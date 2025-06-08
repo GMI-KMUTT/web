@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>อินโฟกราฟิก: บริหารนวัตกรรม พลิกโฉมองค์กรสู่ความสำเร็จ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Visualization & Content Choices:
+        - Course Title: Large text. Goal: Inform. Method: HTML.
+        - Learner Challenges (Section 2.1 from report): Goal: Inform. Method: Series of styled HTML cards (divs with Tailwind), each representing a challenge. Interaction: None, static display. Justification: Clear presentation of distinct pain points.
+        - Course Objectives (Section 1.3 from report): Goal: Inform. Method: List with custom Unicode bullet points (e.g., ✨) and styled text. Interaction: None, static display. Justification: Easy-to-scan list of benefits.
+        - Course Structure (Section 1.4 - 9 Units from report): Goal: Organize/Inform. Method: Donut Chart (Chart.js) showing thematic breakdown (3 units on Foundations & Strategy, 2 on Implementation & Execution, 3 on Culture, Ethics & Partnerships, 1 on Sustainability & Leadership). Also, a list of unit titles where each is a clickable HTML element revealing a short description (JS toggle). Interaction: Click to expand unit details. Justification: Donut chart for overview, interactive list for detailed exploration.
+        - Teaching Methods (Section 1.5 from report): Goal: Inform. Method: Styled list with Unicode icons (e.g., 💡). Interaction: None. Justification: Clear, concise.
+        - Evaluation Methods (Section 1.6 from report): Goal: Inform. Method: Styled list. Interaction: None. Justification: Clear, concise.
+        - Target Audience (Section 1.2 from report): Goal: Inform. Method: Styled text block. Interaction: None. Justification: Clear.
+        - CONFIRMING NO SVG/Mermaid for all. All charts via Chart.js (Canvas). Diagrams/layouts via HTML/Tailwind. -->
+    <style>
+        body {
+            font-family: 'Kanit', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #118AB2, #06D6A0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .section-title {
+            font-size: 2.25rem; /* text-4xl */
+            font-weight: 700; /* font-bold */
+            margin-bottom: 1.5rem; /* mb-6 */
+            color: #073B4C; /* Midnight Blue/Dark Teal */
+            text-align: center;
+        }
+         .section-subtitle {
+            font-size: 1.125rem; /* text-lg */
+            color: #475569; /* slate-600 */
+            text-align: center;
+            margin-bottom: 3rem; /* mb-12 */
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .unit-item {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0; /* slate-200 */
+            border-radius: 8px;
+            margin-bottom: 0.75rem; /* mb-3 */
+            padding: 1rem; /* p-4 */
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .unit-item:hover {
+            background-color: #f1f5f9; /* slate-100 */
+        }
+        .unit-item.active {
+            background-color: #118AB2; /* Cerulean Blue */
+            color: white;
+        }
+        .unit-item.active .unit-title-text {
+            color: white;
+        }
+        .unit-description {
+            display: none;
+            padding: 1rem;
+            margin-top: 0.5rem;
+            background-color: #f0f9ff; /* sky-50 */
+            border-radius: 6px;
+            border-left: 4px solid #06D6A0; /* Tealish Green */
+            font-size: 0.9rem;
+            color: #073B4C;
+        }
+        .unit-item.active .unit-description {
+            display: block;
+        }
+        .icon-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+            color: #073B4C;
+        }
+        .icon-list li::before {
+            content: '✨'; /* Default icon */
+            margin-right: 0.75rem;
+            color: #FFD166; /* Sunny Yellow */
+            font-size: 1.2em;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body class="text-slate-700">
+
+    <section class="py-16 md:py-24 bg-gradient-to-br from-[#118AB2] to-[#06D6A0]">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">บริหารนวัตกรรม: <br class="md:hidden">พลิกโฉมองค์กรสู่ความสำเร็จ</h1>
+            <p class="text-lg md:text-xl text-sky-100 max-w-3xl mx-auto">
+                หลักสูตรสำหรับผู้บริหารที่ต้องการนำนวัตกรรมและเทคโนโลยีใหม่ๆ มาขับเคลื่อนองค์กรให้เติบโตอย่างยั่งยืนในยุคดิจิทัล
+            </p>
+        </div>
+    </section>
+
+    <section class="py-12 md:py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title">ทำไมหลักสูตรนี้จึงสำคัญกับคุณ?</h2>
+            <p class="section-subtitle">
+                ในโลกที่เปลี่ยนแปลงอย่างรวดเร็ว ผู้บริหารเช่นคุณเผชิญความท้าทายมากมายในการนำนวัตกรรมมาปรับใช้ หลักสูตรนี้ถูกออกแบบมาเพื่อตอบโจทย์เหล่านั้นโดยตรง:
+            </p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="card border-t-4 border-[#FF6B6B]">
+                    <h3 class="text-xl font-semibold text-[#FF6B6B] mb-3">ความซับซ้อนของระบบเดิม</h3>
+                    <p class="text-sm">จัดการกับระบบ IT และกระบวนการที่ล้าสมัย เพื่อเปิดรับนวัตกรรมใหม่ๆ</p>
+                </div>
+                <div class="card border-t-4 border-[#FFD166]">
+                    <h3 class="text-xl font-semibold text-[#FFD166] mb-3">การเลือกและจัดลำดับนวัตกรรม</h3>
+                    <p class="text-sm">เรียนรู้วิธีเลือกเทคโนโลยีที่ใช่ และจัดลำดับความสำคัญให้สอดคล้องกับกลยุทธ์องค์กร</p>
+                </div>
+                <div class="card border-t-4 border-[#06D6A0]">
+                    <h3 class="text-xl font-semibold text-[#06D6A0] mb-3">การจัดการความเสี่ยงและกำกับดูแล</h3>
+                    <p class="text-sm">สร้างกรอบการทำงานที่ชัดเจนเพื่อบริหารความเสี่ยงและรับรองการปฏิบัติตามกฎระเบียบ</p>
+                </div>
+                <div class="card border-t-4 border-[#118AB2]">
+                    <h3 class="text-xl font-semibold text-[#118AB2] mb-3">การนำการเปลี่ยนแปลง</h3>
+                    <p class="text-sm">พัฒนาทักษะในการเอาชนะการต่อต้าน และสร้างวัฒนธรรมที่พร้อมรับการเปลี่ยนแปลง</p>
+                </div>
+                 <div class="card border-t-4 border-[#073B4C]">
+                    <h3 class="text-xl font-semibold text-[#073B4C] mb-3">พันธมิตรและความเชี่ยวชาญ</h3>
+                    <p class="text-sm">เรียนรู้วิธีสร้างความร่วมมือและบริหารจัดการผู้เชี่ยวชาญจากภายนอก</p>
+                </div>
+                <div class="card border-t-4 border-[#FF6B6B]">
+                    <h3 class="text-xl font-semibold text-[#FF6B6B] mb-3">การวัดผล ROI</h3>
+                    <p class="text-sm">ทำความเข้าใจวิธีการวัดผลตอบแทนจากการลงทุนในนวัตกรรมอย่างเป็นรูปธรรม</p>
+                </div>
+                <div class="card border-t-4 border-[#FFD166]">
+                    <h3 class="text-xl font-semibold text-[#FFD166] mb-3">การปรับขนาดนวัตกรรม</h3>
+                    <p class="text-sm">กลยุทธ์ในการขยายผลนวัตกรรมที่ประสบความสำเร็จไปทั่วทั้งองค์กร</p>
+                </div>
+                 <div class="card border-t-4 border-[#06D6A0]">
+                    <h3 class="text-xl font-semibold text-[#06D6A0] mb-3">ภาวะผู้นำเชิงนวัตกรรม</h3>
+                    <p class="text-sm">สร้างวิสัยทัศน์ จุดประกายความคิดสร้างสรรค์ และนำทีมสู่ความสำเร็จ</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-12 md:py-20 bg-slate-100">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title">สิ่งที่คุณจะได้รับจากหลักสูตรนี้</h2>
+            <p class="section-subtitle">
+                เมื่อจบหลักสูตร คุณจะสามารถนำความรู้และทักษะไปประยุกต์ใช้เพื่อสร้างการเปลี่ยนแปลงที่วัดผลได้ในองค์กรของคุณ:
+            </p>
+            <div class="max-w-3xl mx-auto">
+                <ul class="icon-list space-y-3 text-lg">
+                    <li>เข้าใจความท้าทายและโอกาสของเทคโนโลยีเกิดใหม่</li>
+                    <li>ระบุและจัดลำดับความสำคัญกรณีการใช้งานเทคโนโลยีที่สอดคล้องกับกลยุทธ์</li>
+                    <li>กำหนดกลยุทธ์และกรอบการกำกับดูแลนวัตกรรม</li>
+                    <li>ประเมิน ROI และพิจารณาด้านจริยธรรมของเทคโนโลยี</li>
+                    <li>นำการเปลี่ยนแปลงและสร้างวัฒนธรรมนวัตกรรม</li>
+                    <li>สร้างและรักษาพันธมิตรทางนวัตกรรม</li>
+                    <li>บริหารผู้จำหน่ายและถ่ายทอดเทคโนโลยีอย่างมีประสิทธิภาพ</li>
+                    <li>ดำเนินโครงการนำร่องนวัตกรรมสู่ความสำเร็จ</li>
+                    <li>ประเมิน ปรับขนาดนวัตกรรม และพัฒนาภาวะผู้นำแห่งอนาคต</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-12 md:py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title">เส้นทางการเรียนรู้: 9 หน่วยสู่ความเป็นผู้นำนวัตกรรม</h2>
+            <p class="section-subtitle">
+                สำรวจเนื้อหาหลักสูตรที่ครอบคลุมทุกมิติ ตั้งแต่การวางรากฐานไปจนถึงการสร้างความยั่งยืน ผ่าน 9 หน่วยการเรียนรู้เชิงลึก
+            </p>
+            <div class="flex flex-col lg:flex-row gap-8 items-start">
+                <div class="lg:w-2/5">
+                    <h3 class="text-2xl font-semibold text-[#073B4C] mb-4 text-center lg:text-left">ภาพรวมเนื้อหาหลักสูตร</h3>
+                    <div class="chart-container mb-6 lg:mb-0">
+                        <canvas id="courseStructureChart"></canvas>
+                    </div>
+                    <p class="text-sm text-slate-500 mt-2 text-center">แผนภูมิแสดงสัดส่วนเนื้อหาหลักในแต่ละหมวดหมู่</p>
+                </div>
+                <div class="lg:w-3/5">
+                    <h3 class="text-2xl font-semibold text-[#073B4C] mb-4 text-center lg:text-left">รายละเอียดหน่วยการเรียนรู้</h3>
+                    <div id="unitListContainer" class="space-y-3">
+                        </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-12 md:py-20 bg-sky-50">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title">ประสบการณ์การเรียนรู้ที่แตกต่าง</h2>
+            <p class="section-subtitle">
+                เรามุ่งเน้นการเรียนรู้แบบมีส่วนร่วมและนำไปใช้ได้จริง เพื่อให้คุณได้รับประโยชน์สูงสุด
+            </p>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card">
+                    <h3 class="text-2xl font-semibold text-[#118AB2] mb-4">วิธีการสอน</h3>
+                    <ul class="icon-list space-y-2">
+                        <li style="--icon-content: '💡'; --icon-color: '#118AB2';">การบรรยายแบบมีส่วนร่วม</li>
+                        <li style="--icon-content: '💬'; --icon-color: '#118AB2';">อภิปรายกลุ่มและแบ่งปันประสบการณ์</li>
+                        <li style="--icon-content: '📊'; --icon-color: '#118AB2';">วิเคราะห์กรณีศึกษาจากองค์กรชั้นนำ</li>
+                        <li style="--icon-content: '🛠️'; --icon-color: '#118AB2';">แบบฝึกหัดภาคปฏิบัติและการจำลองสถานการณ์</li>
+                        <li style="--icon-content: '🏆'; --icon-color: '#118AB2';">การนำเสนอโครงการกลุ่ม</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3 class="text-2xl font-semibold text-[#06D6A0] mb-4">การประเมินผล</h3>
+                    <ul class="icon-list space-y-2">
+                        <li style="--icon-content: '✋'; --icon-color: '#06D6A0';">การมีส่วนร่วมในชั้นเรียน</li>
+                        <li style="--icon-content: '📝'; --icon-color: '#06D6A0';">รายงานกรณีศึกษาหรือโครงการกลุ่ม</li>
+                        <li style="--icon-content: '🎤'; --icon-color: '#06D6A0';">การนำเสนอแผนการนำนวัตกรรมไปใช้</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-12 md:py-20">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="section-title">หลักสูตรนี้เหมาะสำหรับ</h2>
+            <div class="max-w-2xl mx-auto space-y-4 text-lg">
+                <p class="bg-white p-4 rounded-lg shadow-md text-[#073B4C]"><span class="font-semibold text-[#FF6B6B]">ผู้บริหารระดับสูง (C-suite executives)</span> ที่ต้องการขับเคลื่อนวิสัยทัศน์ด้านนวัตกรรม</p>
+                <p class="bg-white p-4 rounded-lg shadow-md text-[#073B4C]"><span class="font-semibold text-[#FFD166]">ผู้นำองค์กรและผู้จัดการฝ่าย</span> ที่รับผิดชอบด้านกลยุทธ์และนวัตกรรมโดยตรง</p>
+                <p class="bg-white p-4 rounded-lg shadow-md text-[#073B4C]"><span class="font-semibold text-[#06D6A0]">ผู้ที่ต้องการพัฒนาทักษะ</span> ในการขับเคลื่อนการเปลี่ยนแปลงและนำเทคโนโลยีใหม่ๆ มาใช้ในองค์กร</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-8 bg-[#073B4C] text-center text-slate-300">
+        <p>&copy; <span id="currentYear"></span> บริหารนวัตกรรม: พลิกโฉมองค์กรสู่ความสำเร็จ. สงวนลิขสิทธิ์</p>
+    </footer>
+
+    <script>
+        const courseUnitsData = [
+            { title: "หน่วยที่ 1: ถอดรหัสนวัตกรรม: ทำความเข้าใจบริบทองค์กรและระบบเดิม", description: "ทำความเข้าใจลักษณะองค์กรที่มีระบบเดิม (Legacy Systems) และความท้าทายในการนำเทคโนโลยีใหม่ๆ มาใช้ รวมถึงความสำคัญของการปรับปรุงระบบเดิมให้ทันสมัย" },
+            { title: "หน่วยที่ 2: เข็มทิศนวัตกรรม: ค้นหาและจัดลำดับความสำคัญเทคโนโลยีพลิกโลก", description: "พัฒนาทักษะในการระบุกรณีการใช้งานเทคโนโลยีเกิดใหม่ที่สอดคล้องกับเป้าหมายองค์กร และจัดลำดับความสำคัญตามความเป็นไปได้และผลกระทบ" },
+            { title: "หน่วยที่ 3: วางแผนและกำกับนวัตกรรม: สร้างรากฐานสู่ความสำเร็จ", description: "สำรวจกลยุทธ์การนำเทคโนโลยีเกิดใหม่มาใช้ และสร้างกรอบการกำกับดูแลที่มีประสิทธิภาพเพื่อจัดการความเสี่ยงและเพิ่มประโยชน์สูงสุด" },
+            { title: "หน่วยที่ 4: นวัตกรรมที่รับผิดชอบ: จริยธรรม, ผลกระทบ, และการวัด ROI", description: "ตรวจสอบข้อพิจารณาด้านจริยธรรม, ความรับผิดชอบ, และผลกระทบต่อสังคม พร้อมวิธีการวัด ROI ของโครงการเทคโนโลยี" },
+            { title: "หน่วยที่ 5: พลิกโฉมองค์กร: สร้างวัฒนธรรมและนำการเปลี่ยนแปลงสู่ยุคนวัตกรรม", description: "กลยุทธ์การจัดการความต้านทานต่อการเปลี่ยนแปลง, ส่งเสริมวัฒนธรรมนวัตกรรม, และปรับวัฒนธรรมองค์กรให้สอดรับการเปลี่ยนแปลง" },
+            { title: "หน่วยที่ 6: พันธมิตรนวัตกรรม: สร้างเครือข่ายความร่วมมือเพื่ออนาคต", description: "ความสำคัญของการสร้างและรักษาความสัมพันธ์กับพันธมิตรภายนอก (สตาร์ทอัพ, มหาวิทยาลัย) เพื่อขับเคลื่อนนวัตกรรม" },
+            { title: "หน่วยที่ 7: นวัตกรรมจากภายนอก: บริหารผู้จำหน่ายและถ่ายทอดเทคโนโลยีอย่างชาญฉลาด", description: "การจัดการความสัมพันธ์กับผู้จำหน่ายเทคโนโลยี และกระบวนการถ่ายทอดเทคโนโลยี โดยเฉพาะเทคโนโลยีเกิดใหม่" },
+            { title: "หน่วยที่ 8: นวัตกรรมภาคสนาม: วางแผนและดำเนินโครงการนำร่องสู่ความสำเร็จ", description: "การวางแผน, ดำเนินการ, และติดตามโครงการนำร่อง (Pilot Programs) เพื่อทดสอบความเป็นไปได้ก่อนการปรับขนาด" },
+            { title: "หน่วยที่ 9: นวัตกรรมสู่ความยั่งยืน: ประเมินผล, ปรับขนาด, และภาวะผู้นำแห่งอนาคต", description: "วิธีการประเมินผลโครงการนำร่อง, กลยุทธ์การปรับขยายนวัตกรรม, และการสร้างภาวะผู้นำในการขับเคลื่อนนวัตกรรม" }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+            const unitListContainer = document.getElementById('unitListContainer');
+            courseUnitsData.forEach((unit, index) => {
+                const unitElement = document.createElement('div');
+                unitElement.classList.add('unit-item');
+                unitElement.innerHTML = `
+                    <div class="flex justify-between items-center">
+                        <h4 class="text-lg font-semibold text-[#073B4C] unit-title-text">${unit.title}</h4>
+                        <span class="text-xl transform transition-transform duration-300 unit-arrow">▼</span>
+                    </div>
+                    <div class="unit-description">
+                        <p>${unit.description}</p>
+                    </div>
+                `;
+                unitElement.addEventListener('click', () => {
+                    const currentlyActive = unitListContainer.querySelector('.unit-item.active');
+                    if (currentlyActive && currentlyActive !== unitElement) {
+                        currentlyActive.classList.remove('active');
+                        currentlyActive.querySelector('.unit-arrow').style.transform = 'rotate(0deg)';
+                    }
+                    unitElement.classList.toggle('active');
+                    unitElement.querySelector('.unit-arrow').style.transform = unitElement.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0deg)';
+                });
+                unitListContainer.appendChild(unitElement);
+            });
+
+            const ctx = document.getElementById('courseStructureChart').getContext('2d');
+            const courseStructureChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: [
+                        'รากฐานและกลยุทธ์ (3 หน่วย)', 
+                        'วัฒนธรรม จริยธรรม และพันธมิตร (3 หน่วย)',
+                        'การนำไปใช้และการปฏิบัติการ (2 หน่วย)',
+                        'ความยั่งยืนและภาวะผู้นำ (1 หน่วย)'
+                    ],
+                    datasets: [{
+                        data: [3, 3, 2, 1],
+                        backgroundColor: ['#118AB2', '#06D6A0', '#FFD166', '#FF6B6B'],
+                        borderColor: '#ffffff',
+                        borderWidth: 2,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#073B4C',
+                                font: { family: "'Kanit', sans-serif", size: 12 },
+                                padding: 15,
+                                boxWidth: 15,
+                                usePointStyle: true,
+                            }
+                        },
+                        tooltip: {
+                            enabled: true,
+                            backgroundColor: '#073B4C',
+                            titleFont: { family: "'Kanit', sans-serif", size: 14, weight: 'bold' },
+                            bodyFont: { family: "'Kanit', sans-serif", size: 12 },
+                            padding: 10,
+                            cornerRadius: 6,
+                            callbacks: {
+                                title: function(tooltipItems) {
+                                    const item = tooltipItems[0];
+                                    let label = item.label;
+                                    if (Array.isArray(label)) {
+                                      return label.join(' ');
+                                    }
+                                    return label;
+                                },
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    label += context.parsed + ' หน่วยกิต';
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    cutout: '60%'
+                }
+            });
+             // Label wrapping for chart legend (if needed, though these are short)
+            courseStructureChart.options.plugins.legend.labels.generateLabels = function(chart) {
+                const original = Chart.defaults.plugins.legend.labels.generateLabels;
+                const labelsOriginal = original.call(this, chart);
+                labelsOriginal.forEach(label => {
+                    const text = label.text;
+                    if (text.length > 25) { // Example threshold for wrapping
+                        const words = text.split(' ');
+                        let currentLine = '';
+                        const lines = [];
+                        words.forEach(word => {
+                            if ((currentLine + word).length > 25 && currentLine.length > 0) {
+                                lines.push(currentLine.trim());
+                                currentLine = '';
+                            }
+                            currentLine += word + ' ';
+                        });
+                        lines.push(currentLine.trim());
+                        label.text = lines; // Chart.js can handle array of strings for labels
+                    }
+                });
+                return labelsOriginal;
+            };
+            courseStructureChart.update();
+
+
+            // Custom icon list styling
+            const iconLists = document.querySelectorAll('.icon-list');
+            iconLists.forEach(list => {
+                list.querySelectorAll('li').forEach(item => {
+                    const icon = item.style.getPropertyValue('--icon-content');
+                    const color = item.style.getPropertyValue('--icon-color');
+                    if (icon) {
+                        item.style.setProperty('--icon-content-actual', icon); // Store for pseudo-element
+                        item.style.setProperty('--icon-color-actual', color || '#FFD166');
+                        item.classList.add('custom-icon-item'); // Add a class to target with CSS if needed
+                    }
+                });
+            });
+            // Add CSS for custom icons if not already in style block
+            const styleSheet = document.createElement("style");
+            styleSheet.type = "text/css";
+            styleSheet.innerText = `
+                .icon-list li.custom-icon-item::before {
+                    content: var(--icon-content-actual, '✨');
+                    color: var(--icon-color-actual, '#FFD166');
+                }
+            `;
+            document.head.appendChild(styleSheet);
+
+        });
+    </script>
+</body>
+</html>
