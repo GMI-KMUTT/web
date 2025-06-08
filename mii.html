@@ -9,19 +9,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!--
-    Chosen Palette: "Modern Tech" - A base of cool grays (bg-gray-50, text-gray-800) for a clean, professional foundation. A deep, intelligent blue (#2c3e50, via custom style) for headings and key elements, signifying trust and knowledge. A vibrant, energetic emerald green (#10b981) for calls-to-action and interactive highlights, symbolizing growth, innovation, and fresh ideas.
-
-    Application Structure Plan: The SPA is structured as a narrative journey for a prospective student. It starts with a strong "Why," moves to the "How" (curriculum structure), then the "What" (specializations), and finally the "Where to" (career paths and investment). This logical flow guides the user from the high-level value proposition to specific, actionable details. Navigation is facilitated by a sticky header, and key information is presented in interactive modules (tabs for program tracks, clickable cards for specializations) to prevent information overload and encourage exploration. This design prioritizes user engagement and clarity over simply replicating the source document's linear format.
-
-    Visualization & Content Choices:
-    - Program Structure: A doughnut chart (Chart.js) visually breaks down the credit distribution for the Professional Track, making the 36-unit structure immediately understandable. This is more intuitive than a simple text list.
-    - Specializations: An interactive card layout. Users click a major to see its details. This "cause-and-effect" interaction is more engaging than a static table and allows users to focus on what interests them. It directly answers "What problem will I solve?" and "What job can I get?".
-    - Core Courses: A simple, clean list format is sufficient as this is foundational information.
-    - Dual Major Option: A clear callout box explains the benefit of taking 3 extra credits to earn a second specialization, making the value proposition tangible.
-
-    CONFIRMATION: NO SVG graphics used. NO Mermaid JS used.
-    -->
     <style>
         body { font-family: 'Kanit', sans-serif; }
         .bg-custom-blue { background-color: #2c3e50; }
@@ -97,7 +84,7 @@
                     <div>
                         <div class="mb-4">
                             <div class="flex border-b border-gray-300">
-                                <button class="tab-btn active-tab py-2 px-4 font-semibold text-custom-blue border-b-2 border-emerald-500" data-target="professional">สายวิชาชีพ</button>
+                                <button class="tab-btn py-2 px-4 font-semibold text-custom-blue border-b-2 border-emerald-500" data-target="professional">สายวิชาชีพ</button>
                                 <button class="tab-btn py-2 px-4 text-gray-500" data-target="academic">สายวิชาการ</button>
                             </div>
                         </div>
@@ -105,25 +92,25 @@
                             <h3 class="text-2xl font-semibold text-custom-blue mb-4">สายวิชาชีพ (36 หน่วยกิต)</h3>
                             <p class="text-gray-700 mb-4">สำหรับผู้ที่ต้องการนำความรู้ไปประยุกต์ใช้ในภาคธุรกิจและสร้างผลลัพธ์ที่เป็นรูปธรรม</p>
                             <ul class="space-y-2 text-gray-700">
-                                <li><strong class="text-custom-blue">วิชาบังคับ:</strong> 15 หน่วยกิต</li>
-                                <li><strong class="text-custom-blue">วิชาเลือก:</strong> 15 หน่วยกิต</li>
-                                <li><strong class="text-custom-blue">โครงงานนวัตกรรม:</strong> 3 หน่วยกิต</li>
-                                <li><strong class="text-custom-blue">การค้นคว้าอิสระ:</strong> 3 หน่วยกิต</li>
+                                <li>วิชาบังคับ: 15 หน่วยกิต</li>
+                                <li>วิชาเลือก: 15 หน่วยกิต</li>
+                                <li>โครงงานนวัตกรรม: 3 หน่วยกิต</li>
+                                <li>การค้นคว้าอิสระ: 3 หน่วยกิต</li>
                             </ul>
                         </div>
                         <div id="academic" class="tab-content hidden">
                             <h3 class="text-2xl font-semibold text-custom-blue mb-4">สายวิชาการ (36 หน่วยกิต)</h3>
                              <p class="text-gray-700 mb-4">สำหรับผู้ที่ต้องการเจาะลึกด้านงานวิจัยและสร้างองค์ความรู้ใหม่</p>
                             <ul class="space-y-2 text-gray-700">
-                                <li><strong class="text-custom-blue">วิชาบังคับ:</strong> 15 หน่วยกิต</li>
-                                <li><strong class="text-custom-blue">วิทยานิพนธ์:</strong> 12 หน่วยกิต</li>
-                                <li><strong class="text-custom-blue">วิชาเลือก:</strong> 9 หน่วยกิต</li>
+                                <li>วิชาบังคับ: 15 หน่วยกิต</li>
+                                <li>วิทยานิพนธ์: 12 หน่วยกิต</li>
+                                <li>วิชาเลือก: 9 หน่วยกิต</li>
                             </ul>
                         </div>
                     </div>
                     <div class="chart-container" style="position: relative; height:300px; max-width: 300px; margin: auto;">
                         <canvas id="creditsChart"></canvas>
-                        <p class="text-center text-sm text-gray-500 mt-2">สัดส่วนหน่วยกิต (สายวิชาชีพ)</p>
+                        <p class="text-center text-sm text-gray-500 mt-2" id="chart-caption">สัดส่วนหน่วยกิต (สายวิชาชีพ)</p>
                     </div>
                 </div>
             </div>
@@ -182,7 +169,7 @@
                     </li>
                 </ul>
                 <div class="mt-6 p-4 bg-blue-50 border-l-4 border-blue-400 text-blue-800 rounded-r-lg">
-                    <p><strong class="font-bold">ตัวอย่างค่าใช้จ่ายตลอดหลักสูตร (36 หน่วยกิต):</strong></p>
+                    <p><span class="font-bold">ตัวอย่างค่าใช้จ่ายตลอดหลักสูตร (36 หน่วยกิต):</span></p>
                     <ul class="list-disc list-inside ml-4 mt-2">
                         <li>ค่าลงทะเบียน: 36 หน่วยกิต × 3,000 บาท = 108,000 บาท</li>
                         <li>ค่าบำรุงและค่าพิเศษ: 4 ภาคการศึกษา × (25,000 + 3,750) บาท = 115,000 บาท</li>
@@ -207,147 +194,73 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Mobile Menu Toggle
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
             mobileMenuBtn.addEventListener('click', () => {
                 mobileMenu.classList.toggle('hidden');
             });
 
-            // Tabbed Content for Program Structure
             const tabButtons = document.querySelectorAll('.tab-btn');
             const tabContents = document.querySelectorAll('.tab-content');
-            tabButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    tabButtons.forEach(btn => {
-                        btn.classList.remove('text-custom-blue', 'border-emerald-500');
-                        btn.classList.add('text-gray-500');
-                    });
-                    button.classList.add('text-custom-blue', 'border-emerald-500');
-                    button.classList.remove('text-gray-500');
-                    
-                    tabContents.forEach(content => {
-                        if (content.id === button.dataset.target) {
-                            content.classList.remove('hidden');
-                        } else {
-                            content.classList.add('hidden');
-                        }
-                    });
+            const chartCaption = document.getElementById('chart-caption');
+            let myChart = null; 
+
+            const professionalData = {
+                labels: ['วิชาบังคับ', 'วิชาเลือก', 'โครงงานนวัตกรรม', 'การค้นคว้าอิสระ'],
+                data: [15, 15, 3, 3],
+                caption: 'สัดส่วนหน่วยกิต (สายวิชาชีพ)'
+            };
+
+            const academicData = {
+                labels: ['วิชาบังคับ', 'วิทยานิพนธ์', 'วิชาเลือก'],
+                data: [15, 12, 9],
+                caption: 'สัดส่วนหน่วยกิต (สายวิชาการ)'
+            };
+
+            const activateTab = (targetId) => {
+                tabButtons.forEach(btn => {
+                    btn.classList.remove('text-custom-blue', 'border-emerald-500');
+                    btn.classList.add('text-gray-500');
                 });
-            });
-
-            // Data for Majors
-            const majorsData = [
-                {
-                    id: 'sim',
-                    title: '1. มาตรฐานการจัดการนวัตกรรม (SIM)',
-                    problem: 'องค์กรที่ขาดกรอบการทำงานนวัตกรรมที่ชัดเจน, กระบวนการนวัตกรรมที่ไม่เป็นระบบ, การไม่สามารถวัดผลลัพธ์ของนวัตกรรมได้อย่างมีประสิทธิภาพ, การลงทุนด้านนวัตกรรมแต่ไม่เห็นผลลัพธ์ที่จับต้องได้',
-                    details: 'แขนงวิชานี้มุ่งเน้นการวางรากฐานความเข้าใจในหลักการและแนวปฏิบัติที่ดีที่สุดในการจัดการนวัตกรรมในองค์กร คุณจะได้เรียนรู้เกี่ยวกับการพัฒนากลยุทธ์นวัตกรรม การจัดทำและควบคุมกระบวนการนวัตกรรม การวัดผลและประเมินประสิทธิภาพของกิจกรรมนวัตกรรม รวมถึงการสร้างโครงสร้างและวัฒนธรรมองค์กรที่สนับสนุนการสร้างสรรค์สิ่งใหม่ๆ อย่างต่อเนื่อง โดยอ้างอิงแนวทางและหลักการจากมาตรฐานสากล ISO 56000 series ที่เป็นกรอบการจัดการนวัตกรรมที่เป็นที่ยอมรับในระดับโลก',
-                    careers: ['ผู้จัดการโครงการนวัตกรรม', 'ที่ปรึกษาด้านนวัตกรรม', 'ผู้จัดการฝ่ายกลยุทธ์องค์กร', 'ผู้จัดการฝ่ายวิจัยและพัฒนา']
-                },
-                {
-                    id: 'ipm',
-                    title: '2. การจัดการทรัพย์สินทางปัญญา (IPM)',
-                    problem: 'มีการละเมิดทรัพย์สินทางปัญญา, ไม่สามารถใช้ประโยชน์จาก IP ได้เต็มที่, ขาดกลยุทธ์ในการคุ้มครองและสร้างมูลค่าจากนวัตกรรม, การจัดการความเสี่ยงทางกฎหมายที่เกี่ยวข้องกับนวัตกรรมไม่เหมาะสม',
-                    details: 'แขนงวิชานี้ให้ความรู้เชิงลึกเกี่ยวกับการระบุ การคุ้มครอง การใช้ประโยชน์ และการบริหารจัดการทรัพย์สินทางปัญญา (IP) ในรูปแบบต่างๆ เช่น สิทธิบัตร เครื่องหมายการค้า ลิขสิทธิ์ และความลับทางการค้า คุณจะได้เรียนรู้กลยุทธ์ในการสร้างพอร์ตโฟลิโอ IP การประเมินมูลค่า IP การทำสัญญาอนุญาตให้ใช้สิทธิ์ (Licensing) และการบังคับใช้สิทธิ์ในกรณีที่มีการละเมิด เพื่อสร้างความได้เปรียบทางการแข่งขันและเพิ่มมูลค่าให้กับองค์กร',
-                    careers: ['ผู้จัดการทรัพย์สินทางปัญญา', 'ที่ปรึกษากฎหมายทรัพย์สินทางปัญญา', 'นักพัฒนาธุรกิจ (ที่เน้น IP)', 'ผู้ประกอบการด้านเทคโนโลยี']
-                },
-                {
-                    id: 'imk',
-                    title: '3. การตลาดนวัตกรรม (IMK)',
-                    problem: 'นำนวัตกรรมออกสู่ตลาดไม่สำเร็จ, ขาดกลยุทธ์การสื่อสารและการสร้างแบรนด์สำหรับผลิตภัณฑ์ใหม่, ไม่สามารถเข้าถึงกลุ่มลูกค้าเป้าหมายได้อย่างมีประสิทธิภาพ, นวัตกรรมไม่ถูกยอมรับจากตลาด',
-                    details: 'แขนงวิชานี้มุ่งเน้นการนำนวัตกรรมออกสู่ตลาดและสร้างการยอมรับจากผู้บริโภค คุณจะได้เรียนรู้หลักการและกลยุทธ์การตลาดสำหรับผลิตภัณฑ์และบริการใหม่ๆ การวิเคราะห์ตลาดเป้าหมาย การกำหนดตำแหน่งผลิตภัณฑ์ การสร้างแบรนด์นวัตกรรม การสื่อสารคุณค่าที่ไม่เหมือนใคร และการสร้างความสัมพันธ์กับลูกค้าเพื่อส่งเสริมการนำนวัตกรรมไปใช้ รวมถึงการใช้เทคโนโลยีการตลาดและข้อมูลเพื่อเพิ่มประสิทธิภาพในการเข้าถึงตลาด',
-                    careers: ['ผู้จัดการฝ่ายการตลาดนวัตกรรม', 'นักการตลาดดิจิทัล', 'ผู้พัฒนาธุรกิจใหม่', 'ผู้จัดการผลิตภัณฑ์ (Product Manager)']
-                },
-                {
-                    id: 'iam',
-                    title: '4. การจัดการการประยุกต์ใช้นวัตกรรม (IAM)',
-                    problem: 'พนักงานต่อต้านการเปลี่ยนแปลง, นำเทคโนโลยีใหม่ๆ หรือกระบวนการนวัตกรรมเข้ามาใช้แล้วไม่ประสบความสำเร็จ, ขาดการสนับสนุนและความเข้าใจจากผู้บริหารในการนำนวัตกรรมไปใช้, นำนวัตกรรมไปใช้แต่ไม่เกิดประโยชน์สูงสุด',
-                    details: 'แขนงวิชานี้สำรวจความท้าทายและกลยุทธ์ในการนำนวัตกรรมไปใช้จริงในองค์กรและสังคม คุณจะได้เรียนรู้เกี่ยวกับการจัดการการเปลี่ยนแปลงที่เกิดจากนวัตกรรม การเอาชนะการต่อต้านการเปลี่ยนแปลง การสร้างการยอมรับและความเข้าใจจากผู้มีส่วนได้ส่วนเสีย การออกแบบกระบวนการและโครงสร้างองค์กรที่เอื้อต่อการนำนวัตกรรมไปใช้ รวมถึงการประเมินผลกระทบทางสังคมและวัฒนธรรมของการประยุกต์ใช้นวัตกรรม',
-                    careers: ['ผู้จัดการการเปลี่ยนแปลงองค์กร', 'ที่ปรึกษาด้านการจัดการ', 'ผู้จัดการโครงการเทคโนโลยี', 'ผู้เชี่ยวชาญด้านการพัฒนาองค์กร']
-                },
-                {
-                    id: 'fwm',
-                    title: '5. การจัดการความมั่งคั่งเชิงนวัตกรรมการเงิน (FWM)',
-                    problem: 'การจัดการความมั่งคั่งที่ไม่ทันสมัยและไม่ตอบโจทย์ความต้องการของผู้บริโภคยุคใหม่, ความท้าทายในการนำเทคโนโลยีทางการเงินมาประยุกต์ใช้ในธุรกิจ, ขาดความเข้าใจในเทรนด์ FinTech, การไม่สามารถสร้างผลิตภัณฑ์ทางการเงินที่เป็นนวัตกรรม',
-                    details: 'แขนงวิชานี้เจาะลึกการบริหารจัดการความมั่งคั่งที่เน้น ความทันสมัยและนวัตกรรม ผสานกับ องค์ความรู้ทางการเงินที่แข็งแกร่ง คุณจะได้เรียนรู้เกี่ยวกับเทรนด์ FinTech ที่กำลังเปลี่ยนแปลงภูมิทัศน์ทางการเงิน การพัฒนาผลิตภัณฑ์และบริการทางการเงินที่เป็นนวัตกรรม การใช้ประโยชน์จากข้อมูลและ AI ในการวิเคราะห์การลงทุนและการให้บริการลูกค้า รวมถึงกลยุทธ์ในการระดมทุนและบริหารความเสี่ยงในบริบทของนวัตกรรมทางการเงิน เพื่อให้สามารถสร้างและบริหารความมั่งคั่งให้แก่บุคคลและองค์กรได้อย่างมีประสิทธิภาพในยุคดิจิทัล',
-                    careers: ['ผู้จัดการกองทุนนวัตกรรม', 'ที่ปรึกษาการลงทุน (ที่เน้น FinTech)', 'นักวิเคราะห์ FinTech', 'นักพัฒนาผลิตภัณฑ์ทางการเงิน']
+                const clickedButton = document.querySelector(`.tab-btn[data-target="${targetId}"]`);
+                if (clickedButton) {
+                    clickedButton.classList.add('text-custom-blue', 'border-emerald-500');
+                    clickedButton.classList.remove('text-gray-500');
                 }
-            ];
-
-            const majorsList = document.getElementById('majors-list');
-            const majorTitle = document.getElementById('major-title');
-            const majorContent = document.getElementById('major-content');
-            let activeMajorButton = null;
-
-            function updateMajorDetails(majorId) {
-                const major = majorsData.find(m => m.id === majorId);
-                if (!major) return;
-
-                majorTitle.innerText = major.title;
-                majorContent.innerHTML = `
-                    <div class="mb-6">
-                        <h4 class="text-lg font-semibold text-emerald-600 mb-2 border-b border-emerald-200 pb-1">ปัญหาที่แก้ไขได้</h4>
-                        <p class="text-gray-600">${major.problem}</p>
-                    </div>
-                    <div class="mb-6">
-                        <h4 class="text-lg font-semibold text-emerald-600 mb-2 border-b border-emerald-200 pb-1">รายละเอียดแขนงวิชา</h4>
-                        <p class="text-gray-600">${major.details}</p>
-                    </div>
-                    <div>
-                        <h4 class="text-lg font-semibold text-emerald-600 mb-2 border-b border-emerald-200 pb-1">ตัวอย่างอาชีพ</h4>
-                        <div class="flex flex-wrap gap-2 mt-2">
-                            ${major.careers.map(career => `<span class="bg-gray-200 text-gray-800 text-sm font-medium px-3 py-1 rounded-full">${career}</span>`).join('')}
-                        </div>
-                    </div>
-                    <div>
-                        <h4 class="text-lg font-semibold text-emerald-600 mb-2 border-b border-emerald-200 pb-1">ข้อมูลเพิ่มเติม</h4>
-                        <div class="flex flex-wrap gap-2 mt-2">
-                            <a href="${major.id}.html" target="blank">คลิก</a>
-                        </div>
-                    </div>
-                `;
-            }
-            
-            majorsData.forEach((major, index) => {
-                const button = document.createElement('button');
-                button.className = 'w-full text-left p-4 rounded-lg border-2 border-transparent transition-all duration-300';
-                button.dataset.majorId = major.id;
-                button.innerHTML = `<span class="font-semibold text-lg text-custom-blue">${major.title}</span>`;
                 
-                if (index === 0) {
-                     button.classList.add('bg-white', 'shadow-md', 'border-emerald-500');
-                     activeMajorButton = button;
-                     updateMajorDetails(major.id);
-                } else {
-                     button.classList.add('bg-gray-200', 'hover:bg-white', 'hover:shadow-md', 'hover:border-emerald-300');
+                tabContents.forEach(content => content.classList.add('hidden'));
+                const targetContent = document.getElementById(targetId);
+                if (targetContent) {
+                    targetContent.classList.remove('hidden');
                 }
 
-                button.addEventListener('click', () => {
-                    if (activeMajorButton) {
-                        activeMajorButton.classList.remove('bg-white', 'shadow-md', 'border-emerald-500');
-                        activeMajorButton.classList.add('bg-gray-200', 'hover:bg-white', 'hover:shadow-md', 'hover:border-emerald-300');
-                    }
-                    button.classList.add('bg-white', 'shadow-md', 'border-emerald-500');
-                    button.classList.remove('bg-gray-200', 'hover:bg-white', 'hover:shadow-md', 'hover:border-emerald-300');
-                    activeMajorButton = button;
-                    
-                    updateMajorDetails(major.id);
-                });
+                let currentChartData;
+                if (targetId === 'professional') {
+                    currentChartData = professionalData;
+                } else if (targetId === 'academic') {
+                    currentChartData = academicData;
+                }
 
-                majorsList.appendChild(button);
+                if (myChart) {
+                    myChart.data.labels = currentChartData.labels;
+                    myChart.data.datasets[0].data = currentChartData.data;
+                    myChart.update();
+                    chartCaption.innerText = currentChartData.caption;
+                }
+            };
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => activateTab(button.dataset.target));
             });
-            
 
-            // Chart.js - Doughnut Chart for Credit Distribution
             const ctx = document.getElementById('creditsChart').getContext('2d');
-            new Chart(ctx, {
+            myChart = new Chart(ctx, {
                 type: 'doughnut',
                 data: {
-                    labels: ['วิชาบังคับ', 'วิชาเลือก', 'โครงงานนวัตกรรม', 'ค้นคว้าอิสระ'],
+                    labels: professionalData.labels,
                     datasets: [{
                         label: 'หน่วยกิต',
-                        data: [15, 15, 3, 3],
+                        data: professionalData.data,
                         backgroundColor: [
                             '#2c3e50', // Custom Blue
                             '#10b981', // Emerald-500
@@ -392,6 +305,110 @@
                     cutout: '60%'
                 }
             });
+
+            activateTab('professional'); // Set initial active tab
+
+            const majorsData = [
+                {
+                    id: 'sim',
+                    title: '1. มาตรฐานการจัดการนวัตกรรม (SIM)',
+                    problem: 'องค์กรที่ขาดกรอบการทำงานนวัตกรรมที่ชัดเจน, กระบวนการนวัตกรรมที่ไม่เป็นระบบ, การไม่สามารถวัดผลลัพธ์ของนวัตกรรมได้อย่างมีประสิทธิภาพ, การลงทุนด้านนวัตกรรมแต่ไม่เห็นผลลัพธ์ที่จับต้องได้',
+                    details: 'แขนงวิชานี้มุ่งเน้นการวางรากฐานความเข้าใจในหลักการและแนวปฏิบัติที่ดีที่สุดในการจัดการนวัตกรรมในองค์กร คุณจะได้เรียนรู้เกี่ยวกับการพัฒนากลยุทธ์นวัตกรรม การจัดทำและควบคุมกระบวนการนวัตกรรม การวัดผลและประเมินประสิทธิภาพของกิจกรรมนวัตกรรม รวมถึงการสร้างโครงสร้างและวัฒนธรรมองค์กรที่สนับสนุนการสร้างสรรค์สิ่งใหม่ๆ อย่างต่อเนื่อง โดยอ้างอิงแนวทางและหลักการจากมาตรฐานสากล ISO 56000 series ที่เป็นกรอบการจัดการนวัตกรรมที่เป็นที่ยอมรับในระดับโลก',
+                    careers: ['ผู้จัดการโครงการนวัตกรรม', 'ที่ปรึกษาด้านนวัตกรรม', 'ผู้จัดการฝ่ายกลยุทธ์องค์กร', 'ผู้จัดการฝ่ายวิจัยและพัฒนา'],
+                    moreDetailsLink: 'sim.html' // Placeholder link
+                },
+                {
+                    id: 'ipm',
+                    title: '2. การจัดการทรัพย์สินทางปัญญา (IPM)',
+                    problem: 'มีการละเมิดทรัพย์สินทางปัญญา, ไม่สามารถใช้ประโยชน์จาก IP ได้เต็มที่, ขาดกลยุทธ์ในการคุ้มครองและสร้างมูลค่าจากนวัตกรรม, การจัดการความเสี่ยงทางกฎหมายที่เกี่ยวข้องกับนวัตกรรมไม่เหมาะสม',
+                    details: 'แขนงวิชานี้ให้ความรู้เชิงลึกเกี่ยวกับการระบุ การคุ้มครอง การใช้ประโยชน์ และการบริหารจัดการทรัพย์สินทางปัญญา (IP) ในรูปแบบต่างๆ เช่น สิทธิบัตร เครื่องหมายการค้า ลิขสิทธิ์ และความลับทางการค้า คุณจะได้เรียนรู้กลยุทธ์ในการสร้างพอร์ตโฟลิโอ IP การประเมินมูลค่า IP การทำสัญญาอนุญาตให้ใช้สิทธิ์ (Licensing) และการบังคับใช้สิทธิ์ในกรณีที่มีการละเมิด เพื่อสร้างความได้เปรียบทางการแข่งขันและเพิ่มมูลค่าให้กับองค์กร',
+                    careers: ['ผู้จัดการทรัพย์สินทางปัญญา', 'ที่ปรึกษากฎหมายทรัพย์สินทางปัญญา', 'นักพัฒนาธุรกิจ (ที่เน้น IP)', 'ผู้ประกอบการด้านเทคโนโลยี'],
+                    moreDetailsLink: 'ipm.html' // Placeholder link
+                },
+                {
+                    id: 'imk',
+                    title: '3. การตลาดนวัตกรรม (IMK)',
+                    problem: 'นำนวัตกรรมออกสู่ตลาดไม่สำเร็จ, ขาดกลยุทธ์การสื่อสารและการสร้างแบรนด์สำหรับผลิตภัณฑ์ใหม่, ไม่สามารถเข้าถึงกลุ่มลูกค้าเป้าหมายได้อย่างมีประสิทธิภาพ, นวัตกรรมไม่ถูกยอมรับจากตลาด',
+                    details: 'แขนงวิชานี้มุ่งเน้นการนำนวัตกรรมออกสู่ตลาดและสร้างการยอมรับจากผู้บริโภค คุณจะได้เรียนรู้หลักการและกลยุทธ์การตลาดสำหรับผลิตภัณฑ์และบริการใหม่ๆ การวิเคราะห์ตลาดเป้าหมาย การกำหนดตำแหน่งผลิตภัณฑ์ การสร้างแบรนด์นวัตกรรม การสื่อสารคุณค่าที่ไม่เหมือนใคร และการสร้างความสัมพันธ์กับลูกค้าเพื่อส่งเสริมการนำนวัตกรรมไปใช้ รวมถึงการใช้เทคโนโลยีการตลาดและข้อมูลเพื่อเพิ่มประสิทธิภาพในการเข้าถึงตลาด',
+                    careers: ['ผู้จัดการฝ่ายการตลาดนวัตกรรม', 'นักการตลาดดิจิทัล', 'ผู้พัฒนาธุรกิจใหม่', 'ผู้จัดการผลิตภัณฑ์ (Product Manager)'],
+                    moreDetailsLink: 'imk.html' // Placeholder link
+                },
+                {
+                    id: 'iam',
+                    title: '4. การจัดการการประยุกต์ใช้นวัตกรรม (IAM)',
+                    problem: 'พนักงานต่อต้านการเปลี่ยนแปลง, นำเทคโนโลยีใหม่ๆ หรือกระบวนการนวัตกรรมเข้ามาใช้แล้วไม่ประสบความสำเร็จ, ขาดการสนับสนุนและความเข้าใจจากผู้บริหารในการนำนวัตกรรมไปใช้, นำนวัตกรรมไปใช้แต่ไม่เกิดประโยชน์สูงสุด',
+                    details: 'แขนงวิชานี้สำรวจความท้าทายและกลยุทธ์ในการนำนวัตกรรมไปใช้จริงในองค์กรและสังคม คุณจะได้เรียนรู้เกี่ยวกับการจัดการการเปลี่ยนแปลงที่เกิดจากนวัตกรรม การเอาชนะการต่อต้านการเปลี่ยนแปลง การสร้างการยอมรับและความเข้าใจจากผู้มีส่วนได้ส่วนเสีย การออกแบบกระบวนการและโครงสร้างองค์กรที่เอื้อต่อการนำนวัตกรรมไปใช้ รวมถึงการประเมินผลกระทบทางสังคมและวัฒนธรรมของการประยุกต์ใช้นวัตกรรม',
+                    careers: ['ผู้จัดการการเปลี่ยนแปลงองค์กร', 'ที่ปรึกษาด้านการจัดการ', 'ผู้จัดการโครงการเทคโนโลยี', 'ผู้เชี่ยวชาญด้านการพัฒนาองค์กร'],
+                    moreDetailsLink: 'iam.html' // Placeholder link
+                },
+                {
+                    id: 'fwm',
+                    title: '5. การจัดการความมั่งคั่งเชิงนวัตกรรมการเงิน (FWM)',
+                    problem: 'การจัดการความมั่งคั่งที่ไม่ทันสมัยและไม่ตอบโจทย์ความต้องการของผู้บริโภคยุคใหม่, ความท้าทายในการนำเทคโนโลยีทางการเงินมาประยุกต์ใช้ในธุรกิจ, ขาดความเข้าใจในเทรนด์ FinTech, การไม่สามารถสร้างผลิตภัณฑ์ทางการเงินที่เป็นนวัตกรรม',
+                    details: 'แขนงวิชานี้เจาะลึกการบริหารจัดการความมั่งคั่งที่เน้น ความทันสมัยและนวัตกรรม ผสานกับ องค์ความรู้ทางการเงินที่แข็งแกร่ง คุณจะได้เรียนรู้เกี่ยวกับเทรนด์ FinTech ที่กำลังเปลี่ยนแปลงภูมิทัศน์ทางการเงิน การพัฒนาผลิตภัณฑ์และบริการทางการเงินที่เป็นนวัตกรรม การใช้ประโยชน์จากข้อมูลและ AI ในการวิเคราะห์การลงทุนและการให้บริการลูกค้า รวมถึงกลยุทธ์ในการระดมทุนและบริหารความเสี่ยงในบริบทของนวัตกรรมทางการเงิน เพื่อให้สามารถสร้างและบริหารความมั่งคั่งให้แก่บุคคลและองค์กรได้อย่างมีประสิทธิภาพในยุคดิจิทัล',
+                    careers: ['ผู้จัดการกองทุนนวัตกรรม', 'ที่ปรึกษาการลงทุน (ที่เน้น FinTech)', 'นักวิเคราะห์ FinTech', 'นักพัฒนาผลิตภัณฑ์ทางการเงิน'],
+                    moreDetailsLink: 'fwm.html' // Placeholder link
+                }
+            ];
+
+            const majorsList = document.getElementById('majors-list');
+            const majorTitle = document.getElementById('major-title');
+            const majorContent = document.getElementById('major-content');
+            let activeMajorButton = null;
+
+            function updateMajorDetails(majorId) {
+                const major = majorsData.find(m => m.id === majorId);
+                if (!major) return;
+
+                majorTitle.innerText = major.title;
+                majorContent.innerHTML = `
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold text-emerald-600 mb-2 border-b border-emerald-200 pb-1">ปัญหาที่แก้ไขได้</h4>
+                        <p class="text-gray-600">${major.problem}</p>
+                    </div>
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold text-emerald-600 mb-2 border-b border-emerald-200 pb-1">รายละเอียดแขนงวิชา</h4>
+                        <p class="text-gray-600">${major.details}</p>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold text-emerald-600 mb-2 border-b border-emerald-200 pb-1">ตัวอย่างอาชีพ</h4>
+                        <div class="flex flex-wrap gap-2 mt-2">
+                            ${major.careers.map(career => `<span class="bg-gray-200 text-gray-800 text-sm font-medium px-3 py-1 rounded-full">${career}</span>`).join('')}
+                        </div>
+                        <a href="${major.moreDetailsLink}" class="inline-block mt-4 text-emerald-600 hover:text-emerald-800 font-semibold text-sm">รายละเอียดเพิ่มเติม &rarr; <b>คลิก</b></a>
+                    </div>
+                `;
+            }
+            
+            majorsData.forEach((major, index) => {
+                const button = document.createElement('button');
+                button.className = 'w-full text-left p-4 rounded-lg border-2 border-transparent transition-all duration-300 cursor-pointer';
+                button.dataset.majorId = major.id;
+                button.innerHTML = `<span class="font-semibold text-lg text-custom-blue">${major.title}</span>`;
+                
+                if (index === 0) {
+                     button.classList.add('bg-white', 'shadow-md', 'border-emerald-500');
+                     activeMajorButton = button;
+                     updateMajorDetails(major.id);
+                } else {
+                     button.classList.add('bg-gray-200', 'hover:bg-white', 'hover:shadow-md', 'hover:border-emerald-300');
+                }
+
+                button.addEventListener('click', () => {
+                    if (activeMajorButton) {
+                        activeMajorButton.classList.remove('bg-white', 'shadow-md', 'border-emerald-500');
+                        activeMajorButton.classList.add('bg-gray-200', 'hover:bg-white', 'hover:shadow-md', 'hover:border-emerald-300');
+                    }
+                    button.classList.add('bg-white', 'shadow-md', 'border-emerald-500');
+                    button.classList.remove('bg-gray-200', 'hover:bg-white', 'hover:shadow-md', 'hover:border-emerald-300');
+                    activeMajorButton = button;
+                    
+                    updateMajorDetails(major.id);
+                });
+
+                majorsList.appendChild(button);
+            });
+            
         });
     </script>
 </body>
