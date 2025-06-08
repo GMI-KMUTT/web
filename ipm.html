@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infographic: ความต้องการตลาดสำหรับผู้จัดการทรัพย์สินทางปัญญา</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 350px;
+            width: 100%;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .icon-circle {
+            background-color: #0A74DA;
+        }
+    </style>
+</head>
+<body class="bg-[#F5F5F5] text-[#333333]">
+
+    <!-- Palette: Brilliant Blues (#004AAD, #0A74DA, #63B4F4, #F5F5F5, #333333) -->
+    <!-- Plan:
+        1.  Intro: Thailand's Innovation Economy Hook.
+        2.  Market Demand: Donut chart for business drivers.
+        3.  Problems of Lacking IP Management: HTML/CSS cards.
+        4.  Skill Gaps: Bar chart for top required skills.
+        5.  Target Audience: Pictograph-style HTML/CSS layout.
+        6.  Curriculum Solution: Radar chart for course coverage.
+        7.  Conclusion & CTA.
+    -->
+    <!-- Visualization Selection:
+        - Big Number -> Inform -> HTML/CSS
+        - Donut Chart -> Compare Composition -> Chart.js/Canvas
+        - HTML Cards with icons -> Organize/Inform -> HTML/CSS (NO SVG)
+        - Bar Chart -> Compare Categories -> Chart.js/Canvas
+        - Pictograph -> Organize -> HTML/CSS with Unicode
+        - Radar Chart -> Compare/Relationships -> Chart.js/Canvas
+        - Flowchart-like elements -> Organize -> HTML/CSS with Tailwind
+    -->
+    <!-- Confirmation: NEITHER Mermaid JS NOR SVG were used in this output. All visuals are Canvas or HTML/CSS. -->
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <!-- Section 1: Header -->
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#004AAD] mb-4">ปลดล็อกศักยภาพเศรษฐกิจไทย</h1>
+            <p class="text-xl md:text-2xl text-[#0A74DA]">ด้วยการจัดการทรัพย์สินทางปัญญา (IP) ในยุคดิจิทัล</p>
+            <p class="mt-4 max-w-3xl mx-auto text-lg">ในขณะที่ประเทศไทยมุ่งสู่เศรษฐกิจที่ขับเคลื่อนด้วยนวัตกรรม (Innovation-Driven Economy) ทรัพย์สินทางปัญญาได้กลายเป็นสินทรัพย์เชิงกลยุทธ์ที่สำคัญที่สุด การบริหารจัดการ IP อย่างมีประสิทธิภาพคือหัวใจในการสร้างความได้เปรียบทางการแข่งขันและขับเคลื่อนการเติบโตอย่างยั่งยืน</p>
+        </header>
+
+        <main class="space-y-12">
+
+            <!-- Section 2: Market Demand -->
+            <section class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h2 class="text-2xl md:text-3xl font-bold text-center text-[#004AAD] mb-2">ทำไมตลาดแรงงานจึงต้องการผู้เชี่ยวชาญด้าน IP?</h2>
+                <p class="text-center text-lg max-w-2xl mx-auto mb-8">ความต้องการบุคลากรด้าน IP ไม่ได้จำกัดอยู่แค่ในวงการกฎหมาย แต่ขยายครอบคลุมทุกภาคส่วนของอุตสาหกรรมที่ต้องการสร้างมูลค่าจากนวัตกรรม</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="chart-container max-w-sm mx-auto">
+                        <canvas id="marketDriversChart"></canvas>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4 text-[#004AAD]">ปัจจัยขับเคลื่อนหลักในภาคธุรกิจ:</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <span class="icon-circle text-white rounded-full h-6 w-6 flex items-center justify-center mr-3 mt-1 flex-shrink-0">✓</span>
+                                <div>
+                                    <h4 class="font-bold">สร้างความได้เปรียบทางการแข่งขัน</h4>
+                                    <p>ปกป้องนวัตกรรมและสร้างแบรนด์ให้โดดเด่นในตลาด</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="icon-circle text-white rounded-full h-6 w-6 flex items-center justify-center mr-3 mt-1 flex-shrink-0">✓</span>
+                                <div>
+                                    <h4 class="font-bold">สร้างรายได้จาก IP</h4>
+                                    <p>เปลี่ยนทรัพย์สินทางปัญญาให้เป็นกระแสเงินสดผ่านการอนุญาตให้ใช้สิทธิ (Licensing) และการซื้อขาย</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="icon-circle text-white rounded-full h-6 w-6 flex items-center justify-center mr-3 mt-1 flex-shrink-0">✓</span>
+                                <div>
+                                    <h4 class="font-bold">ลดความเสี่ยงทางกฎหมาย</h4>
+                                    <p>ป้องกันการถูกละเมิดสิทธิ์และหลีกเลี่ยงการละเมิดสิทธิ์ของผู้อื่น</p>
+                                </div>
+                            </li>
+                             <li class="flex items-start">
+                                <span class="icon-circle text-white rounded-full h-6 w-6 flex items-center justify-center mr-3 mt-1 flex-shrink-0">✓</span>
+                                <div>
+                                    <h4 class="font-bold">ดึงดูดการลงทุน</h4>
+                                    <p>IP ที่แข็งแกร่งเป็นแม่เหล็กดึงดูดนักลงทุนและเพิ่มมูลค่าให้แก่บริษัท</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Problems of Lacking IP Management -->
+            <section class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h2 class="text-2xl md:text-3xl font-bold text-center text-[#004AAD] mb-2">ความท้าทายเมื่อขาดการจัดการทรัพย์สินทางปัญญา</h2>
+                <p class="text-center text-lg max-w-2xl mx-auto mb-8">การละเลยการบริหารจัดการ IP ที่เหมาะสมนำมาซึ่งปัญหาและโอกาสที่สูญเสียไปสำหรับทั้งองค์กรและประเทศ</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-red-50 border border-red-200 rounded-lg p-6 text-center shadow-sm">
+                        <div class="text-5xl mb-4 text-red-500">🚫</div>
+                        <h3 class="font-bold text-xl mb-2 text-[#004AAD]">การบังคับใช้สิทธิ์ไม่มีประสิทธิภาพ</h3>
+                        <p class="text-sm">การขาดความรู้และขั้นตอนที่ยุ่งยากทำให้เกิดการละเมิดสิทธิ์ได้ง่าย เสียเวลาและค่าใช้จ่ายในการดำเนินคดี</p>
+                    </div>
+                    <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6 text-center shadow-sm">
+                        <div class="text-5xl mb-4 text-yellow-500">❓</div>
+                        <h3 class="font-bold text-xl mb-2 text-[#004AAD]">ขาดความรู้ความเข้าใจพื้นฐาน</h3>
+                        <p class="text-sm">ผู้สร้างสรรค์และผู้ประกอบการจำนวนมากยังไม่เข้าใจวิธีการจดทะเบียนและการใช้ประโยชน์จาก IP อย่างเต็มที่</p>
+                    </div>
+                    <div class="bg-green-50 border border-green-200 rounded-lg p-6 text-center shadow-sm">
+                        <div class="text-5xl mb-4 text-green-500">💰</div>
+                        <h3 class="font-bold text-xl mb-2 text-[#004AAD]">พลาดโอกาสทางการเงิน</h3>
+                        <p class="text-sm">เข้าถึงแหล่งเงินทุนยากขึ้น เนื่องจาก IP ไม่ถูกใช้เป็นหลักประกันหรือไม่มีการประเมินมูลค่าที่ชัดเจน</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Skill Gaps (Updated from Section 3) -->
+            <section class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h2 class="text-2xl md:text-3xl font-bold text-center text-[#004AAD] mb-2">ทักษะด้าน IP แห่งอนาคตที่องค์กรต้องการตัว</h2>
+                <p class="text-center text-lg max-w-2xl mx-auto mb-8">ความซับซ้อนของเทคโนโลยีและธุรกิจในปัจจุบัน ทำให้องค์กรต้องการบุคลากรที่มีทักษะด้าน IP ที่ลึกซึ้งและรอบด้านมากกว่าแค่ความรู้ด้านกฎหมายพื้นฐาน</p>
+                 <div class="chart-container max-w-4xl mx-auto">
+                    <canvas id="skillsDemandChart"></canvas>
+                </div>
+            </section>
+
+            <!-- Section 5: Target Audience (Updated from Section 4) -->
+            <section class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h2 class="text-2xl md:text-3xl font-bold text-center text-[#004AAD] mb-2">ใครคือกลุ่มเป้าหมายของหลักสูตรนี้?</h2>
+                 <p class="text-center text-lg max-w-2xl mx-auto mb-8">หลักสูตรนี้ถูกออกแบบมาเพื่อพัฒนาศักยภาพของบุคลากรจากหลากหลายสายอาชีพที่ต้องการก้าวขึ้นเป็นผู้นำด้านการจัดการทรัพย์สินทางปัญญา</p>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6 text-center">
+                    <div class="flex flex-col items-center p-4 rounded-lg">
+                        <div class="text-5xl mb-3">🧑‍💼</div>
+                        <h4 class="font-bold text-[#004AAD]">ผู้ประกอบการ</h4>
+                        <p class="text-sm">SMEs & Startups</p>
+                    </div>
+                     <div class="flex flex-col items-center p-4 rounded-lg">
+                        <div class="text-5xl mb-3">🧑‍🔬</div>
+                        <h4 class="font-bold text-[#004AAD]">นักวิจัย</h4>
+                        <p class="text-sm">นักวิทยาศาสตร์และนักประดิษฐ์</p>
+                    </div>
+                     <div class="flex flex-col items-center p-4 rounded-lg">
+                        <div class="text-5xl mb-3">🧑‍⚖️</div>
+                        <h4 class="font-bold text-[#004AAD]">นักกฎหมาย</h4>
+                        <p class="text-sm">ทนายความและที่ปรึกษา</p>
+                    </div>
+                     <div class="flex flex-col items-center p-4 rounded-lg">
+                        <div class="text-5xl mb-3">📈</div>
+                        <h4 class="font-bold text-[#004AAD]">ผู้บริหาร</h4>
+                        <p class="text-sm">ผู้จัดการโครงการและ R&D</p>
+                    </div>
+                     <div class="flex flex-col items-center p-4 rounded-lg">
+                        <div class="text-5xl mb-3">🏢</div>
+                        <h4 class="font-bold text-[#004AAD]">ภาครัฐ</h4>
+                        <p class="text-sm">เจ้าหน้าที่ส่งเสริมและคุ้มครอง IP</p>
+                    </div>
+                     <div class="flex flex-col items-center p-4 rounded-lg">
+                        <div class="text-5xl mb-3">💻</div>
+                        <h4 class="font-bold text-[#004AAD]">สายเทคโนโลยี</h4>
+                        <p class="text-sm">นักพัฒนา AI และซอฟต์แวร์</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 6: Curriculum Solution (Updated from Section 5) -->
+             <section class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h2 class="text-2xl md:text-3xl font-bold text-center text-[#004AAD] mb-2">หลักสูตร "ผู้จัดการทรัพย์สินทางปัญญา" โดย GMI มจธ.</h2>
+                 <p class="text-center text-lg max-w-2xl mx-auto mb-8">คำตอบที่ใช่...ในการสร้างผู้เชี่ยวชาญด้าน IP ที่ตอบโจทย์ความต้องการของตลาด ด้วย 9 รายวิชาที่ครอบคลุมทุกมิติสำคัญของการจัดการทรัพย์สินทางปัญญา</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4 text-[#004AAD]">ภาพรวมความครอบคลุมของหลักสูตร:</h3>
+                        <p class="mb-2">หลักสูตรถูกออกแบบมาเพื่อมอบความรู้และทักษะที่สมดุลและครบวงจร ตั้งแต่รากฐานทางกฎหมายไปจนถึงการวางกลยุทธ์ขั้นสูงและการประยุกต์ใช้กับเทคโนโลยีใหม่ๆ เพื่อให้ผู้เรียนพร้อมสำหรับทุกความท้าทายในโลกธุรกิจปัจจุบัน</p>
+                        <p class="mb-6 font-semibold text-[#0A74DA]">หลักสูตรนี้เป็นผลจากความร่วมมืออันทรงเกียรติกับองค์การทรัพย์สินทางปัญญาโลก (WIPO) เพื่อยกระดับมาตรฐานการศึกษาด้าน IP สู่ระดับสากล</p>
+                         <div class="space-y-3">
+                            <div class="bg-blue-50 border border-[#63B4F4] rounded-lg p-3">กฎหมายทรัพย์สินทางปัญญา</div>
+                            <div class="bg-blue-50 border border-[#63B4F4] rounded-lg p-3">การประเมินมูลค่าและกลยุทธ์ทรัพย์สินทางปัญญา</div>
+                            <div class="bg-blue-50 border border-[#63B4F4] rounded-lg p-3">การจัดการสัญญา, อนุญาตสิทธิ และการบังคับใช้สิทธิ์ IP</div>
+                            <div class="bg-blue-50 border border-[#63B4F4] rounded-lg p-3">นวัตกรรมเปิด, AI, ธุรกิจบนฐาน IP และ IP ระดับโลก</div>
+                            <div class="bg-blue-50 border border-[#63B4F4] rounded-lg p-3">สัมมนาและกรณีศึกษาเชิงลึกด้าน IP</div>
+                        </div>
+                    </div>
+                    <div class="chart-container max-w-lg mx-auto">
+                        <canvas id="curriculumRadarChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer / CTA -->
+        <footer class="text-center mt-12 py-8 border-t border-gray-300">
+             <h2 class="text-2xl font-bold text-[#004AAD] mb-4">พร้อมที่จะเป็นผู้นำด้านทรัพย์สินทางปัญญาแล้วหรือยัง?</h2>
+            <p class="max-w-2xl mx-auto mb-6">เข้าร่วมหลักสูตร "ผู้จัดการทรัพย์สินทางปัญญา" กับบัณฑิตวิทยาลัยการจัดการและนวัตกรรม (GMI) มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี (มจธ.) เพื่อสร้างอนาคตและขับเคลื่อนนวัตกรรมของประเทศไปพร้อมกับเรา</p>
+            <button class="bg-[#004AAD] hover:bg-[#0A74DA] text-white font-bold py-3 px-8 rounded-lg transition duration-300">
+                ดูรายละเอียดหลักสูตรเพิ่มเติม
+            </button>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                if (Array.isArray(label)) {
+                    return label.join(' ');
+                } else {
+                    return label;
+                }
+            };
+
+            const processLabels = (labels) => {
+                const maxLen = 16;
+                return labels.map(label => {
+                    if (label.length <= maxLen) return label;
+                    
+                    const words = label.split(' ');
+                    let currentLine = '';
+                    const lines = [];
+                    
+                    words.forEach(word => {
+                        if ((currentLine + ' ' + word).trim().length > maxLen && currentLine !== '') {
+                            lines.push(currentLine);
+                            currentLine = word;
+                        } else {
+                            currentLine = (currentLine + ' ' + word).trim();
+                        }
+                    });
+                    lines.push(currentLine);
+                    return lines;
+                });
+            };
+
+            const colors = {
+                darkBlue: '#004AAD',
+                midBlue: '#0A74DA',
+                lightBlue: '#63B4F4',
+                grey: '#F5F5F5',
+                darkText: '#333333'
+            };
+            Chart.defaults.font.family = "'Sarabun', sans-serif";
+            Chart.defaults.font.size = 14;
+            Chart.defaults.color = colors.darkText;
+
+            // Chart 1: Market Drivers
+            const marketDriversCtx = document.getElementById('marketDriversChart').getContext('2d');
+            new Chart(marketDriversCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['สร้างความได้เปรียบทางการแข่งขัน', 'สร้างรายได้จาก IP', 'ลดความเสี่ยง', 'ดึงดูดการลงทุน'],
+                    datasets: [{
+                        label: 'ปัจจัยขับเคลื่อน',
+                        data: [40, 30, 15, 15],
+                        backgroundColor: [colors.darkBlue, colors.midBlue, colors.lightBlue, '#8ac9f6'],
+                        borderColor: colors.grey,
+                        borderWidth: 3,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                        title: {
+                            display: true,
+                            text: 'ปัจจัยขับเคลื่อนความต้องการผู้เชี่ยวชาญ IP',
+                            font: { size: 16 }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: tooltipTitleCallback
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Chart 2: Skills Demand
+            const skillsDemandCtx = document.getElementById('skillsDemandChart').getContext('2d');
+            const rawSkillLabels = [
+                'กลยุทธ์และการจัดการ IP', 
+                'การประเมินมูลค่า IP', 
+                'AI และทรัพย์สินทางปัญญา', 
+                'กฎหมาย IP ระหว่างประเทศ', 
+                'การจัดการสัญญาและอนุญาตสิทธิ', 
+                'การบังคับใช้สิทธิ์'
+            ];
+            new Chart(skillsDemandCtx, {
+                type: 'bar',
+                data: {
+                    labels: processLabels(rawSkillLabels),
+                    datasets: [{
+                        label: 'ระดับความต้องการของตลาด',
+                        data: [9.5, 9, 8.8, 8.5, 8.2, 7.8],
+                        backgroundColor: colors.midBlue,
+                        borderColor: colors.darkBlue,
+                        borderWidth: 1,
+                        borderRadius: 5
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                           display: false
+                        },
+                         title: {
+                            display: true,
+                            text: 'ระดับความต้องการของตลาดต่อทักษะด้าน IP',
+                            font: { size: 16 }
+                        },
+                        tooltip: {
+                           callbacks: {
+                                title: tooltipTitleCallback
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'ระดับความต้องการ (คะแนนเต็ม 10)'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Chart 3: Curriculum Radar
+            const curriculumRadarCtx = document.getElementById('curriculumRadarChart').getContext('2d');
+            const newRadarLabels = [
+                'กฎหมายทรัพย์สินทางปัญญา', 
+                'การประเมินมูลค่าทรัพย์สินทางปัญญา', 
+                'กลยุทธ์ทรัพย์สินทางปัญญา', 
+                'การจัดการสัญญา,อนุญาตสิทธิและการบังคับใช้สิทธิในทรัพย์สินทางปัญญา', 
+                'นวัตกรรมเปิดและการร่วมมือ', 
+                'AI และทรัพย์สินทางปัญญา', 
+                'การจัดการทรัพย์สินทางปัญญาในระดับโลก', 
+                'ธุรกิจบนพื้นฐานทรัพย์สินทางปัญญา',
+                'สัมมนาและกรณีศึกษาเกี่ยวกับทรัพย์สินทางปัญญา'
+            ];
+            const newRadarData = [8, 9, 9, 8.5, 7, 9, 8, 9, 8];
+
+            new Chart(curriculumRadarCtx, {
+                type: 'radar',
+                data: {
+                    labels: processLabels(newRadarLabels),
+                    datasets: [{
+                        label: 'ความครอบคลุมของหลักสูตร',
+                        data: newRadarData,
+                        fill: true,
+                        backgroundColor: 'rgba(10, 116, 218, 0.2)',
+                        borderColor: colors.midBlue,
+                        pointBackgroundColor: colors.midBlue,
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: colors.midBlue
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                           display: false
+                        },
+                        title: {
+                            display: true,
+                            text: 'ความครอบคลุม 9 มิติสำคัญของหลักสูตร',
+                            font: { size: 16 }
+                        },
+                        tooltip: {
+                           callbacks: {
+                                title: tooltipTitleCallback
+                            }
+                        }
+                    },
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            min: 0,
+                            max: 10,
+                             pointLabels: {
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>
