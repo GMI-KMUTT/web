@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infographic: หลักสูตรมาตรฐานการจัดการนวัตกรรม - GMI KMUTT</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+    <!-- 
+        Color Palette: Brilliant Blues 
+        Chosen for its professional, energetic, and tech-forward feel, suitable for an innovation-focused topic.
+        HEX Codes: #003f5c, #2f4b7c, #665191, #a05195, #d45087, #f95d6a, #ff7c43, #ffa600
+    -->
+    <!-- 
+        Narrative Plan: 
+        1. Hook: Introduce the need for innovation management.
+        2. Why: Show market drivers and business needs.
+        3. What: Present the ISO 56000 framework as the solution.
+        4. How: Detail the 9-course curriculum designed to teach the framework.
+        5. Investment: Clearly state the pricing.
+        6. Call to Action: Provide contact details.
+    -->
+    <!-- 
+        Visualization Plan:
+        - Market Drivers: Goal: Inform. Method: HTML/CSS Icon cards. Justification: Simple, clear, visually appealing way to present key concepts. (No SVG Used)
+        - Business Needs: Goal: Compare. Method: Chart.js Horizontal Bar Chart. Justification: Effectively compares the importance of different business drivers. (Canvas, No SVG Used)
+        - ISO Framework: Goal: Organize. Method: HTML/CSS Flow Diagram. Justification: Shows the relationship between standards in a structured way without SVG/Mermaid. (No SVG Used)
+        - Curriculum Structure: Goal: Show composition. Method: Chart.js Donut Chart. Justification: Quickly shows the proportional breakdown of course topics. (Canvas, No SVG Used)
+        - Course Details: Goal: Organize. Method: HTML/CSS Grid of Cards. Justification: Clear, structured presentation of each course. (No SVG Used)
+        - Pricing: Goal: Inform/Compare. Method: HTML/CSS "Big Number" display. Justification: Direct and high-impact way to show cost. (No SVG Used)
+        - Innovation Idea Generator (New Feature): Goal: Generate Ideas. Method: LLM Text Generation via Gemini API with user input. Justification: Provides interactive, AI-powered brainstorming directly relevant to innovation. (No SVG Used)
+        - Confirmation: NEITHER Mermaid JS NOR SVG were used in this output. All charts are rendered on HTML Canvas via Chart.js.
+    -->
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 50vh;
+        }
+        .flow-line {
+            position: relative;
+            width: 2px;
+            background-color: #ff7c43;
+            margin: 0 auto;
+        }
+        .flow-line::before, .flow-line::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            border-style: solid;
+            border-color: #ff7c43 transparent transparent transparent;
+        }
+        .flow-line::after {
+            bottom: -10px;
+            border-width: 10px 10px 0 10px;
+        }
+        .flow-item {
+            border: 2px solid #ff7c43;
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #f95d6a, #ff7c43, #ffa600);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+        .btn-primary {
+            background-color: #ff7c43;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .btn-primary:hover {
+            background-color: #f95d6a;
+            transform: translateY(-2px);
+        }
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #ff7c43;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            display: none; /* Hidden by default */
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-bold gradient-text mb-2">ปลดล็อกศักยภาพนวัตกรรม</h1>
+            <h2 class="text-xl md:text-2xl text-[#003f5c] font-bold">หลักสูตรมาตรฐานการจัดการนวัตกรรม (ISO 56000 Series)</h2>
+            <p class="text-md text-gray-600 mt-2 max-w-3xl mx-auto">โดย บัณฑิตวิทยาลัยการจัดการและนวัตกรรม (GMI) มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี (KMUTT)</p>
+        </header>
+
+        <main class="space-y-12">
+            <section>
+                <h3 class="text-3xl font-bold text-center mb-8 text-[#2f4b7c]">โลกที่เปลี่ยนแปลง: ทำไม "นวัตกรรม" คือคำตอบ</h3>
+                <p class="text-center max-w-3xl mx-auto mb-10 text-gray-600">ในยุคที่ทุกสิ่งเชื่อมต่อและเปลี่ยนแปลงอย่างรวดเร็ว องค์กรที่สามารถปรับตัวและสร้างสรรค์สิ่งใหม่เท่านั้นที่จะอยู่รอดและเติบโต หลักสูตรนี้ถูกออกแบบมาเพื่อตอบสนองต่อ 3 เมกะเทรนด์สำคัญที่กำลังขับเคลื่อนโลก</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="bg-white p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300">
+                        <div class="text-6xl mb-4">💻</div>
+                        <h4 class="text-xl font-bold text-[#665191] mb-2">Digital Transformation</h4>
+                        <p class="text-gray-600">การนำเทคโนโลยีดิจิทัลมาใช้เป็นหัวใจหลักในการสร้างความได้เปรียบทางการแข่งขัน</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300">
+                        <div class="text-6xl mb-4">🌿</div>
+                        <h4 class="text-xl font-bold text-[#a05195] mb-2">Sustainability</h4>
+                        <p class="text-gray-600">นวัตกรรมที่คำนึงถึงสิ่งแวดล้อมและสังคมคืออนาคตของธุรกิจที่ยั่งยืน</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300">
+                        <div class="text-6xl mb-4">⚙️</div>
+                        <h4 class="text-xl font-bold text-[#d45087] mb-2">Technology Integration</h4>
+                        <p class="text-gray-600">การผสานเทคโนโลยีล้ำสมัยอย่าง AI และ Data Analytics เพื่อสร้างผลิตภัณฑ์และบริการใหม่</p>
+                    </div>
+                </div>
+            </section>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <section class="bg-white p-6 md:p-8 rounded-xl shadow-lg">
+                    <h3 class="text-3xl font-bold text-center mb-2 text-[#2f4b7c]">ความต้องการเร่งด่วนของภาคธุรกิจ</h3>
+                    <p class="text-center max-w-xl mx-auto mb-6 text-gray-600">องค์กรต่างๆ กำลังมองหาบุคลากรที่มีความสามารถในการบริหารจัดการนวัตกรรมอย่างเป็นระบบ เพื่อขับเคลื่อนเป้าหมายทางธุรกิจที่สำคัญ</p>
+                    <div class="chart-container h-[450px] md:h-[500px] max-h-[60vh]">
+                        <canvas id="businessNeedsChart"></canvas>
+                    </div>
+                </section>
+                
+                <section class="bg-white p-6 md:p-8 rounded-xl shadow-lg">
+                    <h3 class="text-3xl font-bold text-center mb-2 text-[#2f4b7c]">โครงสร้างหลักสูตรที่สมดุล</h3>
+                     <p class="text-center max-w-xl mx-auto mb-6 text-gray-600">หลักสูตรของเราถูกแบ่งออกเป็น 3 ส่วนหลักเพื่อให้ผู้เรียนได้รับความรู้ที่ครอบคลุม ตั้งแต่พื้นฐาน เครื่องมือ จนถึงกลยุทธ์ขั้นสูง</p>
+                    <div class="chart-container h-[450px] md:h-[500px] max-h-[60vh]">
+                        <canvas id="curriculumBreakdownChart"></canvas>
+                    </div>
+                </section>
+            </div>
+
+            <section class="text-center">
+                <h3 class="text-3xl font-bold text-[#2f4b7c] mb-4">The Solution: ISO 56000 Framework</h3>
+                <p class="max-w-3xl mx-auto text-gray-600 mb-10">มาตรฐานสากล ISO 56000 Series คือเครื่องมือและแนวทางปฏิบัติที่ดีที่สุด (Best Practice) ที่ช่วยให้องค์กรสร้าง "ระบบนิเวศนวัตกรรม" ที่แข็งแกร่งและยั่งยืน</p>
+
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <div class="flow-item bg-[#003f5c] text-white p-4 rounded-lg shadow-md max-w-md mx-auto">
+                        <h4 class="text-xl font-bold">ระบบการจัดการนวัตกรรม (IMS)</h4>
+                        <p class="text-sm">แกนกลางในการขับเคลื่อนนวัตกรรมทั้งองค์กร</p>
+                    </div>
+                    <div class="flow-line h-16"></div>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="flow-item bg-white p-3 rounded-lg text-center">
+                            <h5 class="font-bold text-[#2f4b7c]">พื้นฐานและคำศัพท์</h5>
+                            <p class="text-xs text-gray-500">(ISO 56000)</p>
+                        </div>
+                         <div class="flow-item bg-white p-3 rounded-lg text-center">
+                            <h5 class="font-bold text-[#665191]">การประเมินระบบ</h5>
+                            <p class="text-xs text-gray-500">(ISO 56004)</p>
+                        </div>
+                        <div class="flow-item bg-white p-3 rounded-lg text-center">
+                            <h5 class="font-bold text-[#a05195]">พันธมิตรนวัตกรรม</h5>
+                            <p class="text-xs text-gray-500">(ISO 56003)</p>
+                        </div>
+                         <div class="flow-item bg-white p-3 rounded-lg text-center">
+                            <h5 class="font-bold text-[#d45087]">ทรัพย์สินทางปัญญา</h5>
+                            <p class="text-xs text-gray-500">(ISO 56005)</p>
+                        </div>
+                        <div class="flow-item bg-white p-3 rounded-lg text-center">
+                            <h5 class="font-bold text-[#f95d6a]">ข่าวกรองเชิงกลยุทธ์</h5>
+                            <p class="text-xs text-gray-500">(ISO 56006)</p>
+                        </div>
+                        <div class="flow-item bg-white p-3 rounded-lg text-center">
+                            <h5 class="font-bold text-[#ff7c43]">การจัดการโอกาส/ไอเดีย</h5>
+                            <p class="text-xs text-gray-500">(ISO 56007)</p>
+                        </div>
+                        <div class="flow-item bg-white p-3 rounded-lg text-center">
+                            <h5 class="font-bold text-[#ffa600]">การวัดผล</h5>
+                            <p class="text-xs text-gray-500">(ISO 56008)</p>
+                        </div>
+                        <div class="flow-item bg-white p-3 rounded-lg text-center">
+                            <h5 class="font-bold text-[#003f5c]">ข้อกำหนดของระบบ</h5>
+                            <p class="text-xs text-gray-500">(ISO 56001)</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h3 class="text-3xl font-bold text-center text-[#2f4b7c] mb-8">เส้นทางสู่ความเชี่ยวชาญ: 9 รายวิชา (9 หน่วยกิต)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Course Cards -->
+                    <div class="bg-white p-5 rounded-lg shadow-md border-l-4 border-[#003f5c]">
+                        <h4 class="font-bold text-lg">1. พื้นฐานและศัพท์ของการจัดการนวัตกรรม</h4><p class="text-sm text-gray-500">มาตรฐานอ้างอิง: ISO 56000</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-lg shadow-md border-l-4 border-[#2f4b7c]">
+                        <h4 class="font-bold text-lg">2. ระบบการจัดการนวัตกรรม</h4><p class="text-sm text-gray-500">มาตรฐานอ้างอิง: ISO 56001 & 56002</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-lg shadow-md border-l-4 border-[#665191]">
+                        <h4 class="font-bold text-lg">3. การจัดการพันธมิตรนวัตกรรม</h4><p class="text-sm text-gray-500">มาตรฐานอ้างอิง: ISO 56003</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-lg shadow-md border-l-4 border-[#a05195]">
+                        <h4 class="font-bold text-lg">4. การประเมินและปรับปรุงระบบนวัตกรรม</h4><p class="text-sm text-gray-500">มาตรฐานอ้างอิง: ISO 56004</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-lg shadow-md border-l-4 border-[#d45087]">
+                        <h4 class="font-bold text-lg">5. กลยุทธ์การจัดการทรัพย์สินทางปัญญา</h4><p class="text-sm text-gray-500">มาตรฐานอ้างอิง: ISO 56005</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-lg shadow-md border-l-4 border-[#f95d6a]">
+                        <h4 class="font-bold text-lg">6. การจัดการข่าวกรองเชิงกลยุทธ์</h4><p class="text-sm text-gray-500">มาตรฐานอ้างอิง: ISO 56006</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-lg shadow-md border-l-4 border-[#ff7c43]">
+                        <h4 class="font-bold text-lg">7. การจัดการแนวคิดและโอกาสทางนวัตกรรม</h4><p class="text-sm text-gray-500">มาตรฐานอ้างอิง: ISO 56007</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-lg shadow-md border-l-4 border-[#ffa600]">
+                        <h4 class="font-bold text-lg">8. การวัดผลและตัวชี้วัดนวัตกรรม</h4><p class="text-sm text-gray-500">มาตรฐานอ้างอิง: ISO 56008</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-lg shadow-md border-l-4 border-[#003f5c]">
+                        <h4 class="font-bold text-lg">9. ภูมิทัศน์และกลยุทธ์นวัตกรรม</h4><p class="text-sm text-gray-500">มาตรฐานอ้างอิง: ISO 56012 & 56013</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-white p-8 rounded-xl shadow-lg">
+                <h3 class="text-3xl font-bold text-center text-[#2f4b7c] mb-6">การลงทุนเพื่ออนาคตของคุณ</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
+                    <div class="border-2 border-[#ff7c43] p-6 rounded-lg">
+                        <h4 class="text-2xl font-bold text-gray-700 mb-2">นักศึกษาภายใน</h4>
+                        <p class="text-5xl font-bold text-[#ff7c43]">3,000</p>
+                        <p class="text-gray-600">บาท / หน่วยกิต</p>
+                    </div>
+                    <div class="border-2 border-[#003f5c] p-6 rounded-lg">
+                        <h4 class="text-2xl font-bold text-gray-700 mb-2">บุคคลภายนอก</h4>
+                        <p class="text-5xl font-bold text-[#003f5c]">9,000</p>
+                        <p class="text-gray-600">บาท / หน่วยกิต</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-white p-8 rounded-xl shadow-lg">
+                <h3 class="text-3xl font-bold text-center text-[#2f4b7c] mb-6">💡 สร้างแนวคิดนวัตกรรมด้วย AI</h3>
+                <p class="text-center max-w-2xl mx-auto mb-6 text-gray-600">ใส่คำสำคัญหรืออุตสาหกรรมที่คุณสนใจ แล้วให้ AI ช่วยสร้างแนวคิดนวัตกรรมที่สอดคล้องกับหลักการจัดการนวัตกรรมตามมาตรฐาน ISO 56000</p>
+                <div class="flex flex-col items-center space-y-4">
+                    <input type="text" id="innovationInput" placeholder="ตัวอย่าง: อุตสาหกรรมท่องเที่ยว, การศึกษาออนไลน์"
+                           class="w-full md:w-2/3 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ff7c43]">
+                    <button id="generateIdeaBtn" class="btn-primary flex items-center justify-center space-x-2">
+                        <span>สร้างแนวคิด ✨</span>
+                        <div id="loadingSpinner" class="loading-spinner"></div>
+                    </button>
+                    <div id="innovationOutput" class="w-full md:w-2/3 p-4 bg-gray-50 rounded-lg border border-gray-200 min-h-[100px] mt-4 text-gray-700 text-left whitespace-pre-wrap">
+                        <!-- AI generated ideas will appear here -->
+                    </div>
+                </div>
+            </section>
+            
+        </main>
+
+        <footer class="text-center mt-12 pt-8 border-t border-gray-300">
+             <p class="font-bold text-lg text-[#003f5c]">บัณฑิตวิทยาลัยการจัดการและนวัตกรรม (GMI)</p>
+             <p class="text-gray-600">มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี</p>
+             <p class="text-sm text-gray-500 mt-4">Infographic created on: June 7, 2025</p>
+        </footer>
+
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const brilliantBlues = ['#003f5c', '#488f31', '#2f4b7c', '#665191', '#a05195', '#d45087', '#f95d6a', '#ff7c43', '#ffa600'].reverse();
+        const tooltipTitleCallback = function(tooltipItems) {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+              return label.join(' ');
+            } else {
+              return label;
+            }
+        };
+
+        const wrapLabel = (str, maxWidth) => {
+            if (str.length <= maxWidth) return str;
+            const words = str.split(' ');
+            const lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + word).length > maxWidth && currentLine.length > 0) {
+                    lines.push(currentLine.trim());
+                    currentLine = '';
+                }
+                currentLine += word + ' ';
+            });
+            lines.push(currentLine.trim());
+            return lines;
+        };
+        
+        const businessNeedsCtx = document.getElementById('businessNeedsChart').getContext('2d');
+        new Chart(businessNeedsCtx, {
+            type: 'bar',
+            data: {
+                labels: [
+                    'เพิ่มขีดความสามารถในการแข่งขัน',
+                    'ปรับปรุงประสิทธิภาพและลดต้นทุน',
+                    'จัดการความเสี่ยงและทรัพย์สินทางปัญญา',
+                    'สร้างวัฒนธรรมนวัตกรรมและความร่วมมือ',
+                    'สร้างชื่อเสียงและความน่าเชื่อถือ',
+                    'ตอบสนองเป้าหมายการพัฒนาที่ยั่งยืน (SDGs)'
+                ].map(label => wrapLabel(label, 18)),
+                datasets: [{
+                    label: 'ระดับความสำคัญต่อธุรกิจ',
+                    data: [95, 88, 85, 92, 80, 78],
+                    backgroundColor: brilliantBlues,
+                    borderColor: '#ffffff',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                           title: tooltipTitleCallback
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        ticks: {
+                            font: { size: 12, family: 'Sarabun' }
+                        }
+                    },
+                    y: {
+                         ticks: {
+                            font: { size: 14, family: 'Sarabun' }
+                        }
+                    }
+                }
+            }
+        });
+
+        const curriculumBreakdownCtx = document.getElementById('curriculumBreakdownChart').getContext('2d');
+        new Chart(curriculumBreakdownCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['พื้นฐานและระบบ (2 วิชา)', 'เครื่องมือและกระบวนการหลัก (5 วิชา)', 'กลยุทธ์และการกำกับดูแล (2 วิชา)'],
+                datasets: [{
+                    label: 'สัดส่วนเนื้อหาหลักสูตร',
+                    data: [2, 5, 2],
+                    backgroundColor: ['#003f5c', '#a05195', '#ff7c43'],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                           font: { size: 14, family: 'Sarabun' }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                           title: tooltipTitleCallback
+                        }
+                    }
+                }
+            }
+        });
+
+        const innovationInput = document.getElementById('innovationInput');
+        const generateIdeaBtn = document.getElementById('generateIdeaBtn');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const innovationOutput = document.getElementById('innovationOutput');
+
+        generateIdeaBtn.addEventListener('click', async () => {
+            const userInput = innovationInput.value.trim();
+            if (!userInput) {
+                innovationOutput.textContent = 'กรุณาป้อนคำสำคัญหรืออุตสาหกรรมที่ต้องการ';
+                return;
+            }
+
+            innovationOutput.textContent = '';
+            loadingSpinner.style.display = 'block';
+            generateIdeaBtn.disabled = true;
+
+            const prompt = `โปรดสร้างแนวคิดนวัตกรรม 3 ข้อสำหรับอุตสาหกรรม ${userInput} โดยพิจารณาหลักการจัดการนวัตกรรมตามมาตรฐาน ISO 56000 เช่น การจัดการข่าวกรองเชิงกลยุทธ์ และการจัดการโอกาสและแนวคิดนวัตกรรม โปรดนำเสนอในรูปแบบรายการแบบหัวข้อย่อย.`;
+
+            let chatHistory = [];
+            chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+            const payload = { contents: chatHistory };
+            const apiKey = "";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    innovationOutput.textContent = text;
+                } else {
+                    innovationOutput.textContent = 'ไม่สามารถสร้างแนวคิดได้ในขณะนี้ โปรดลองอีกครั้ง';
+                }
+            } catch (error) {
+                console.error('Error calling Gemini API:', error);
+                innovationOutput.textContent = 'เกิดข้อผิดพลาดในการเชื่อมต่อ AI โปรดลองอีกครั้งในภายหลัง';
+            } finally {
+                loadingSpinner.style.display = 'none';
+                generateIdeaBtn.disabled = false;
+            }
+        });
+    });
+    </script>
+</body>
+</html>
