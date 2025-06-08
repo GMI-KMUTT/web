@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>อินโฟกราฟิก: แนวโน้มอุตสาหกรรมเทคโนโลยีในประเทศไทย</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- 
+        Source Material Integration Plan:
+        1. Analyze Material: Simulated "Deep Research Report" on Thailand's Tech Industry. Focus on market size, growth, tech adoption, competitive landscape, consumer demographics, SWOT, and future outlook.
+        2. Plan Narrative & Structure:
+            - Introduction: Brief overview of the report.
+            - Market Overview: Size, growth projections.
+            - Technology Adoption Trends: Key technology adoption rates.
+            - Competitive Landscape: Market share of key players.
+            - Consumer Insights: Demographics and behavior.
+            - SWOT Analysis: Strengths, Weaknesses, Opportunities, Threats.
+            - Future Outlook: Growth forecasts and concluding remarks.
+        3. Select Optimal Visualizations:
+            - Market Size (Current): Single Big Number (Text). Goal: Inform. Method: HTML/Tailwind. (NO SVG)
+            - Market Growth Projection: Line Chart (Chart.js). Goal: Change. Justification: Shows trend over time. Library: Chart.js (Canvas). (NO SVG)
+            - Technology Adoption Rates: Bar Chart (Chart.js). Goal: Compare. Justification: Compares adoption across different technologies. Library: Chart.js (Canvas). (NO SVG)
+            - Market Share: Donut Chart (Chart.js). Goal: Compare (Composition). Justification: Shows proportion of market held by key players. Library: Chart.js (Canvas). (NO SVG)
+            - Consumer Demographics (Age Groups): Pie Chart (Chart.js). Goal: Compare (Composition). Justification: Shows distribution of consumer age groups. Library: Chart.js (Canvas). (NO SVG)
+            - SWOT Analysis: Structured HTML/CSS. Goal: Organize. Justification: Clearly presents categorized information. Method: HTML/Tailwind. (NO SVG, NO MERMAID JS)
+            - Future Growth Rate: Single Big Number (Text) for CAGR. Goal: Inform. Method: HTML/Tailwind. (NO SVG)
+        4. Chosen Color Palette: "Energetic & Playful"
+            - Coral: #FF6B6B
+            - Sunglow: #FFD166
+            - Caribbean Green: #06D6A0
+            - Blue NCS: #118AB2
+            - Midnight Green: #073B4C (Darker, for text/backgrounds)
+            - Background/Neutral: #F7F7F7 (Light Gray), #FFFFFF (White)
+        Confirmation: NEITHER Mermaid JS NOR SVG were used anywhere in this output. All charts are Chart.js (Canvas). Diagrams are HTML/CSS.
+    -->
+    <style>
+        body {
+            font-family: 'Kanit', sans-serif;
+            background-color: #F7F7F7; /* Light Gray background from palette */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px; /* Max width for readability */
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px; /* Base height */
+            max-height: 400px; /* Max height */
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px; /* Taller on md screens and up */
+            }
+        }
+        .stat-card {
+            background-color: #FFFFFF; /* White card background */
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+            padding: 1.5rem; /* p-6 */
+            margin-bottom: 1.5rem; /* mb-6 */
+        }
+        .swot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        .swot-item {
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+        .swot-strengths { background-color: #E6FFFA; border-left: 5px solid #06D6A0; } /* Caribbean Green accent */
+        .swot-weaknesses { background-color: #FFF5F5; border-left: 5px solid #FF6B6B; } /* Coral accent */
+        .swot-opportunities { background-color: #FEFCBF; border-left: 5px solid #FFD166; } /* Sunglow accent */
+        .swot-threats { background-color: #EBF4FF; border-left: 5px solid #118AB2; } /* Blue NCS accent */
+        h1, h2, h3 {
+            color: #073B4C; /* Midnight Green for headings */
+        }
+        .text-highlight {
+            color: #118AB2; /* Blue NCS for highlights */
+        }
+        .nav-sticky {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <header class="bg-gradient-to-r from-[#118AB2] to-[#06D6A0] text-white p-8 text-center">
+        <h1 class="text-4xl font-bold text-white">อินโฟกราฟิก: แนวโน้มอุตสาหกรรมเทคโนโลยีในประเทศไทย</h1>
+        <p class="mt-2 text-lg">การวิเคราะห์ภาพรวมตลาด, แนวโน้มสำคัญ, และการคาดการณ์อนาคต</p>
+    </header>
+
+    <nav class="nav-sticky py-3 px-6">
+        <ul class="flex flex-wrap justify-center space-x-4 md:space-x-6">
+            <li><a href="#market-overview" class="text-[#073B4C] hover:text-[#118AB2] font-medium">ภาพรวมตลาด</a></li>
+            <li><a href="#tech-trends" class="text-[#073B4C] hover:text-[#118AB2] font-medium">แนวโน้มเทคโนโลยี</a></li>
+            <li><a href="#competition" class="text-[#073B4C] hover:text-[#118AB2] font-medium">การแข่งขัน</a></li>
+            <li><a href="#consumer-insights" class="text-[#073B4C] hover:text-[#118AB2] font-medium">ข้อมูลผู้บริโภค</a></li>
+            <li><a href="#swot" class="text-[#073B4C] hover:text-[#118AB2] font-medium">SWOT</a></li>
+            <li><a href="#future-outlook" class="text-[#073B4C] hover:text-[#118AB2] font-medium">อนาคตอุตสาหกรรม</a></li>
+        </ul>
+    </nav>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <section id="market-overview" class="mb-12 stat-card">
+            <h2 class="text-3xl font-semibold mb-6 text-center">ภาพรวมตลาดเทคโนโลยีไทย</h2>
+            <p class="text-lg text-gray-700 mb-6 text-center">
+                อุตสาหกรรมเทคโนโลยีในประเทศไทยมีการเติบโตอย่างต่อเนื่อง โดยได้รับแรงหนุนจากการปรับตัวสู่ดิจิทัลในภาคส่วนต่างๆ และการสนับสนุนจากภาครัฐ
+                ข้อมูลล่าสุดชี้ให้เห็นถึงศักยภาพที่แข็งแกร่งสำหรับการขยายตัวในอนาคต
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="text-center">
+                    <h3 class="text-2xl font-medium mb-2">มูลค่าตลาดปัจจุบัน (โดยประมาณ)</h3>
+                    <p class="text-5xl font-bold text-highlight">1.5 ล้านล้านบาท</p>
+                    <p class="text-gray-600 mt-2">(ปี 2567)</p>
+                </div>
+                <div class="chart-container">
+                    <canvas id="marketGrowthChart"></canvas>
+                </div>
+            </div>
+            <p class="text-md text-gray-600 mt-6 text-center">
+                แผนภูมิด้านบนแสดงการคาดการณ์การเติบโตของมูลค่าตลาดอุตสาหกรรมเทคโนโลยีในประเทศไทยในช่วง 5 ปีข้างหน้า สะท้อนให้เห็นถึงแนวโน้มการเติบโตที่ชัดเจน
+            </p>
+        </section>
+
+        <section id="tech-trends" class="mb-12 stat-card">
+            <h2 class="text-3xl font-semibold mb-6 text-center">แนวโน้มการนำเทคโนโลยีมาใช้</h2>
+            <p class="text-lg text-gray-700 mb-6 text-center">
+                การนำเทคโนโลยีใหม่ๆ มาปรับใช้เป็นปัจจัยสำคัญที่ขับเคลื่อนการเติบโตของอุตสาหกรรม อัตราการยอมรับเทคโนโลยีหลักๆ เช่น Cloud Computing, AI, และ IoT กำลังเพิ่มสูงขึ้นอย่างมีนัยสำคัญ
+            </p>
+            <div class="chart-container mx-auto">
+                <canvas id="techAdoptionChart"></canvas>
+            </div>
+            <p class="text-md text-gray-600 mt-6 text-center">
+                แผนภูมิแท่งนี้แสดงอัตราการนำเทคโนโลยีสำคัญมาใช้ในภาคธุรกิจของไทย แสดงให้เห็นว่า Cloud Computing และ Big Data & Analytics เป็นเทคโนโลยีที่มีการนำมาใช้ในวงกว้าง
+            </p>
+        </section>
+
+        <section id="competition" class="mb-12 stat-card">
+            <h2 class="text-3xl font-semibold mb-6 text-center">ภูมิทัศน์การแข่งขันและผู้เล่นหลัก</h2>
+            <p class="text-lg text-gray-700 mb-6 text-center">
+                ตลาดเทคโนโลยีไทยมีการแข่งขันที่หลากหลาย ประกอบด้วยผู้เล่นทั้งในระดับประเทศและระดับนานาชาติ การทำความเข้าใจส่วนแบ่งการตลาดช่วยให้เห็นภาพรวมการแข่งขันได้ชัดเจนยิ่งขึ้น
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="chart-container">
+                    <canvas id="marketShareChart"></canvas>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-medium mb-4">ผู้เล่นหลักในตลาด (ตัวอย่าง)</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2">
+                        <li>บริษัท A (ผู้ให้บริการ Cloud รายใหญ่)</li>
+                        <li>บริษัท B (ผู้นำด้านโซลูชัน AI)</li>
+                        <li>บริษัท C (ผู้เชี่ยวชาญด้าน IoT และ Smart City)</li>
+                        <li>บริษัท D (ผู้พัฒนาระบบ ERP ท้องถิ่น)</li>
+                        <li>ผู้เล่นรายอื่นๆ และสตาร์ทอัพ</li>
+                    </ul>
+                    <p class="text-md text-gray-600 mt-4">
+                        แผนภูมิโดนัทแสดงส่วนแบ่งการตลาดโดยประมาณของผู้เล่นหลักในอุตสาหกรรมเทคโนโลยีไทย สะท้อนให้เห็นถึงการกระจายตัวของตลาดและการแข่งขัน
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="consumer-insights" class="mb-12 stat-card">
+            <h2 class="text-3xl font-semibold mb-6 text-center">ข้อมูลเชิงลึกผู้บริโภค</h2>
+            <p class="text-lg text-gray-700 mb-6 text-center">
+                ความเข้าใจในข้อมูลประชากรและพฤติกรรมของผู้บริโภคเป็นสิ่งสำคัญในการพัฒนากลยุทธ์ทางธุรกิจที่ตอบโจทย์ กลุ่มผู้บริโภคในประเทศไทยมีความหลากหลายและเปิดรับเทคโนโลยีใหม่ๆ มากขึ้น
+            </p>
+            <div class="chart-container mx-auto">
+                <canvas id="consumerDemographicsChart"></canvas>
+            </div>
+            <p class="text-md text-gray-600 mt-6 text-center">
+                แผนภูมิวงกลมนี้แสดงสัดส่วนกลุ่มผู้บริโภคเทคโนโลยีในประเทศไทยตามช่วงอายุ แสดงให้เห็นว่ากลุ่ม Gen Y และ Gen Z เป็นกลุ่มผู้ใช้งานหลัก
+            </p>
+        </section>
+
+        <section id="swot" class="mb-12 stat-card">
+            <h2 class="text-3xl font-semibold mb-6 text-center">การวิเคราะห์ SWOT อุตสาหกรรมเทคโนโลยีไทย</h2>
+            <p class="text-lg text-gray-700 mb-6 text-center">
+                การวิเคราะห์จุดแข็ง จุดอ่อน โอกาส และอุปสรรค (SWOT) ช่วยให้เข้าใจปัจจัยภายในและภายนอกที่ส่งผลต่ออุตสาหกรรมเทคโนโลยีในประเทศไทย
+            </p>
+            <div class="swot-grid">
+                <div class="swot-item swot-strengths">
+                    <h3 class="text-xl font-semibold mb-2 text-[#073B4C]">จุดแข็ง (Strengths)</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-1">
+                        <li>การสนับสนุนจากภาครัฐ (เช่น Thailand 4.0)</li>
+                        <li>การเติบโตของ Digital Literacy</li>
+                        <li>โครงสร้างพื้นฐานโทรคมนาคมที่ค่อนข้างดี</li>
+                        <li>ตลาดผู้บริโภคขนาดใหญ่</li>
+                    </ul>
+                </div>
+                <div class="swot-item swot-weaknesses">
+                    <h3 class="text-xl font-semibold mb-2 text-[#073B4C]">จุดอ่อน (Weaknesses)</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-1">
+                        <li>การขาดแคลนบุคลากรทักษะสูง</li>
+                        <li>ความเหลื่อมล้ำในการเข้าถึงเทคโนโลยี</li>
+                        <li>กฎระเบียบที่อาจตามไม่ทันการเปลี่ยนแปลง</li>
+                        <li>การพึ่งพาเทคโนโลยีจากต่างประเทศ</li>
+                    </ul>
+                </div>
+                <div class="swot-item swot-opportunities">
+                    <h3 class="text-xl font-semibold mb-2 text-[#073B4C]">โอกาส (Opportunities)</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-1">
+                        <li>การขยายตัวของ E-commerce และ Fintech</li>
+                        <li>การลงทุนใน Smart City และ 5G</li>
+                        <li>ความต้องการโซลูชัน AI และ Big Data ที่เพิ่มขึ้น</li>
+                        <li>การเป็นศูนย์กลางเทคโนโลยีในภูมิภาค</li>
+                    </ul>
+                </div>
+                <div class="swot-item swot-threats">
+                    <h3 class="text-xl font-semibold mb-2 text-[#073B4C]">อุปสรรค (Threats)</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-1">
+                        <li>ความปลอดภัยทางไซเบอร์และการละเมิดข้อมูล</li>
+                        <li>การแข่งขันจากผู้เล่นระดับโลก</li>
+                        <li>ความไม่แน่นอนทางเศรษฐกิจ</li>
+                        <li>การเปลี่ยนแปลงทางเทคโนโลยีที่รวดเร็ว</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="future-outlook" class="mb-12 stat-card text-center">
+            <h2 class="text-3xl font-semibold mb-6">อนาคตอุตสาหกรรมเทคโนโลยีไทย</h2>
+            <p class="text-lg text-gray-700 mb-4">
+                อุตสาหกรรมเทคโนโลยีของไทยมีแนวโน้มเติบโตอย่างต่อเนื่องในอีกหลายปีข้างหน้า โดยคาดว่าจะมีการลงทุนเพิ่มขึ้นในเทคโนโลยีเชิงลึก เช่น AI, IoT, และ Blockchain รวมถึงการพัฒนาบุคลากรเพื่อรองรับความต้องการของตลาด
+            </p>
+            <div class="my-8">
+                <h3 class="text-2xl font-medium mb-2">อัตราการเติบโตเฉลี่ยต่อปี (CAGR) ที่คาดการณ์</h3>
+                <p class="text-5xl font-bold text-highlight">8-10%</p>
+                <p class="text-gray-600 mt-2">(ช่วงปี 2568-2572)</p>
+            </div>
+            <p class="text-lg text-gray-700">
+                การปรับตัวและนำนวัตกรรมมาใช้อย่างต่อเนื่องจะเป็นกุญแจสำคัญสำหรับธุรกิจไทยในการแข่งขันและเติบโตในยุคดิจิทัล
+            </p>
+        </section>
+
+    </main>
+
+    <footer class="bg-[#073B4C] text-white text-center p-6 mt-12">
+        <p>&copy; 2567 รายงานการวิจัยตลาดเทคโนโลยี (จำลอง). สงวนลิขสิทธิ์</p>
+        <p class="text-sm opacity-75">อินโฟกราฟิกนี้จัดทำขึ้นเพื่อเป็นตัวอย่างเท่านั้น</p>
+    </footer>
+
+    <script>
+        const FONT_FAMILY = "'Kanit', sans-serif";
+        const PALETTE = {
+            coral: '#FF6B6B',
+            sunglow: '#FFD166',
+            caribbeanGreen: '#06D6A0',
+            blueNCS: '#118AB2',
+            midnightGreen: '#073B4C'
+        };
+
+        function wrapLabel(str, maxWidth) {
+            if (str.length <= maxWidth) {
+                return str;
+            }
+            const words = str.split(' ');
+            let currentLine = '';
+            const lines = [];
+            for (const word of words) {
+                if ((currentLine + word).length > maxWidth && currentLine.length > 0) {
+                    lines.push(currentLine.trim());
+                    currentLine = '';
+                }
+                currentLine += word + ' ';
+            }
+            lines.push(currentLine.trim());
+            return lines;
+        }
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+
+        const commonChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        font: { family: FONT_FAMILY, size: 12 },
+                        color: PALETTE.midnightGreen
+                    }
+                },
+                tooltip: {
+                    titleFont: { family: FONT_FAMILY, size: 14 },
+                    bodyFont: { family: FONT_FAMILY, size: 12 },
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        font: { family: FONT_FAMILY, size: 11 },
+                        color: PALETTE.midnightGreen
+                    },
+                    grid: { display: false }
+                },
+                y: {
+                    ticks: {
+                        font: { family: FONT_FAMILY, size: 11 },
+                        color: PALETTE.midnightGreen
+                    },
+                    grid: { color: '#e0e0e0' }
+                }
+            }
+        };
+
+        // Market Growth Chart
+        const marketGrowthCtx = document.getElementById('marketGrowthChart').getContext('2d');
+        new Chart(marketGrowthCtx, {
+            type: 'line',
+            data: {
+                labels: ['2567', '2568', '2569', '2570', '2571'],
+                datasets: [{
+                    label: 'มูลค่าตลาด (ล้านล้านบาท)',
+                    data: [1.5, 1.65, 1.8, 2.0, 2.25],
+                    borderColor: PALETTE.blueNCS,
+                    backgroundColor: 'rgba(17, 138, 178, 0.1)',
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: { ...commonChartOptions }
+        });
+
+        // Tech Adoption Chart
+        const techAdoptionCtx = document.getElementById('techAdoptionChart').getContext('2d');
+        const techAdoptionLabels = [
+            'Cloud Computing', 
+            'Big Data & Analytics', 
+            'ปัญญาประดิษฐ์ (AI)', 
+            'Internet of Things (IoT)', 
+            'Cybersecurity Solutions'
+        ].map(label => wrapLabel(label, 16));
+        new Chart(techAdoptionCtx, {
+            type: 'bar',
+            data: {
+                labels: techAdoptionLabels,
+                datasets: [{
+                    label: 'อัตราการนำมาใช้ในธุรกิจ (%)',
+                    data: [75, 60, 45, 50, 70],
+                    backgroundColor: [PALETTE.caribbeanGreen, PALETTE.sunglow, PALETTE.coral, PALETTE.blueNCS, PALETTE.midnightGreen],
+                    borderColor: '#ffffff',
+                    borderWidth: 1
+                }]
+            },
+            options: { ...commonChartOptions, indexAxis: 'y' }
+        });
+
+        // Market Share Chart
+        const marketShareCtx = document.getElementById('marketShareChart').getContext('2d');
+        const marketShareLabels = ['บริษัท A', 'บริษัท B', 'บริษัท C', 'บริษัท D', 'อื่นๆ'].map(label => wrapLabel(label, 16));
+        new Chart(marketShareCtx, {
+            type: 'doughnut',
+            data: {
+                labels: marketShareLabels,
+                datasets: [{
+                    label: 'ส่วนแบ่งการตลาด',
+                    data: [30, 25, 20, 15, 10],
+                    backgroundColor: [PALETTE.blueNCS, PALETTE.caribbeanGreen, PALETTE.sunglow, PALETTE.coral, PALETTE.midnightGreen],
+                    hoverOffset: 4
+                }]
+            },
+            options: { ...commonChartOptions, scales: { x: { display: false }, y: { display: false } } }
+        });
+
+        // Consumer Demographics Chart
+        const consumerDemographicsCtx = document.getElementById('consumerDemographicsChart').getContext('2d');
+        const consumerDemographicsLabels = ['Gen Z (ต่ำกว่า 25 ปี)', 'Gen Y (25-40 ปี)', 'Gen X (41-55 ปี)', 'Baby Boomer (56+ ปี)'].map(label => wrapLabel(label, 16));
+        new Chart(consumerDemographicsCtx, {
+            type: 'pie',
+            data: {
+                labels: consumerDemographicsLabels,
+                datasets: [{
+                    label: 'กลุ่มผู้บริโภคเทคโนโลยี',
+                    data: [35, 40, 20, 5],
+                    backgroundColor: [PALETTE.coral, PALETTE.sunglow, PALETTE.caribbeanGreen, PALETTE.blueNCS],
+                    hoverOffset: 4
+                }]
+            },
+            options: { ...commonChartOptions, scales: { x: { display: false }, y: { display: false } } }
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Calculate position considering sticky nav height if any
+                    const navHeight = document.querySelector('nav.nav-sticky')?.offsetHeight || 0;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - navHeight - 10; // 10px buffer
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>
