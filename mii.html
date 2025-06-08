@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>หลักสูตรวิทยาศาสตรมหาบัณฑิต สาขาการจัดการนวัตกรรมเชิงบูรณาการ</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -18,7 +18,7 @@
     - Program Structure: A doughnut chart (Chart.js) visually breaks down the credit distribution for the Professional Track, making the 36-unit structure immediately understandable. This is more intuitive than a simple text list.
     - Specializations: An interactive card layout. Users click a major to see its details. This "cause-and-effect" interaction is more engaging than a static table and allows users to focus on what interests them. It directly answers "What problem will I solve?" and "What job can I get?".
     - Core Courses: A simple, clean list format is sufficient as this is foundational information.
-    - Dual Major Option: Implemented with simple checkboxes and a dynamic text box. This directly engages the user in exploring a key program feature, making the benefit of "3 extra credits for 2 specializations" tangible.
+    - Dual Major Option: A clear callout box explains the benefit of taking 3 extra credits to earn a second specialization, making the value proposition tangible.
 
     CONFIRMATION: NO SVG graphics used. NO Mermaid JS used.
     -->
@@ -27,116 +27,97 @@
         .bg-custom-blue { background-color: #2c3e50; }
         .text-custom-blue { color: #2c3e50; }
         .border-custom-blue { border-color: #2c3e50; }
-        .hover\:bg-custom-blue-dark:hover { background-color: #22303f; }
+        .hover\:bg-custom-blue-dark:hover { background-color: #212f3c; }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-gray-100 text-gray-800">
 
-    <!-- Header & Navigation -->
     <header id="header" class="bg-white shadow-md sticky top-0 z-50 transition-all duration-300">
         <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
             <a href="#" class="text-xl font-bold text-custom-blue">M.Sc. Integrated Innovation</a>
             <div class="hidden md:flex space-x-8">
-                <a href="#about" class="text-gray-600 hover:text-emerald-500 transition-colors">เกี่ยวกับหลักสูตร</a>
-                <a href="#structure" class="text-gray-600 hover:text-emerald-500 transition-colors">โครงสร้าง</a>
-                <a href="#majors" class="text-gray-600 hover:text-emerald-500 transition-colors">แขนงวิชา</a>
-                <a href="#careers" class="text-gray-600 hover:text-emerald-500 transition-colors">โอกาสทางอาชีพ</a>
-                <a href="#fees" class="text-gray-600 hover:text-emerald-500 transition-colors">ค่าใช้จ่าย</a>
+                <a href="#about" class="text-gray-600 hover:text-emerald-600 transition-colors">เกี่ยวกับหลักสูตร</a>
+                <a href="#structure" class="text-gray-600 hover:text-emerald-600 transition-colors">โครงสร้าง</a>
+                <a href="#majors" class="text-gray-600 hover:text-emerald-600 transition-colors">แขนงวิชา</a>
+                <a href="#careers" class="text-gray-600 hover:text-emerald-600 transition-colors">โอกาสทางอาชีพ</a>
+                <a href="#fees" class="text-gray-600 hover:text-emerald-600 transition-colors">ค่าใช้จ่าย</a>
             </div>
             <a href="#contact" class="hidden md:block bg-emerald-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-emerald-600 transition-all duration-300 shadow-sm">ติดต่อเรา</a>
             <button id="mobile-menu-btn" class="md:hidden focus:outline-none">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
             </button>
         </nav>
-        <div id="mobile-menu" class="hidden md:hidden">
-            <a href="#about" class="block py-2 px-4 text-sm hover:bg-gray-200">เกี่ยวกับหลักสูตร</a>
-            <a href="#structure" class="block py-2 px-4 text-sm hover:bg-gray-200">โครงสร้าง</a>
-            <a href="#majors" class="block py-2 px-4 text-sm hover:bg-gray-200">แขนงวิชา</a>
-            <a href="#careers" class="block py-2 px-4 text-sm hover:bg-gray-200">โอกาสทางอาชีพ</a>
-            <a href="#fees" class="block py-2 px-4 text-sm hover:bg-gray-200">ค่าใช้จ่าย</a>
-            <a href="#contact" class="block py-2 px-4 text-sm hover:bg-gray-200">ติดต่อเรา</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <a href="#about" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">เกี่ยวกับหลักสูตร</a>
+            <a href="#structure" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">โครงสร้าง</a>
+            <a href="#majors" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">แขนงวิชา</a>
+            <a href="#careers" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">โอกาสทางอาชีพ</a>
+            <a href="#fees" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">ค่าใช้จ่าย</a>
+            <a href="#contact" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">ติดต่อเรา</a>
         </div>
     </header>
 
-    <main class="container mx-auto p-6">
-        <!-- Hero Section -->
-        <section id="hero" class="text-center py-20 bg-white rounded-lg shadow-lg mb-12" style="background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url('https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80'); background-size: cover; background-position: center;">
-            <h1 class="text-4xl md:text-6xl font-extrabold text-custom-blue mb-4">พลิกโฉมอนาคตด้วยนวัตกรรม</h1>
-            <h2 class="text-xl md:text-2xl text-gray-700 mb-8">หลักสูตรวิทยาศาสตรมหาบัณฑิต สาขาการจัดการนวัตกรรมเชิงบูรณาการ</h2>
-            <p class="max-w-3xl mx-auto text-gray-600 mb-8">
-                ในยุคที่เทคโนโลยีเปลี่ยนแปลงอย่างรวดเร็ว องค์กรที่หยุดนิ่งคือการถอยหลัง หลักสูตรของเราไม่ได้สอนให้คุณแค่ตามทัน แต่สอนให้คุณเป็นผู้นำการเปลี่ยนแปลง การสร้างนวัตกรรมไม่ใช่แค่ "ทางเลือก" แต่คือ "ทางรอดเดียว" ขององค์กรในปัจจุบัน
-            </p>
-            <a href="#majors" class="bg-emerald-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-emerald-600 transition-all duration-300 transform hover:scale-105 shadow-md">ค้นหาความเชี่ยวชาญของคุณ</a>
+    <main class="container mx-auto p-4 sm:p-6">
+        <section id="hero" class="text-center py-16 md:py-24 bg-white rounded-xl shadow-lg mb-12 bg-cover bg-center" style="background-image: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80');">
+            <div class="px-4">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-custom-blue mb-4 leading-tight">พลิกโฉมอนาคตด้วยนวัตกรรม</h1>
+                <h2 class="text-xl md:text-2xl text-gray-700 mb-6">หลักสูตรวิทยาศาสตรมหาบัณฑิต สาขาการจัดการนวัตกรรมเชิงบูรณาการ</h2>
+                <p class="max-w-3xl mx-auto text-gray-600 mb-8 text-lg">
+                    ในยุคที่ความเร็วในการเปลี่ยนแปลงของสังคมและเทคโนโลยีกำลังสูงขึ้นอย่างไม่เคยเป็นมาก่อน องค์กรที่ไม่มีนวัตกรรม จะค่อยๆตายลง การจัดการนวัตกรรมไม่ใช่ทางเลือก แต่เป็นทางรอดเดียวขององค์กรในยุคปัจจุบัน
+                </p>
+                <a href="#majors" class="bg-emerald-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-emerald-600 transition-all duration-300 transform hover:scale-105 shadow-md">สำรวจแขนงวิชา</a>
+            </div>
         </section>
 
-        <!-- About Section -->
         <section id="about" class="mb-12 scroll-mt-20">
-            <h2 class="text-3xl font-bold text-center text-custom-blue mb-8">ทำไมต้องเลือกเรียนที่นี่?</h2>
+            <h2 class="text-3xl font-bold text-center text-custom-blue mb-10">ทำไมต้องเลือกเรียนที่นี่?</h2>
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:-translate-y-2 transition-transform duration-300">
-                    <div class="text-emerald-500 mb-4"><svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.523 5.754 19 7.5 19s3.332-.477 4.5-1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.523 18.246 19 16.5 19s-3.332-.477-4.5-1.253" /></svg></div>
+                <div class="bg-white p-6 rounded-xl shadow-md text-center transform hover:-translate-y-2 transition-transform duration-300">
+                    <div class="text-emerald-500 mb-4 text-5xl">💡</div>
                     <h3 class="text-xl font-semibold mb-2 text-custom-blue">เรียนจริง ทำจริง</h3>
                     <p class="text-gray-600">เน้นการเรียนรู้แบบลงมือปฏิบัติ (Experiential Learning) ผ่านเวิร์กชอปและโครงงานจริง เพื่อสร้างประสบการณ์ที่นำไปใช้ได้ทันที</p>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:-translate-y-2 transition-transform duration-300">
-                    <div class="text-emerald-500 mb-4"><svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg></div>
+                <div class="bg-white p-6 rounded-xl shadow-md text-center transform hover:-translate-y-2 transition-transform duration-300">
+                    <div class="text-emerald-500 mb-4 text-5xl">🚀</div>
                     <h3 class="text-xl font-semibold mb-2 text-custom-blue">ทักษะแห่งอนาคต</h3>
                     <p class="text-gray-600">พัฒนาทักษะที่ตลาดต้องการ ทั้งการคิดเชิงนวัตกรรม, ภาวะผู้นำ, ความยั่งยืน และการบริหารจัดการความเสี่ยง</p>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:-translate-y-2 transition-transform duration-300">
-                    <div class="text-emerald-500 mb-4"><svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg></div>
+                <div class="bg-white p-6 rounded-xl shadow-md text-center transform hover:-translate-y-2 transition-transform duration-300">
+                    <div class="text-emerald-500 mb-4 text-5xl">🧭</div>
                     <h3 class="text-xl font-semibold mb-2 text-custom-blue">เส้นทางที่ยืดหยุ่น</h3>
                     <p class="text-gray-600">เลือกเรียนได้ทั้งสายวิชาการ (เน้นวิจัย) หรือสายวิชาชีพ (เน้นโครงงาน) ที่ตอบโจทย์เป้าหมายของคุณ</p>
                 </div>
             </div>
         </section>
 
-        <!-- Program Structure Section -->
         <section id="structure" class="mb-12 scroll-mt-20">
             <h2 class="text-3xl font-bold text-center text-custom-blue mb-8">โครงสร้างหลักสูตร</h2>
-            <div class="bg-white p-6 rounded-lg shadow-lg">
+            <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg">
                 <div class="grid md:grid-cols-2 gap-8 items-center">
                     <div>
                         <div class="mb-4">
-                            <div class="flex border-b">
-                                <button class="tab-btn active-tab py-2 px-4 font-semibold" data-target="core">วิชาบังคับ</button>
-                                <button class="tab-btn py-2 px-4 text-gray-500" data-target="professional">สายวิชาชีพ</button>
+                            <div class="flex border-b border-gray-300">
+                                <button class="tab-btn active-tab py-2 px-4 font-semibold text-custom-blue border-b-2 border-emerald-500" data-target="professional">สายวิชาชีพ</button>
                                 <button class="tab-btn py-2 px-4 text-gray-500" data-target="academic">สายวิชาการ</button>
                             </div>
                         </div>
-                        <div id="core" class="tab-content">
-                            <h3 class="text-xl font-semibold text-custom-blue mb-2">วิชาบังคับ (15 หน่วยกิต)</h3>
-                            <ul class="list-disc list-inside space-y-1 text-gray-700">
-                                <li>เวิร์กชอปนวัตกรรม, ภาวะผู้นำ, และความยั่งยืน</li>
-                                <li>การระบุและประเมินโอกาสทางนวัตกรรม</li>
-                                <li>หลักการพื้นฐานของกลยุทธ์นวัตกรรม</li>
-                                <li>การวิเคราะห์ระบบนิเวศนวัตกรรม</li>
-                                <li>การจัดการทรัพย์สินทางปัญญา</li>
-                                <li>การสร้างและทดสอบแบบจำลองธุรกิจ</li>
-                                <li>การสร้างและบริหารทีมสำหรับโครงการนวัตกรรม</li>
-                                <li>การจัดการการเปลี่ยนแปลงในองค์กร</li>
-                                <li>กลยุทธ์การนำนวัตกรรมเข้าสู่เชิงพาณิชย์</li>
-                                <li>การถ่ายทอดเทคโนโลยีและความรู้</li>
-                                <li>พื้นฐานการเงินสำหรับผู้บริหารนวัตกรรม</li>
-                                <li>การบัญชีบริหารเพื่อการตัดสินใจเชิงกลยุทธ์</li>
-                                <li>การบริหารความเสี่ยง</li>
-                            </ul>
-                        </div>
-                        <div id="professional" class="tab-content hidden">
-                            <h3 class="text-xl font-semibold text-custom-blue mb-2">สายวิชาชีพ (36 หน่วยกิต)</h3>
-                            <ul class="list-disc list-inside space-y-1 text-gray-700">
-                                <li><strong>วิชาบังคับ:</strong> 15 หน่วยกิต</li>
-                                <li><strong>โครงงานนวัตกรรม:</strong> 3 หน่วยกิต</li>
-                                <li><strong>วิชาเลือก:</strong> 15 หน่วยกิต</li>
-                                <li><strong>ค้นคว้าอิสระ:</strong> 3 หน่วยกิต</li>
+                        <div id="professional" class="tab-content">
+                            <h3 class="text-2xl font-semibold text-custom-blue mb-4">สายวิชาชีพ (36 หน่วยกิต)</h3>
+                            <p class="text-gray-700 mb-4">สำหรับผู้ที่ต้องการนำความรู้ไปประยุกต์ใช้ในภาคธุรกิจและสร้างผลลัพธ์ที่เป็นรูปธรรม</p>
+                            <ul class="space-y-2 text-gray-700">
+                                <li><strong class="text-custom-blue">วิชาบังคับ:</strong> 15 หน่วยกิต</li>
+                                <li><strong class="text-custom-blue">วิชาเลือก:</strong> 15 หน่วยกิต</li>
+                                <li><strong class="text-custom-blue">โครงงานนวัตกรรม:</strong> 3 หน่วยกิต</li>
+                                <li><strong class="text-custom-blue">การค้นคว้าอิสระ:</strong> 3 หน่วยกิต</li>
                             </ul>
                         </div>
                         <div id="academic" class="tab-content hidden">
-                            <h3 class="text-xl font-semibold text-custom-blue mb-2">สายวิชาการ (36 หน่วยกิต)</h3>
-                            <ul class="list-disc list-inside space-y-1 text-gray-700">
-                                <li><strong>วิชาบังคับ:</strong> 15 หน่วยกิต</li>
-                                <li><strong>วิทยานิพนธ์:</strong> 12 หน่วยกิต</li>
-                                <li><strong>วิชาเลือก:</strong> 9 หน่วยกิต</li>
+                            <h3 class="text-2xl font-semibold text-custom-blue mb-4">สายวิชาการ (36 หน่วยกิต)</h3>
+                             <p class="text-gray-700 mb-4">สำหรับผู้ที่ต้องการเจาะลึกด้านงานวิจัยและสร้างองค์ความรู้ใหม่</p>
+                            <ul class="space-y-2 text-gray-700">
+                                <li><strong class="text-custom-blue">วิชาบังคับ:</strong> 15 หน่วยกิต</li>
+                                <li><strong class="text-custom-blue">วิทยานิพนธ์:</strong> 12 หน่วยกิต</li>
+                                <li><strong class="text-custom-blue">วิชาเลือก:</strong> 9 หน่วยกิต</li>
                             </ul>
                         </div>
                     </div>
@@ -148,24 +129,19 @@
             </div>
         </section>
 
-
-        <!-- Majors Section -->
         <section id="majors" class="mb-12 scroll-mt-20">
             <h2 class="text-3xl font-bold text-center text-custom-blue mb-4">แขนงวิชาเลือก: สร้างความเชี่ยวชาญเฉพาะทาง</h2>
             <p class="text-center text-gray-600 mb-8">เลือกความเชี่ยวชาญที่ใช่สำหรับคุณ หรือเลือก 2 แขนงเพื่อโอกาสที่เหนือกว่า!</p>
             <div class="grid lg:grid-cols-12 gap-8">
-                <!-- Left: Major Selection -->
                 <div class="lg:col-span-4">
-                    <div id="majors-list" class="space-y-4">
-                        <!-- Major cards will be injected here by JS -->
+                    <div id="majors-list" class="space-y-2">
                     </div>
-                     <div class="mt-6 p-4 bg-emerald-100 border-l-4 border-emerald-500 text-emerald-700 rounded-r-lg">
+                     <div class="mt-6 p-4 bg-emerald-50 border-l-4 border-emerald-500 text-emerald-800 rounded-r-lg">
                         <p class="font-bold">✨ เพิ่มพลังความเชี่ยวชาญ!</p>
-                        <p>สำหรับสายวิชาชีพ สามารถเรียนเพิ่ม 3 หน่วยกิต (รวม 39 หน่วยกิต) เพื่อสำเร็จการศึกษาพร้อมความเชี่ยวชาญ 2 แขนง</p>
+                        <p class="text-sm">สำหรับสายวิชาชีพ สามารถเรียนเพิ่ม 3 หน่วยกิต (รวม 39 หน่วยกิต) เพื่อสำเร็จการศึกษาพร้อมความเชี่ยวชาญ 2 แขนง</p>
                     </div>
                 </div>
-                <!-- Right: Major Details -->
-                <div class="lg:col-span-8 bg-white p-6 rounded-lg shadow-lg" id="major-details-container">
+                <div class="lg:col-span-8 bg-white p-6 rounded-lg shadow-lg min-h-[400px]">
                     <h3 id="major-title" class="text-2xl font-bold text-custom-blue mb-4">เลือกแขนงวิชาเพื่อดูรายละเอียด</h3>
                     <div id="major-content">
                         <p class="text-gray-600">คลิกที่แขนงวิชาด้านซ้ายเพื่อดูว่าคุณจะสามารถแก้ปัญหาอะไรให้องค์กรได้บ้าง และเส้นทางอาชีพของคุณจะเป็นอย่างไร</p>
@@ -174,83 +150,60 @@
             </div>
         </section>
 
-
-        <!-- Careers Section -->
         <section id="careers" class="mb-12 scroll-mt-20">
             <h2 class="text-3xl font-bold text-center text-custom-blue mb-8">โอกาสทางอาชีพ: จุดประกายสู่ความสำเร็จ</h2>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 text-center">
-                <div class="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow">
-                    <div class="text-4xl mb-2">🚀</div>
-                    <p class="font-semibold">ผู้จัดการนวัตกรรม</p>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow">
-                    <div class="text-4xl mb-2">💡</div>
-                    <p class="font-semibold">ที่ปรึกษาด้านนวัตกรรม</p>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow">
-                    <div class="text-4xl mb-2">📈</div>
-                    <p class="font-semibold">ผู้พัฒนาธุรกิจใหม่</p>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow">
-                    <div class="text-4xl mb-2">⚖️</div>
-                    <p class="font-semibold">ผู้บริหารทรัพย์สินทางปัญญา</p>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow">
-                    <div class="text-4xl mb-2">📢</div>
-                    <p class="font-semibold">นักการตลาดผลิตภัณฑ์ใหม่</p>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow">
-                    <div class="text-4xl mb-2">👥</div>
-                    <p class="font-semibold">ผู้นำการเปลี่ยนแปลงองค์กร</p>
-                </div>
-                 <div class="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow">
-                    <div class="text-4xl mb-2">📊</div>
-                    <p class="font-semibold">นักวิเคราะห์ FinTech</p>
-                </div>
-                 <div class="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow">
-                    <div class="text-4xl mb-2">✨</div>
-                    <p class="font-semibold">และอีกมากมาย!</p>
-                </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 text-center">
+                <div class="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow flex flex-col items-center justify-center"><div class="text-4xl mb-2">🚀</div><p class="font-semibold">ผู้จัดการนวัตกรรม</p></div>
+                <div class="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow flex flex-col items-center justify-center"><div class="text-4xl mb-2">💡</div><p class="font-semibold">ที่ปรึกษาด้านนวัตกรรม</p></div>
+                <div class="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow flex flex-col items-center justify-center"><div class="text-4xl mb-2">📈</div><p class="font-semibold">ผู้พัฒนาธุรกิจใหม่</p></div>
+                <div class="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow flex flex-col items-center justify-center"><div class="text-4xl mb-2">⚖️</div><p class="font-semibold">ผู้บริหารทรัพย์สินทางปัญญา</p></div>
+                <div class="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow flex flex-col items-center justify-center"><div class="text-4xl mb-2">📢</div><p class="font-semibold">นักการตลาดผลิตภัณฑ์ใหม่</p></div>
+                <div class="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow flex flex-col items-center justify-center"><div class="text-4xl mb-2">👥</div><p class="font-semibold">ผู้นำการเปลี่ยนแปลง</p></div>
+                 <div class="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow flex flex-col items-center justify-center"><div class="text-4xl mb-2">📊</div><p class="font-semibold">นักวิเคราะห์ FinTech</p></div>
+                 <div class="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow flex flex-col items-center justify-center"><div class="text-4xl mb-2">✨</div><p class="font-semibold">และอีกมากมาย!</p></div>
             </div>
         </section>
-
-        <!-- Fees Section -->
+        
         <section id="fees" class="mb-12 scroll-mt-20">
             <h2 class="text-3xl font-bold text-center text-custom-blue mb-8">ค่าใช้จ่ายในการศึกษา</h2>
             <div class="bg-white p-8 rounded-lg shadow-lg max-w-2xl mx-auto">
                 <ul class="space-y-4 text-lg">
-                    <li class="flex justify-between border-b pb-2">
-                        <span>ค่าบำรุงการศึกษา (ต่อภาคการศึกษา):</span>
-                        <span class="font-semibold">25,000 บาท</span>
+                    <li class="flex justify-between items-center border-b pb-3">
+                        <span class="text-gray-600">ค่าบำรุงการศึกษา (ต่อภาคการศึกษา)</span>
+                        <span class="font-semibold text-custom-blue">25,000 บาท</span>
                     </li>
-                    <li class="flex justify-between border-b pb-2">
-                        <span>ค่าลงทะเบียน (ต่อหน่วยกิต):</span>
-                        <span class="font-semibold">3,000 บาท</span>
+                    <li class="flex justify-between items-center border-b py-3">
+                        <span class="text-gray-600">ค่าลงทะเบียน (ต่อหน่วยกิต)</span>
+                        <span class="font-semibold text-custom-blue">3,000 บาท</span>
                     </li>
-                    <li class="flex justify-between border-b pb-2">
-                        <span>ค่าบำรุงพิเศษ (ต่อภาคการศึกษา):</span>
-                        <span class="font-semibold">3,750 บาท</span>
+                    <li class="flex justify-between items-center border-b py-3">
+                        <span class="text-gray-600">ค่าบำรุงพิเศษ (ต่อภาคการศึกษา)</span>
+                        <span class="font-semibold text-custom-blue">3,750 บาท</span>
                     </li>
                 </ul>
-                <div class="mt-6 p-4 bg-blue-50 border-l-4 border-blue-400 text-blue-800">
-                    <p><strong class="font-bold">ตัวอย่างค่าใช้จ่ายโดยประมาณ (ตลอดหลักสูตร 36 หน่วยกิต):</strong></p>
+                <div class="mt-6 p-4 bg-blue-50 border-l-4 border-blue-400 text-blue-800 rounded-r-lg">
+                    <p><strong class="font-bold">ตัวอย่างค่าใช้จ่ายตลอดหลักสูตร (36 หน่วยกิต):</strong></p>
                     <ul class="list-disc list-inside ml-4 mt-2">
-                        <li>ค่าลงทะเบียน (36 หน่วยกิต x 3,000 บาท): 108,000 บาท</li>
-                        <li>ค่าบำรุงและค่าพิเศษ (4 ภาคการศึกษา x 28,750 บาท): 115,000 บาท</li>
-                        <li class="font-bold">รวมประมาณ: 223,000 บาท</li>
+                        <li>ค่าลงทะเบียน: 36 หน่วยกิต × 3,000 บาท = 108,000 บาท</li>
+                        <li>ค่าบำรุงและค่าพิเศษ: 4 ภาคการศึกษา × (25,000 + 3,750) บาท = 115,000 บาท</li>
+                        <li class="font-bold mt-2">รวมโดยประมาณ: 223,000 บาท</li>
                     </ul>
                 </div>
             </div>
         </section>
 
-        <!-- Contact Section -->
-        <section id="contact" class="text-center py-16 bg-custom-blue text-white rounded-lg">
+        <section id="contact" class="text-center py-16 bg-custom-blue text-white rounded-xl shadow-lg">
              <h2 class="text-3xl font-bold mb-4">พร้อมเริ่มต้นเส้นทางสู่การเป็นผู้นำนวัตกรรมแล้วหรือยัง?</h2>
-             <p class="max-w-2xl mx-auto mb-8">สอบถามข้อมูลเพิ่มเติมหรือสมัครเรียนได้แล้ววันนี้</p>
-             <a href="#" class="bg-white text-custom-blue font-bold py-3 px-8 rounded-lg text-lg hover:bg-gray-200 transition-all duration-300 shadow-lg">ติดต่อเรา</a>
+             <p class="max-w-2xl mx-auto mb-8 text-gray-300">สอบถามข้อมูลเพิ่มเติมหรือสมัครเรียนได้แล้ววันนี้</p>
+             <a href="#" class="bg-emerald-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-emerald-600 transition-all duration-300 transform hover:scale-105 shadow-md">ติดต่อเรา</a>
         </section>
 
     </main>
+    <footer class="bg-white mt-12 py-6">
+        <div class="container mx-auto text-center text-gray-500">
+            &copy; 2024 Faculty of Innovation Management. All Rights Reserved.
+        </div>
+    </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -266,8 +219,13 @@
             const tabContents = document.querySelectorAll('.tab-content');
             tabButtons.forEach(button => {
                 button.addEventListener('click', () => {
-                    tabButtons.forEach(btn => btn.classList.remove('active-tab', 'text-custom-blue', 'border-b-2', 'border-emerald-500'));
-                    button.classList.add('active-tab', 'text-custom-blue', 'border-b-2', 'border-emerald-500');
+                    tabButtons.forEach(btn => {
+                        btn.classList.remove('text-custom-blue', 'border-emerald-500');
+                        btn.classList.add('text-gray-500');
+                    });
+                    button.classList.add('text-custom-blue', 'border-emerald-500');
+                    button.classList.remove('text-gray-500');
+                    
                     tabContents.forEach(content => {
                         if (content.id === button.dataset.target) {
                             content.classList.remove('hidden');
@@ -277,9 +235,6 @@
                     });
                 });
             });
-            // Set initial active tab
-            document.querySelector('.tab-btn[data-target="core"]').classList.add('text-custom-blue', 'border-b-2', 'border-emerald-500');
-
 
             // Data for Majors
             const majorsData = [
@@ -323,49 +278,60 @@
             const majorsList = document.getElementById('majors-list');
             const majorTitle = document.getElementById('major-title');
             const majorContent = document.getElementById('major-content');
+            let activeMajorButton = null;
 
+            function updateMajorDetails(majorId) {
+                const major = majorsData.find(m => m.id === majorId);
+                if (!major) return;
+
+                majorTitle.innerText = major.title;
+                majorContent.innerHTML = `
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold text-emerald-600 mb-2 border-b border-emerald-200 pb-1">ปัญหาที่แก้ไขได้</h4>
+                        <p class="text-gray-600">${major.problem}</p>
+                    </div>
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold text-emerald-600 mb-2 border-b border-emerald-200 pb-1">รายละเอียดแขนงวิชา</h4>
+                        <p class="text-gray-600">${major.details}</p>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold text-emerald-600 mb-2 border-b border-emerald-200 pb-1">ตัวอย่างอาชีพ</h4>
+                        <div class="flex flex-wrap gap-2 mt-2">
+                            ${major.careers.map(career => `<span class="bg-gray-200 text-gray-800 text-sm font-medium px-3 py-1 rounded-full">${career}</span>`).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+            
             majorsData.forEach((major, index) => {
                 const button = document.createElement('button');
                 button.className = 'w-full text-left p-4 rounded-lg border-2 border-transparent transition-all duration-300';
                 button.dataset.majorId = major.id;
-                button.innerHTML = `<span class="font-semibold text-lg">${major.title}</span>`;
+                button.innerHTML = `<span class="font-semibold text-lg text-custom-blue">${major.title}</span>`;
                 
                 if (index === 0) {
                      button.classList.add('bg-white', 'shadow-md', 'border-emerald-500');
+                     activeMajorButton = button;
+                     updateMajorDetails(major.id);
                 } else {
-                     button.classList.add('bg-gray-100', 'hover:bg-white', 'hover:shadow-md');
+                     button.classList.add('bg-gray-200', 'hover:bg-white', 'hover:shadow-md', 'hover:border-emerald-300');
                 }
 
                 button.addEventListener('click', () => {
-                    // Update content
-                    majorTitle.innerText = major.title;
-                    majorContent.innerHTML = `
-                        <h4 class="text-lg font-semibold text-gray-800 mb-2">ปัญหาขององค์กรที่แก้ไขได้</h4>
-                        <p class="text-gray-600 mb-4">${major.problem}</p>
-                        <h4 class="text-lg font-semibold text-gray-800 mb-2">รายละเอียด</h4>
-                        <p class="text-gray-600 mb-4">${major.details}</p>
-                        <h4 class="text-lg font-semibold text-gray-800 mb-2">อาชีพหลังเรียนจบ</h4>
-                        <div class="flex flex-wrap gap-2">
-                            ${major.careers.map(career => `<span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">${career}</span>`).join('')}
-                        </div>
-                    `;
-
-                    // Update button styles
-                    majorsList.querySelectorAll('button').forEach(btn => {
-                        btn.classList.remove('bg-white', 'shadow-md', 'border-emerald-500');
-                        btn.classList.add('bg-gray-100', 'hover:bg-white', 'hover:shadow-md');
-                    });
+                    if (activeMajorButton) {
+                        activeMajorButton.classList.remove('bg-white', 'shadow-md', 'border-emerald-500');
+                        activeMajorButton.classList.add('bg-gray-200', 'hover:bg-white', 'hover:shadow-md', 'hover:border-emerald-300');
+                    }
                     button.classList.add('bg-white', 'shadow-md', 'border-emerald-500');
-                    button.classList.remove('bg-gray-100', 'hover:bg-white', 'hover:shadow-md');
+                    button.classList.remove('bg-gray-200', 'hover:bg-white', 'hover:shadow-md', 'hover:border-emerald-300');
+                    activeMajorButton = button;
+                    
+                    updateMajorDetails(major.id);
                 });
 
                 majorsList.appendChild(button);
             });
             
-            // Trigger click on the first major to show its details initially
-            if(majorsList.firstChild) {
-                majorsList.firstChild.click();
-            }
 
             // Chart.js - Doughnut Chart for Credit Distribution
             const ctx = document.getElementById('creditsChart').getContext('2d');
@@ -377,18 +343,14 @@
                         label: 'หน่วยกิต',
                         data: [15, 15, 3, 3],
                         backgroundColor: [
-                            'rgba(44, 62, 80, 0.8)',   // Custom Blue - #2c3e50
-                            'rgba(16, 185, 129, 0.8)', // Emerald 500 - #10b981
-                            'rgba(52, 152, 219, 0.8)', // Lighter Blue - #3498db (from previous, can be adjusted)
-                            'rgba(5, 150, 105, 0.8)'   // Emerald 600 - #059669
+                            '#2c3e50', // Custom Blue
+                            '#10b981', // Emerald-500
+                            '#3498db', // A Lighter Blue
+                            '#34d399'  // Emerald-400
                         ],
-                        borderColor: [
-                            '#FFFFFF',
-                            '#FFFFFF',
-                            '#FFFFFF',
-                            '#FFFFFF'
-                        ],
-                        borderWidth: 2
+                        borderColor: '#ffffff',
+                        borderWidth: 3,
+                        hoverOffset: 4
                     }]
                 },
                 options: {
@@ -397,14 +359,33 @@
                     plugins: {
                         legend: {
                             position: 'bottom',
+                            labels: {
+                                font: {
+                                    family: "'Kanit', sans-serif"
+                                }
+                            }
                         },
-                        title: {
-                            display: false
+                        tooltip: {
+                            callbacks: {
+                                title: function(tooltipItems) {
+                                    return tooltipItems[0].label;
+                                },
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed !== null) {
+                                        label += context.parsed + ' หน่วยกิต';
+                                    }
+                                    return label;
+                                }
+                            }
                         }
-                    }
+                    },
+                    cutout: '60%'
                 }
             });
-
         });
     </script>
 </body>
