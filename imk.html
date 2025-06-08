@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infographic: หลักสูตร Innovation Marketing การตลาดนวัตกรรม</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+        }
+        :root {
+            --color-red: #FF6B6B;
+            --color-yellow: #FFD166;
+            --color-green: #06D6A0;
+            --color-blue: #118AB2;
+            --color-dark-blue: #073B4C;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 450px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .flowchart-line {
+            width: 4px;
+            background-color: var(--color-blue);
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 0;
+        }
+        .flowchart-dot {
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border: 4px solid var(--color-blue);
+            border-radius: 50%;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--color-blue), var(--color-green));
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="gradient-bg text-white text-center py-12 md:py-20 px-4">
+        <h1 class="text-4xl md:text-6xl font-bold mb-2">Innovation Marketing</h1>
+        <h2 class="text-2xl md:text-3xl font-bold">การตลาดนวัตกรรม</h2>
+        <p class="mt-4 text-lg md:text-xl max-w-3xl mx-auto">จุดประกายความคิด สร้างสรรค์อนาคต: ติดอาวุธสู่การเป็นนักการตลาดแห่งอนาคต</p>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        
+        <section id="challenges" class="mb-16">
+            <h3 class="text-3xl font-bold text-center mb-4 text-gray-800">ความท้าทายขององค์กรในยุคดิจิทัล</h3>
+            <p class="text-center max-w-2xl mx-auto mb-10 text-gray-600">ในโลกธุรกิจที่ไม่หยุดนิ่ง องค์กรต่างเผชิญกับความท้าทายรอบด้านที่ต้องการกลยุทธ์การตลาดรูปแบบใหม่เพื่อการเติบโตอย่างยั่งยืน</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center border-t-4 border-red-400">
+                    <div class="text-4xl mb-3" style="color: var(--color-red);">⚡️</div>
+                    <h4 class="text-xl font-bold mb-2">การแข่งขันที่รุนแรง</h4>
+                    <p class="text-gray-600">ผลิตภัณฑ์และบริการถูกลอกเลียนแบบได้ง่าย ทำให้ยากต่อการสร้างความแตกต่าง</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center border-t-4 border-yellow-400">
+                    <div class="text-4xl mb-3" style="color: var(--color-yellow);">🎯</div>
+                    <h4 class="text-xl font-bold mb-2">ผู้บริโภคที่เปลี่ยนแปลงเร็ว</h4>
+                    <p class="text-gray-600">มีความคาดหวังสูง ต้องการประสบการณ์ใหม่ และแสวงหานวัตกรรมอยู่เสมอ</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center border-t-4 border-green-400 md:col-span-2 lg:col-span-1">
+                    <div class="text-4xl mb-3" style="color: var(--color-green);">💡</div>
+                    <h4 class="text-xl font-bold mb-2">ความจำเป็นในการสร้างนวัตกรรม</h4>
+                    <p class="text-gray-600">ธุรกิจที่หยุดนิ่งคือการถอยหลัง การปรับตัวและสร้างสรรค์สิ่งใหม่คือหัวใจสำคัญ</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="solution-overview" class="mb-16">
+            <h3 class="text-3xl font-bold text-center mb-4 text-gray-800">ภาพรวมหลักสูตร: เครื่องมือสู่ความสำเร็จ</h3>
+            <p class="text-center max-w-2xl mx-auto mb-10 text-gray-600">หลักสูตรนี้มุ่งเน้นการสร้างทักษะที่ตอบโจทย์ความท้าทายทางธุรกิจ โดยแบ่งเนื้อหาออกเป็น 3 ส่วนหลักที่สำคัญ</p>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="chart-container">
+                    <canvas id="courseThemesChart"></canvas>
+                </div>
+                <p class="text-center mt-4 text-gray-600">หลักสูตรของเราครอบคลุมตั้งแต่การวางรากฐานเชิงกลยุทธ์, การลงมือปฏิบัติและนำนวัตกรรมสู่ตลาด, ไปจนถึงการสร้างความร่วมมือและการเติบโตอย่างยั่งยืน</p>
+            </div>
+        </section>
+        
+        <section id="learning-journey" class="mb-16">
+            <h3 class="text-3xl font-bold text-center mb-4 text-gray-800">เส้นทางการเรียนรู้: 9 วิชาแกนสู่ความเป็นมืออาชีพ</h3>
+             <p class="text-center max-w-2xl mx-auto mb-12 text-gray-600">หลักสูตรถูกออกแบบเป็นเส้นทางที่ชัดเจน เพื่อสร้างความเข้าใจและทักษะด้านการตลาดนวัตกรรมอย่างเป็นระบบ ตั้งแต่พื้นฐานจนถึงระดับสูง</p>
+            <div class="relative">
+                <div class="flowchart-line" style="top: 0; bottom: 0;"></div>
+                <div class="space-y-16">
+                    <div class="relative flex items-center md:justify-start">
+                        <div class="flowchart-dot -top-2"></div>
+                        <div class="w-full md:w-5/12 ml-auto md:ml-0 md:mr-auto z-10">
+                            <div class="bg-white rounded-lg shadow-lg p-6 border-l-4" style="border-color: var(--color-red);">
+                                <h5 class="font-bold text-lg">1. กลยุทธ์การตลาดสำหรับนวัตกรรม</h5>
+                                <p class="text-sm text-gray-600">วางกลยุทธ์ กำหนดตลาดเป้าหมาย และตำแหน่งผลิตภัณฑ์</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative flex items-center md:justify-end">
+                        <div class="w-full md:w-5/12 mr-auto md:mr-0 md:ml-auto z-10">
+                            <div class="bg-white rounded-lg shadow-lg p-6 border-r-4 md:border-r-0 md:border-l-4" style="border-color: var(--color-red);">
+                                <h5 class="font-bold text-lg">2. การตลาดแบบคล่องตัวและการทดลองตลาด</h5>
+                                <p class="text-sm text-gray-600">เรียนรู้แนวคิด Agile Marketing และการทดสอบตลาดแบบ MVP, A/B testing</p>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="relative flex items-center md:justify-start">
+                        <div class="w-full md:w-5/12 ml-auto md:ml-0 md:mr-auto z-10">
+                            <div class="bg-white rounded-lg shadow-lg p-6 border-l-4" style="border-color: var(--color-red);">
+                                <h5 class="font-bold text-lg">3. การสร้างแบรนด์นวัตกรรม</h5>
+                                <p class="text-sm text-gray-600">สร้างแบรนด์ผ่านการเล่าเรื่อง (Storytelling) และการวางตำแหน่งผลิตภัณฑ์</p>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="relative flex items-center md:justify-end">
+                        <div class="w-full md:w-5/12 mr-auto md:mr-0 md:ml-auto z-10">
+                            <div class="bg-white rounded-lg shadow-lg p-6 border-r-4 md:border-r-0 md:border-l-4" style="border-color: var(--color-yellow);">
+                                <h5 class="font-bold text-lg">4. กลยุทธ์การเร่งการยอมรับนวัตกรรม</h5>
+                                <p class="text-sm text-gray-600">เข้าใจโมเดล Diffusion of Innovation และเทคนิคเร่งการยอมรับ</p>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="relative flex items-center md:justify-start">
+                        <div class="w-full md:w-5/12 ml-auto md:ml-0 md:mr-auto z-10">
+                            <div class="bg-white rounded-lg shadow-lg p-6 border-l-4" style="border-color: var(--color-yellow);">
+                                <h5 class="font-bold text-lg">5. การทดสอบแนวคิดและผลิตภัณฑ์ใหม่</h5>
+                                <p class="text-sm text-gray-600">เรียนรู้วิธีออกแบบ MVP, ทดสอบต้นแบบ, และเก็บ Feedback</p>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="relative flex items-center md:justify-end">
+                        <div class="w-full md:w-5/12 mr-auto md:mr-0 md:ml-auto z-10">
+                            <div class="bg-white rounded-lg shadow-lg p-6 border-r-4 md:border-r-0 md:border-l-4" style="border-color: var(--color-yellow);">
+                                <h5 class="font-bold text-lg">6. กลยุทธ์การนำผลิตภัณฑ์นวัตกรรมสู่ตลาด</h5>
+                                <p class="text-sm text-gray-600">วางแผน GTM ตั้งแต่ช่องทางจัดจำหน่าย, การเปิดตัว, และการขยายตลาด</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative flex items-center md:justify-start">
+                        <div class="w-full md:w-5/12 ml-auto md:ml-0 md:mr-auto z-10">
+                            <div class="bg-white rounded-lg shadow-lg p-6 border-l-4" style="border-color: var(--color-green);">
+                                <h5 class="font-bold text-lg">7. การจัดการความร่วมมือเชิงพาณิชย์</h5>
+                                <p class="text-sm text-gray-600">ศึกษารูปแบบ Co-branding, Distributor partnerships, Ecosystem strategy</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative flex items-center md:justify-end">
+                         <div class="w-full md:w-5/12 mr-auto md:mr-0 md:ml-auto z-10">
+                            <div class="bg-white rounded-lg shadow-lg p-6 border-r-4 md:border-r-0 md:border-l-4" style="border-color: var(--color-green);">
+                                <h5 class="font-bold text-lg">8. กลยุทธ์การกำหนดมูลค่าและรูปแบบรายได้</h5>
+                                <p class="text-sm text-gray-600">เรียนรู้การตั้งราคาและโมเดลรายได้ เช่น Subscription, Freemium</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative flex items-center md:justify-start">
+                        <div class="flowchart-dot -bottom-2"></div>
+                        <div class="w-full md:w-5/12 ml-auto md:ml-0 md:mr-auto z-10">
+                            <div class="bg-white rounded-lg shadow-lg p-6 border-l-4" style="border-color: var(--color-green);">
+                                <h5 class="font-bold text-lg">9. การตลาดเพื่อความยั่งยืนและจริยธรรม</h5>
+                                <p class="text-sm text-gray-600">ศึกษาการตลาดที่คำนึงถึงสังคมและสิ่งแวดล้อม</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="career-paths">
+            <h3 class="text-3xl font-bold text-center mb-4 text-gray-800">โอกาสทางอาชีพหลังสำเร็จการศึกษา</h3>
+             <p class="text-center max-w-2xl mx-auto mb-10 text-gray-600">ผู้สำเร็จการศึกษาจะมีความพร้อมสำหรับบทบาทสำคัญหลากหลายในองค์กรที่ขับเคลื่อนด้วยนวัตกรรม ไม่ว่าจะเป็นธุรกิจขนาดใหญ่ สตาร์ทอัพ หรือแม้แต่การสร้างธุรกิจของตนเอง</p>
+            <div class="bg-white rounded-lg shadow-lg p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="flex items-center space-x-4 p-4 rounded-lg bg-gray-50 border-l-4 border-blue-400">
+                    <span class="text-4xl">🚀</span>
+                    <div>
+                        <h4 class="font-bold text-lg">ผู้จัดการฝ่ายการตลาดนวัตกรรม</h4>
+                        <p class="text-sm text-gray-600">ผู้นำการวางแผนกลยุทธ์นวัตกรรม</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4 p-4 rounded-lg bg-gray-50 border-l-4 border-blue-400">
+                    <span class="text-4xl">💡</span>
+                    <div>
+                        <h4 class="font-bold text-lg">ผู้จัดการผลิตภัณฑ์</h4>
+                        <p class="text-sm text-gray-600">นำแนวคิดใหม่ๆ ออกสู่ตลาด</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4 p-4 rounded-lg bg-gray-50 border-l-4 border-blue-400">
+                    <span class="text-4xl">✨</span>
+                    <div>
+                        <h4 class="font-bold text-lg">ผู้จัดการแบรนด์</h4>
+                        <p class="text-sm text-gray-600">สร้างแบรนด์นวัตกรรมให้แข็งแกร่ง</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4 p-4 rounded-lg bg-gray-50 border-l-4 border-blue-400">
+                    <span class="text-4xl">🌐</span>
+                    <div>
+                        <h4 class="font-bold text-lg">นักกลยุทธ์การตลาดดิจิทัล</h4>
+                        <p class="text-sm text-gray-600">ใช้เทคโนโลยีดิจิทัลเร่งการยอมรับ</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4 p-4 rounded-lg bg-gray-50 border-l-4 border-blue-400">
+                    <span class="text-4xl">🔍</span>
+                    <div>
+                        <h4 class="font-bold text-lg">นักวิเคราะห์ตลาด</h4>
+                        <p class="text-sm text-gray-600">วิเคราะห์ข้อมูล แนวโน้ม และความต้องการ</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4 p-4 rounded-lg bg-gray-50 border-l-4 border-blue-400">
+                    <span class="text-4xl">💼</span>
+                    <div>
+                        <h4 class="font-bold text-lg">ผู้ประกอบการ</h4>
+                        <p class="text-sm text-gray-600">สร้างสรรค์ธุรกิจของตนเอง</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4 p-4 rounded-lg bg-gray-50 border-l-4 border-blue-400">
+                    <span class="text-4xl">🤝</span>
+                    <div>
+                        <h4 class="font-bold text-lg">ที่ปรึกษาด้านนวัตกรรมและการตลาด</h4>
+                        <p class="text-sm text-gray-600">ให้คำแนะนำโซลูชั่นนวัตกรรม</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="bg-gray-800 text-white text-center py-8 px-4">
+        <h4 class="text-2xl font-bold">พร้อมที่จะเป็นผู้นำด้าน Innovation Marketing แล้วหรือยัง?</h4>
+        <p class="mt-2">มาสร้างอนาคตของการตลาดไปด้วยกัน!</p>
+    </footer>
+
+    <script>
+        const COLORS = {
+            red: 'rgba(255, 107, 107, 0.8)',
+            yellow: 'rgba(255, 209, 102, 0.8)',
+            green: 'rgba(6, 214, 160, 0.8)',
+            blue: 'rgba(17, 138, 178, 0.8)',
+            darkBlue: 'rgba(7, 59, 76, 0.8)',
+        };
+
+        const BORDER_COLORS = {
+            red: 'rgb(255, 107, 107)',
+            yellow: 'rgb(255, 209, 102)',
+            green: 'rgb(6, 214, 160)',
+            blue: 'rgb(17, 138, 178)',
+            darkBlue: 'rgb(7, 59, 76)',
+        };
+        
+        function wrapLabel(str, maxWidth) {
+            if (str.length <= maxWidth) {
+                return str;
+            }
+            const words = str.split(' ');
+            let lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                if (currentLine.length + words[i].length + 1 < maxWidth) {
+                    currentLine += ' ' + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+        
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+
+        const commonChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                     labels: {
+                        font: {
+                            family: "'Sarabun', sans-serif",
+                            size: 14,
+                        }
+                    }
+                },
+                tooltip: {
+                    titleFont: { family: "'Sarabun', sans-serif" },
+                    bodyFont: { family: "'Sarabun', sans-serif" },
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    }
+                }
+            }
+        };
+
+        const courseThemesCtx = document.getElementById('courseThemesChart').getContext('2d');
+        new Chart(courseThemesCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['กลยุทธ์และการสร้างแบรนด์', 'การปฏิบัติและเร่งการยอมรับ', 'ความร่วมมือและความยั่งยืน'],
+                datasets: [{
+                    label: 'ภาพรวมหลักสูตร',
+                    data: [3, 3, 3],
+                    backgroundColor: [COLORS.red, COLORS.yellow, COLORS.green],
+                    borderColor: [BORDER_COLORS.red, BORDER_COLORS.yellow, BORDER_COLORS.green],
+                    borderWidth: 1
+                }]
+            },
+            options: commonChartOptions
+        });
+    </script>
+
+</body>
+</html>
