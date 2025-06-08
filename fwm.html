@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>อินโฟกราฟิก: เทรนด์การจัดการความมั่งคั่งยุคใหม่</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .text-gradient {
+            background-image: linear-gradient(to right, #005F73, #0A9396);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            padding: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.1);
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4">
+            <h1 class="text-2xl md:text-3xl font-bold text-gradient">Finovative Wealth Management: เจาะลึกเทรนด์อุตสาหกรรม</h1>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-8 md:py-12">
+
+        <section id="introduction" class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-[#005F73] mb-4">ภูมิทัศน์ใหม่ของการเงิน</h2>
+            <p class="max-w-3xl mx-auto text-lg text-gray-600 mb-8">อุตสาหกรรมการจัดการความมั่งคั่งกำลังเผชิญการเปลี่ยนแปลงครั้งใหญ่ จากพลังของเทคโนโลยีและแนวคิดการลงทุนที่เปลี่ยนไป หลักสูตร Finovative Wealth Management ถูกสร้างขึ้นเพื่อตอบสนองต่อความต้องการบุคลากรที่มีทักษะรอบด้านและพร้อมสำหรับอนาคต</p>
+            <div class="card max-w-md mx-auto bg-[#005F73] text-white">
+                <p class="text-xl font-semibold mb-2">มูลค่าตลาด WealthTech ทั่วโลกคาดการณ์</p>
+                <p class="text-5xl md:text-6xl font-bold tracking-tight">$18.6 พันล้าน</p>
+                <p class="mt-2 text-lg">ภายในปี 2027</p>
+            </div>
+        </section>
+
+        <section id="core-skills" class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-[#005F73] mb-4">รากฐานทักษะที่จำเป็นสำหรับนักจัดการความมั่งคั่งยุคใหม่</h2>
+             <p class="max-w-3xl mx-auto text-center text-lg text-gray-600 mb-8">หลักสูตรแกนกลางทั้ง 9 วิชาถูกจัดกลุ่มเพื่อแสดงให้เห็นถึงรากฐานความรู้ที่ครอบคลุม ตั้งแต่การเงินพื้นฐานไปจนถึงการบริหารความเสี่ยงและจิตวิทยาการลงทุน เพื่อสร้างความเป็นมืออาชีพที่สมบูรณ์</p>
+            <div class="card">
+                <div class="chart-container">
+                    <canvas id="coreSubjectsChart"></canvas>
+                </div>
+                 <p class="text-center mt-4 text-gray-600">แผนภูมินี้แสดงการจัดกลุ่มวิชาแกนทั้งหมด 9 วิชา ซึ่งประกอบกันเป็นหลักสูตรพื้นฐานที่ครอบคลุมทุกมิติของการจัดการความมั่งคั่ง</p>
+            </div>
+        </section>
+
+        <section id="market-drivers" class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-[#005F73] mb-8">นวัตกรรมและเทรนด์สำคัญที่ขับเคลื่อนตลาด</h2>
+            <p class="max-w-3xl mx-auto text-center text-lg text-gray-600 mb-12">การเปลี่ยนแปลงในอุตสาหกรรมการเงินถูกขับเคลื่อนโดยเทรนด์หลักหลายประการ ตั้งแต่การลงทุนที่ยั่งยืนไปจนถึงการปฏิวัติของสินทรัพย์ดิจิทัล และพลังของการวิเคราะห์ข้อมูลที่เข้ามามีบทบาทสำคัญในการตัดสินใจ</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <div class="card lg:col-span-2">
+                    <h3 class="text-xl font-bold text-[#0A9396] mb-4">การเติบโตของการลงทุนที่ยั่งยืน (ESG)</h3>
+                    <p class="text-gray-600 mb-4">นักลงทุนทั่วโลกให้ความสำคัญกับปัจจัยด้านสิ่งแวดล้อม สังคม และธรรมาภิบาล (ESG) มากขึ้น ส่งผลให้เม็ดเงินลงทุนในสินทรัพย์ที่เกี่ยวข้องกับ ESG เติบโตอย่างก้าวกระโดด</p>
+                    <div class="chart-container h-64 md:h-72">
+                        <canvas id="esgGrowthChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="text-xl font-bold text-[#0A9396] mb-4">การปฏิวัติของสินทรัพย์ดิจิทัล</h3>
+                     <p class="text-gray-600 mb-4">สินทรัพย์ดิจิทัลและคริปโตเคอร์เรนซีได้กลายเป็นทางเลือกการลงทุนที่น่าจับตามอง ถึงแม้จะมีความผันผวนสูง แต่ก็มีศักยภาพในการสร้างผลตอบแทนและเปลี่ยนแปลงระบบการเงิน</p>
+                    <div class="chart-container h-64 md:h-72">
+                        <canvas id="digitalAssetsChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="card lg:col-span-3">
+                    <h3 class="text-xl font-bold text-[#0A9396] mb-4">พลังของการวิเคราะห์ข้อมูลด้วย Python</h3>
+                    <p class="text-gray-600 mb-6">ทักษะการวิเคราะห์ข้อมูลทางการเงินกลายเป็นสิ่งจำเป็น การใช้เครื่องมืออย่าง Python ช่วยให้นักวิเคราะห์สามารถเปลี่ยนข้อมูลดิบให้เป็นข้อมูลเชิงลึก (Insight) เพื่อประกอบการตัดสินใจลงทุนได้อย่างแม่นยำ</p>
+                    <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4 text-center">
+                        <div class="p-4 bg-blue-50 rounded-lg w-48">
+                            <p class="font-bold text-blue-800">1. ดึงข้อมูล</p>
+                            <p class="text-sm text-blue-600">(APIs, Databases)</p>
+                        </div>
+                        <div class="text-2xl text-[#EE9B00] font-mono">&rarr;</div>
+                        <div class="p-4 bg-green-50 rounded-lg w-48">
+                             <p class="font-bold text-green-800">2. ทำความสะอาดข้อมูล</p>
+                            <p class="text-sm text-green-600">(Handle Missing Data)</p>
+                        </div>
+                        <div class="text-2xl text-[#EE9B00] font-mono">&rarr;</div>
+                        <div class="p-4 bg-yellow-50 rounded-lg w-48">
+                             <p class="font-bold text-yellow-800">3. วิเคราะห์และคำนวณ</p>
+                            <p class="text-sm text-yellow-600">(Statistics, Models)</p>
+                        </div>
+                         <div class="text-2xl text-[#EE9B00] font-mono">&rarr;</div>
+                        <div class="p-4 bg-purple-50 rounded-lg w-48">
+                             <p class="font-bold text-purple-800">4. สร้างภาพข้อมูล</p>
+                             <p class="text-sm text-purple-600">(Charts, Reports)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="specialization" class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-[#005F73] mb-4">เลือกเส้นทางสู่ความเชี่ยวชาญของคุณ</h2>
+             <p class="max-w-3xl mx-auto text-center text-lg text-gray-600 mb-8">วิชาเลือกเปิดโอกาสให้ผู้เรียนได้เจาะลึกในสาขาที่สนใจเป็นพิเศษ เพื่อสร้างโปรไฟล์ความเชี่ยวชาญที่โดดเด่นและตอบโจทย์ความต้องการของตลาดแรงงาน ไม่ว่าจะเป็นสายเทคโนโลยี นวัตกรรม หรือการวางแผนการเงินส่วนบุคคล</p>
+            <div class="card">
+                <div class="chart-container">
+                    <canvas id="specializationRadarChart"></canvas>
+                </div>
+                <p class="text-center mt-4 text-gray-600">แผนภูมิเรดาร์เปรียบเทียบโปรไฟล์ทักษะ 2 รูปแบบที่สามารถสร้างได้จากการเลือกเรียนวิชาเฉพาะทางที่แตกต่างกัน</p>
+            </div>
+        </section>
+
+        <section id="talent-gap" class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-[#005F73] mb-4">เติมเต็มช่องว่างทักษะแห่งอนาคต</h2>
+            <p class="max-w-3xl mx-auto text-center text-lg text-gray-600 mb-8">อุตสาหกรรมการเงินในอีก 5 ปีข้างหน้าต้องการทักษะด้านเทคโนโลยี การวิเคราะห์ข้อมูล และความเข้าใจในนวัตกรรมใหม่ๆ มากขึ้น ซึ่งหลักสูตรนี้ถูกออกแบบมาเพื่อเติมเต็มช่องว่างดังกล่าวและสร้างบุคลากรที่พร้อมสำหรับความท้าทายในอนาคต</p>
+            <div class="card">
+                <div class="chart-container">
+                    <canvas id="skillsGapChart"></canvas>
+                </div>
+                 <p class="text-center mt-4 text-gray-600">แผนภูมิแท่งเปรียบเทียบทักษะของบุคลากรในปัจจุบันกับทักษะที่ต้องการในอนาคต แสดงให้เห็นถึงช่องว่างที่หลักสูตรนี้เข้ามาตอบโจทย์</p>
+            </div>
+        </section>
+        
+    </main>
+    
+    <footer class="bg-[#005F73] text-white text-center py-6">
+        <p class="font-semibold">ก้าวเข้าสู่ยุคใหม่ของการจัดการความมั่งคั่งกับ Finovative Wealth Management!</p>
+        <p class="text-sm mt-2">อินโฟกราฟิกนี้จัดทำขึ้นเพื่อแสดงภาพรวมเทรนด์อุตสาหกรรมจากเนื้อหาหลักสูตร</p>
+    </footer>
+
+    <script>
+        function wrapLabels(label, maxWidth) {
+            const words = label.split(' ');
+            let line = '';
+            const lines = [];
+            for (let i = 0; i < words.length; i++) {
+                const testLine = line + words[i] + ' ';
+                if (testLine.length > maxWidth && i > 0) {
+                    lines.push(line.trim());
+                    line = words[i] + ' ';
+                } else {
+                    line = testLine;
+                }
+            }
+            lines.push(line.trim());
+            return lines;
+        }
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            } else {
+                return label;
+            }
+        };
+
+        const chartColors = {
+            blue1: '#005F73',
+            blue2: '#0A9396',
+            green: '#94D2BD',
+            yellow: '#E9D8A6',
+            orange1: '#EE9B00',
+            orange2: '#CA6702',
+            red1: '#BB3E03',
+            red2: '#AE2012',
+            red3: '#9B2226'
+        };
+        
+        const colorPalette = [chartColors.blue1, chartColors.orange1, chartColors.green, chartColors.blue2, chartColors.orange2, chartColors.red1, chartColors.yellow, chartColors.red2, chartColors.red3];
+        const defaultFont = { family: 'Sarabun', size: 14 };
+
+        Chart.defaults.font.family = 'Sarabun';
+
+        new Chart(document.getElementById('coreSubjectsChart'), {
+            type: 'doughnut',
+            data: {
+                labels: [
+                    'พื้นฐานการเงินและองค์กร (3 วิชา)',
+                    'การบริหารความเสี่ยง (2 วิชา)',
+                    'ทฤษฎีและพฤติกรรมการลงทุน (2 วิชา)',
+                    'การวางแผนและประยุกต์ใช้ (2 วิชา)'
+                ],
+                datasets: [{
+                    label: 'จำนวนวิชาแกน',
+                    data: [3, 2, 2, 2],
+                    backgroundColor: [chartColors.blue1, chartColors.orange1, chartColors.green, chartColors.red1],
+                    borderColor: '#fff',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: { font: defaultFont }
+                    },
+                    title: {
+                        display: true,
+                        text: 'การจัดกลุ่มวิชาแกนหลัก: สร้างรากฐานความมั่งคั่ง',
+                        font: { size: 18, weight: 'bold' }
+                    },
+                    tooltip: {
+                        callbacks: { title: tooltipTitleCallback }
+                    }
+                }
+            }
+        });
+        
+        new Chart(document.getElementById('esgGrowthChart'), {
+            type: 'line',
+            data: {
+                labels: ['2021', '2022', '2023', '2024', '2025 (คาดการณ์)'],
+                datasets: [{
+                    label: 'สินทรัพย์ ESG ทั่วโลก (ล้านล้าน USD)',
+                    data: [35.3, 39.8, 45.1, 53.0, 61.2],
+                    borderColor: chartColors.blue2,
+                    backgroundColor: 'rgba(10, 147, 150, 0.2)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        ticks: { font: defaultFont }
+                    },
+                    x: { ticks: { font: defaultFont } }
+                }
+            }
+        });
+
+        const digitalAssetLabels = ['Bitcoin', 'Ethereum', wrapLabels('DeFi Ecosystem (Total Value Locked)', 16), wrapLabels('Stablecoins Market Cap', 16)];
+        new Chart(document.getElementById('digitalAssetsChart'), {
+            type: 'bar',
+            data: {
+                labels: digitalAssetLabels,
+                datasets: [{
+                    label: 'Market Size (Billion USD) - Conceptual',
+                    data: [1200, 450, 150, 180],
+                    backgroundColor: [chartColors.orange1, chartColors.blue1, chartColors.green, chartColors.yellow],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                },
+                scales: {
+                    x: { ticks: { font: defaultFont } },
+                    y: { ticks: { font: defaultFont } }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('specializationRadarChart'), {
+            type: 'radar',
+            data: {
+                labels: ['นวัตกรรม (DeFi/FinTech)', 'การวิเคราะห์ข้อมูล (Data/AI)', 'สินทรัพย์ดิจิทัล (Crypto)', 'การลงทุนยั่งยืน (ESG)', 'การวางแผนส่วนบุคคล'],
+                datasets: [{
+                    label: 'โปรไฟล์: FinTech Innovator',
+                    data: [5, 5, 4, 3, 2],
+                    borderColor: chartColors.red1,
+                    backgroundColor: 'rgba(187, 62, 3, 0.2)'
+                }, {
+                    label: 'โปรไฟล์: Personal Wealth Guru',
+                    data: [2, 3, 3, 4, 5],
+                    borderColor: chartColors.blue1,
+                    backgroundColor: 'rgba(0, 95, 115, 0.2)'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top', labels: { font: defaultFont } },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                },
+                scales: {
+                    r: {
+                        angleLines: { color: '#ddd' },
+                        grid: { color: '#ddd' },
+                        pointLabels: { font: defaultFont },
+                        ticks: { backdropColor: 'white', color: 'black' }
+                    }
+                }
+            }
+        });
+
+        const skillLabels = ['การวิเคราะห์ข้อมูล', 'ความเข้าใจ FinTech', 'การบริหารความเสี่ยง', 'การวางแผนการเงิน', 'ความรู้ ESG'];
+        new Chart(document.getElementById('skillsGapChart'), {
+            type: 'bar',
+            data: {
+                labels: skillLabels,
+                datasets: [{
+                    label: 'ทักษะปัจจุบัน',
+                    data: [45, 40, 70, 75, 30],
+                    backgroundColor: chartColors.green
+                }, {
+                    label: 'ทักษะที่ต้องการใน 5 ปี',
+                    data: [85, 80, 85, 90, 75],
+                    backgroundColor: chartColors.blue2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top', labels: { font: defaultFont } },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                },
+                scales: {
+                    x: { stacked: false, ticks: { font: defaultFont } },
+                    y: { stacked: false, ticks: { font: defaultFont } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
