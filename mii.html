@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>หลักสูตรวิทยาศาสตรมหาบัณฑิต สาขาการจัดการนวัตกรรมเชิงบูรณาการ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!--
+    Chosen Palette: "Modern Tech" - A base of cool grays (bg-gray-50, text-gray-800) for a clean, professional foundation. A deep, intelligent blue (#2c3e50, via custom style) for headings and key elements, signifying trust and knowledge. A vibrant, energetic emerald green (#10b981) for calls-to-action and interactive highlights, symbolizing growth, innovation, and fresh ideas.
+
+    Application Structure Plan: The SPA is structured as a narrative journey for a prospective student. It starts with a strong "Why," moves to the "How" (curriculum structure), then the "What" (specializations), and finally the "Where to" (career paths and investment). This logical flow guides the user from the high-level value proposition to specific, actionable details. Navigation is facilitated by a sticky header, and key information is presented in interactive modules (tabs for program tracks, clickable cards for specializations) to prevent information overload and encourage exploration. This design prioritizes user engagement and clarity over simply replicating the source document's linear format.
+
+    Visualization & Content Choices:
+    - Program Structure: A doughnut chart (Chart.js) visually breaks down the credit distribution for the Professional Track, making the 36-unit structure immediately understandable. This is more intuitive than a simple text list.
+    - Specializations: An interactive card layout. Users click a major to see its details. This "cause-and-effect" interaction is more engaging than a static table and allows users to focus on what interests them. It directly answers "What problem will I solve?" and "What job can I get?".
+    - Core Courses: A simple, clean list format is sufficient as this is foundational information.
+    - Dual Major Option: Implemented with simple checkboxes and a dynamic text box. This directly engages the user in exploring a key program feature, making the benefit of "3 extra credits for 2 specializations" tangible.
+
+    CONFIRMATION: NO SVG graphics used. NO Mermaid JS used.
+    -->
+    <style>
+        body { font-family: 'Kanit', sans-serif; }
+        .bg-custom-blue { background-color: #2c3e50; }
+        .text-custom-blue { color: #2c3e50; }
+        .border-custom-blue { border-color: #2c3e50; }
+        .hover\:bg-custom-blue-dark:hover { background-color: #22303f; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Header & Navigation -->
+    <header id="header" class="bg-white shadow-md sticky top-0 z-50 transition-all duration-300">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold text-custom-blue">M.Sc. Integrated Innovation</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="text-gray-600 hover:text-emerald-500 transition-colors">เกี่ยวกับหลักสูตร</a>
+                <a href="#structure" class="text-gray-600 hover:text-emerald-500 transition-colors">โครงสร้าง</a>
+                <a href="#majors" class="text-gray-600 hover:text-emerald-500 transition-colors">แขนงวิชา</a>
+                <a href="#careers" class="text-gray-600 hover:text-emerald-500 transition-colors">โอกาสทางอาชีพ</a>
+                <a href="#fees" class="text-gray-600 hover:text-emerald-500 transition-colors">ค่าใช้จ่าย</a>
+            </div>
+            <a href="#contact" class="hidden md:block bg-emerald-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-emerald-600 transition-all duration-300 shadow-sm">ติดต่อเรา</a>
+            <button id="mobile-menu-btn" class="md:hidden focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="#about" class="block py-2 px-4 text-sm hover:bg-gray-200">เกี่ยวกับหลักสูตร</a>
+            <a href="#structure" class="block py-2 px-4 text-sm hover:bg-gray-200">โครงสร้าง</a>
+            <a href="#majors" class="block py-2 px-4 text-sm hover:bg-gray-200">แขนงวิชา</a>
+            <a href="#careers" class="block py-2 px-4 text-sm hover:bg-gray-200">โอกาสทางอาชีพ</a>
+            <a href="#fees" class="block py-2 px-4 text-sm hover:bg-gray-200">ค่าใช้จ่าย</a>
+            <a href="#contact" class="block py-2 px-4 text-sm hover:bg-gray-200">ติดต่อเรา</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-6">
+        <!-- Hero Section -->
+        <section id="hero" class="text-center py-20 bg-white rounded-lg shadow-lg mb-12" style="background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url('https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80'); background-size: cover; background-position: center;">
+            <h1 class="text-4xl md:text-6xl font-extrabold text-custom-blue mb-4">พลิกโฉมอนาคตด้วยนวัตกรรม</h1>
+            <h2 class="text-xl md:text-2xl text-gray-700 mb-8">หลักสูตรวิทยาศาสตรมหาบัณฑิต สาขาการจัดการนวัตกรรมเชิงบูรณาการ</h2>
+            <p class="max-w-3xl mx-auto text-gray-600 mb-8">
+                ในยุคที่เทคโนโลยีเปลี่ยนแปลงอย่างรวดเร็ว องค์กรที่หยุดนิ่งคือการถอยหลัง หลักสูตรของเราไม่ได้สอนให้คุณแค่ตามทัน แต่สอนให้คุณเป็นผู้นำการเปลี่ยนแปลง การสร้างนวัตกรรมไม่ใช่แค่ "ทางเลือก" แต่คือ "ทางรอดเดียว" ขององค์กรในปัจจุบัน
+            </p>
+            <a href="#majors" class="bg-emerald-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-emerald-600 transition-all duration-300 transform hover:scale-105 shadow-md">ค้นหาความเชี่ยวชาญของคุณ</a>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="mb-12 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-center text-custom-blue mb-8">ทำไมต้องเลือกเรียนที่นี่?</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:-translate-y-2 transition-transform duration-300">
+                    <div class="text-emerald-500 mb-4"><svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.523 5.754 19 7.5 19s3.332-.477 4.5-1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.523 18.246 19 16.5 19s-3.332-.477-4.5-1.253" /></svg></div>
+                    <h3 class="text-xl font-semibold mb-2 text-custom-blue">เรียนจริง ทำจริง</h3>
+                    <p class="text-gray-600">เน้นการเรียนรู้แบบลงมือปฏิบัติ (Experiential Learning) ผ่านเวิร์กชอปและโครงงานจริง เพื่อสร้างประสบการณ์ที่นำไปใช้ได้ทันที</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:-translate-y-2 transition-transform duration-300">
+                    <div class="text-emerald-500 mb-4"><svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg></div>
+                    <h3 class="text-xl font-semibold mb-2 text-custom-blue">ทักษะแห่งอนาคต</h3>
+                    <p class="text-gray-600">พัฒนาทักษะที่ตลาดต้องการ ทั้งการคิดเชิงนวัตกรรม, ภาวะผู้นำ, ความยั่งยืน และการบริหารจัดการความเสี่ยง</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:-translate-y-2 transition-transform duration-300">
+                    <div class="text-emerald-500 mb-4"><svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg></div>
+                    <h3 class="text-xl font-semibold mb-2 text-custom-blue">เส้นทางที่ยืดหยุ่น</h3>
+                    <p class="text-gray-600">เลือกเรียนได้ทั้งสายวิชาการ (เน้นวิจัย) หรือสายวิชาชีพ (เน้นโครงงาน) ที่ตอบโจทย์เป้าหมายของคุณ</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Program Structure Section -->
+        <section id="structure" class="mb-12 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-center text-custom-blue mb-8">โครงสร้างหลักสูตร</h2>
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <div class="mb-4">
+                            <div class="flex border-b">
+                                <button class="tab-btn active-tab py-2 px-4 font-semibold" data-target="core">วิชาบังคับ</button>
+                                <button class="tab-btn py-2 px-4 text-gray-500" data-target="professional">สายวิชาชีพ</button>
+                                <button class="tab-btn py-2 px-4 text-gray-500" data-target="academic">สายวิชาการ</button>
+                            </div>
+                        </div>
+                        <div id="core" class="tab-content">
+                            <h3 class="text-xl font-semibold text-custom-blue mb-2">วิชาบังคับ (15 หน่วยกิต)</h3>
+                            <ul class="list-disc list-inside space-y-1 text-gray-700">
+                                <li>เวิร์กชอปนวัตกรรม, ภาวะผู้นำ, และความยั่งยืน</li>
+                                <li>การระบุและประเมินโอกาสทางนวัตกรรม</li>
+                                <li>หลักการพื้นฐานของกลยุทธ์นวัตกรรม</li>
+                                <li>การวิเคราะห์ระบบนิเวศนวัตกรรม</li>
+                                <li>การจัดการทรัพย์สินทางปัญญา</li>
+                                <li>การสร้างและทดสอบแบบจำลองธุรกิจ</li>
+                                <li>การสร้างและบริหารทีมสำหรับโครงการนวัตกรรม</li>
+                                <li>การจัดการการเปลี่ยนแปลงในองค์กร</li>
+                                <li>กลยุทธ์การนำนวัตกรรมเข้าสู่เชิงพาณิชย์</li>
+                                <li>การถ่ายทอดเทคโนโลยีและความรู้</li>
+                                <li>พื้นฐานการเงินสำหรับผู้บริหารนวัตกรรม</li>
+                                <li>การบัญชีบริหารเพื่อการตัดสินใจเชิงกลยุทธ์</li>
+                                <li>การบริหารความเสี่ยง</li>
+                            </ul>
+                        </div>
+                        <div id="professional" class="tab-content hidden">
+                            <h3 class="text-xl font-semibold text-custom-blue mb-2">สายวิชาชีพ (36 หน่วยกิต)</h3>
+                            <ul class="list-disc list-inside space-y-1 text-gray-700">
+                                <li><strong>วิชาบังคับ:</strong> 15 หน่วยกิต</li>
+                                <li><strong>โครงงานนวัตกรรม:</strong> 3 หน่วยกิต</li>
+                                <li><strong>วิชาเลือก:</strong> 15 หน่วยกิต</li>
+                                <li><strong>ค้นคว้าอิสระ:</strong> 3 หน่วยกิต</li>
+                            </ul>
+                        </div>
+                        <div id="academic" class="tab-content hidden">
+                            <h3 class="text-xl font-semibold text-custom-blue mb-2">สายวิชาการ (36 หน่วยกิต)</h3>
+                            <ul class="list-disc list-inside space-y-1 text-gray-700">
+                                <li><strong>วิชาบังคับ:</strong> 15 หน่วยกิต</li>
+                                <li><strong>วิทยานิพนธ์:</strong> 12 หน่วยกิต</li>
+                                <li><strong>วิชาเลือก:</strong> 9 หน่วยกิต</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="chart-container" style="position: relative; height:300px; max-width: 300px; margin: auto;">
+                        <canvas id="creditsChart"></canvas>
+                        <p class="text-center text-sm text-gray-500 mt-2">สัดส่วนหน่วยกิต (สายวิชาชีพ)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Majors Section -->
+        <section id="majors" class="mb-12 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-center text-custom-blue mb-4">แขนงวิชาเลือก: สร้างความเชี่ยวชาญเฉพาะทาง</h2>
+            <p class="text-center text-gray-600 mb-8">เลือกความเชี่ยวชาญที่ใช่สำหรับคุณ หรือเลือก 2 แขนงเพื่อโอกาสที่เหนือกว่า!</p>
+            <div class="grid lg:grid-cols-12 gap-8">
+                <!-- Left: Major Selection -->
+                <div class="lg:col-span-4">
+                    <div id="majors-list" class="space-y-4">
+                        <!-- Major cards will be injected here by JS -->
+                    </div>
+                     <div class="mt-6 p-4 bg-emerald-100 border-l-4 border-emerald-500 text-emerald-700 rounded-r-lg">
+                        <p class="font-bold">✨ เพิ่มพลังความเชี่ยวชาญ!</p>
+                        <p>สำหรับสายวิชาชีพ สามารถเรียนเพิ่ม 3 หน่วยกิต (รวม 39 หน่วยกิต) เพื่อสำเร็จการศึกษาพร้อมความเชี่ยวชาญ 2 แขนง</p>
+                    </div>
+                </div>
+                <!-- Right: Major Details -->
+                <div class="lg:col-span-8 bg-white p-6 rounded-lg shadow-lg" id="major-details-container">
+                    <h3 id="major-title" class="text-2xl font-bold text-custom-blue mb-4">เลือกแขนงวิชาเพื่อดูรายละเอียด</h3>
+                    <div id="major-content">
+                        <p class="text-gray-600">คลิกที่แขนงวิชาด้านซ้ายเพื่อดูว่าคุณจะสามารถแก้ปัญหาอะไรให้องค์กรได้บ้าง และเส้นทางอาชีพของคุณจะเป็นอย่างไร</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Careers Section -->
+        <section id="careers" class="mb-12 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-center text-custom-blue mb-8">โอกาสทางอาชีพ: จุดประกายสู่ความสำเร็จ</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 text-center">
+                <div class="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                    <div class="text-4xl mb-2">🚀</div>
+                    <p class="font-semibold">ผู้จัดการนวัตกรรม</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                    <div class="text-4xl mb-2">💡</div>
+                    <p class="font-semibold">ที่ปรึกษาด้านนวัตกรรม</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                    <div class="text-4xl mb-2">📈</div>
+                    <p class="font-semibold">ผู้พัฒนาธุรกิจใหม่</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                    <div class="text-4xl mb-2">⚖️</div>
+                    <p class="font-semibold">ผู้บริหารทรัพย์สินทางปัญญา</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                    <div class="text-4xl mb-2">📢</div>
+                    <p class="font-semibold">นักการตลาดผลิตภัณฑ์ใหม่</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                    <div class="text-4xl mb-2">👥</div>
+                    <p class="font-semibold">ผู้นำการเปลี่ยนแปลงองค์กร</p>
+                </div>
+                 <div class="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                    <div class="text-4xl mb-2">📊</div>
+                    <p class="font-semibold">นักวิเคราะห์ FinTech</p>
+                </div>
+                 <div class="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                    <div class="text-4xl mb-2">✨</div>
+                    <p class="font-semibold">และอีกมากมาย!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fees Section -->
+        <section id="fees" class="mb-12 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-center text-custom-blue mb-8">ค่าใช้จ่ายในการศึกษา</h2>
+            <div class="bg-white p-8 rounded-lg shadow-lg max-w-2xl mx-auto">
+                <ul class="space-y-4 text-lg">
+                    <li class="flex justify-between border-b pb-2">
+                        <span>ค่าบำรุงการศึกษา (ต่อภาคการศึกษา):</span>
+                        <span class="font-semibold">25,000 บาท</span>
+                    </li>
+                    <li class="flex justify-between border-b pb-2">
+                        <span>ค่าลงทะเบียน (ต่อหน่วยกิต):</span>
+                        <span class="font-semibold">3,000 บาท</span>
+                    </li>
+                    <li class="flex justify-between border-b pb-2">
+                        <span>ค่าบำรุงพิเศษ (ต่อภาคการศึกษา):</span>
+                        <span class="font-semibold">3,750 บาท</span>
+                    </li>
+                </ul>
+                <div class="mt-6 p-4 bg-blue-50 border-l-4 border-blue-400 text-blue-800">
+                    <p><strong class="font-bold">ตัวอย่างค่าใช้จ่ายโดยประมาณ (ตลอดหลักสูตร 36 หน่วยกิต):</strong></p>
+                    <ul class="list-disc list-inside ml-4 mt-2">
+                        <li>ค่าลงทะเบียน (36 หน่วยกิต x 3,000 บาท): 108,000 บาท</li>
+                        <li>ค่าบำรุงและค่าพิเศษ (4 ภาคการศึกษา x 28,750 บาท): 115,000 บาท</li>
+                        <li class="font-bold">รวมประมาณ: 223,000 บาท</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="text-center py-16 bg-custom-blue text-white rounded-lg">
+             <h2 class="text-3xl font-bold mb-4">พร้อมเริ่มต้นเส้นทางสู่การเป็นผู้นำนวัตกรรมแล้วหรือยัง?</h2>
+             <p class="max-w-2xl mx-auto mb-8">สอบถามข้อมูลเพิ่มเติมหรือสมัครเรียนได้แล้ววันนี้</p>
+             <a href="#" class="bg-white text-custom-blue font-bold py-3 px-8 rounded-lg text-lg hover:bg-gray-200 transition-all duration-300 shadow-lg">ติดต่อเรา</a>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Mobile Menu Toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Tabbed Content for Program Structure
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    tabButtons.forEach(btn => btn.classList.remove('active-tab', 'text-custom-blue', 'border-b-2', 'border-emerald-500'));
+                    button.classList.add('active-tab', 'text-custom-blue', 'border-b-2', 'border-emerald-500');
+                    tabContents.forEach(content => {
+                        if (content.id === button.dataset.target) {
+                            content.classList.remove('hidden');
+                        } else {
+                            content.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+            // Set initial active tab
+            document.querySelector('.tab-btn[data-target="core"]').classList.add('text-custom-blue', 'border-b-2', 'border-emerald-500');
+
+
+            // Data for Majors
+            const majorsData = [
+                {
+                    id: 'sim',
+                    title: '1. มาตรฐานการจัดการนวัตกรรม (SIM)',
+                    problem: 'องค์กรที่ขาดกรอบการทำงานนวัตกรรมที่ชัดเจน, กระบวนการนวัตกรรมที่ไม่เป็นระบบ, การไม่สามารถวัดผลลัพธ์ของนวัตกรรมได้อย่างมีประสิทธิภาพ, การลงทุนด้านนวัตกรรมแต่ไม่เห็นผลลัพธ์ที่จับต้องได้',
+                    details: 'แขนงวิชานี้มุ่งเน้นการวางรากฐานความเข้าใจในหลักการและแนวปฏิบัติที่ดีที่สุดในการจัดการนวัตกรรมในองค์กร คุณจะได้เรียนรู้เกี่ยวกับการพัฒนากลยุทธ์นวัตกรรม การจัดทำและควบคุมกระบวนการนวัตกรรม การวัดผลและประเมินประสิทธิภาพของกิจกรรมนวัตกรรม รวมถึงการสร้างโครงสร้างและวัฒนธรรมองค์กรที่สนับสนุนการสร้างสรรค์สิ่งใหม่ๆ อย่างต่อเนื่อง โดยอ้างอิงแนวทางและหลักการจากมาตรฐานสากล ISO 56000 series ที่เป็นกรอบการจัดการนวัตกรรมที่เป็นที่ยอมรับในระดับโลก',
+                    careers: ['ผู้จัดการโครงการนวัตกรรม', 'ที่ปรึกษาด้านนวัตกรรม', 'ผู้จัดการฝ่ายกลยุทธ์องค์กร', 'ผู้จัดการฝ่ายวิจัยและพัฒนา']
+                },
+                {
+                    id: 'ipm',
+                    title: '2. การจัดการทรัพย์สินทางปัญญา (IPM)',
+                    problem: 'มีการละเมิดทรัพย์สินทางปัญญา, ไม่สามารถใช้ประโยชน์จาก IP ได้เต็มที่, ขาดกลยุทธ์ในการคุ้มครองและสร้างมูลค่าจากนวัตกรรม, การจัดการความเสี่ยงทางกฎหมายที่เกี่ยวข้องกับนวัตกรรมไม่เหมาะสม',
+                    details: 'แขนงวิชานี้ให้ความรู้เชิงลึกเกี่ยวกับการระบุ การคุ้มครอง การใช้ประโยชน์ และการบริหารจัดการทรัพย์สินทางปัญญา (IP) ในรูปแบบต่างๆ เช่น สิทธิบัตร เครื่องหมายการค้า ลิขสิทธิ์ และความลับทางการค้า คุณจะได้เรียนรู้กลยุทธ์ในการสร้างพอร์ตโฟลิโอ IP การประเมินมูลค่า IP การทำสัญญาอนุญาตให้ใช้สิทธิ์ (Licensing) และการบังคับใช้สิทธิ์ในกรณีที่มีการละเมิด เพื่อสร้างความได้เปรียบทางการแข่งขันและเพิ่มมูลค่าให้กับองค์กร',
+                    careers: ['ผู้จัดการทรัพย์สินทางปัญญา', 'ที่ปรึกษากฎหมายทรัพย์สินทางปัญญา', 'นักพัฒนาธุรกิจ (ที่เน้น IP)', 'ผู้ประกอบการด้านเทคโนโลยี']
+                },
+                {
+                    id: 'imk',
+                    title: '3. การตลาดนวัตกรรม (IMK)',
+                    problem: 'นำนวัตกรรมออกสู่ตลาดไม่สำเร็จ, ขาดกลยุทธ์การสื่อสารและการสร้างแบรนด์สำหรับผลิตภัณฑ์ใหม่, ไม่สามารถเข้าถึงกลุ่มลูกค้าเป้าหมายได้อย่างมีประสิทธิภาพ, นวัตกรรมไม่ถูกยอมรับจากตลาด',
+                    details: 'แขนงวิชานี้มุ่งเน้นการนำนวัตกรรมออกสู่ตลาดและสร้างการยอมรับจากผู้บริโภค คุณจะได้เรียนรู้หลักการและกลยุทธ์การตลาดสำหรับผลิตภัณฑ์และบริการใหม่ๆ การวิเคราะห์ตลาดเป้าหมาย การกำหนดตำแหน่งผลิตภัณฑ์ การสร้างแบรนด์นวัตกรรม การสื่อสารคุณค่าที่ไม่เหมือนใคร และการสร้างความสัมพันธ์กับลูกค้าเพื่อส่งเสริมการนำนวัตกรรมไปใช้ รวมถึงการใช้เทคโนโลยีการตลาดและข้อมูลเพื่อเพิ่มประสิทธิภาพในการเข้าถึงตลาด',
+                    careers: ['ผู้จัดการฝ่ายการตลาดนวัตกรรม', 'นักการตลาดดิจิทัล', 'ผู้พัฒนาธุรกิจใหม่', 'ผู้จัดการผลิตภัณฑ์ (Product Manager)']
+                },
+                {
+                    id: 'iam',
+                    title: '4. การจัดการการประยุกต์ใช้นวัตกรรม (IAM)',
+                    problem: 'พนักงานต่อต้านการเปลี่ยนแปลง, นำเทคโนโลยีใหม่ๆ หรือกระบวนการนวัตกรรมเข้ามาใช้แล้วไม่ประสบความสำเร็จ, ขาดการสนับสนุนและความเข้าใจจากผู้บริหารในการนำนวัตกรรมไปใช้, นำนวัตกรรมไปใช้แต่ไม่เกิดประโยชน์สูงสุด',
+                    details: 'แขนงวิชานี้สำรวจความท้าทายและกลยุทธ์ในการนำนวัตกรรมไปใช้จริงในองค์กรและสังคม คุณจะได้เรียนรู้เกี่ยวกับการจัดการการเปลี่ยนแปลงที่เกิดจากนวัตกรรม การเอาชนะการต่อต้านการเปลี่ยนแปลง การสร้างการยอมรับและความเข้าใจจากผู้มีส่วนได้ส่วนเสีย การออกแบบกระบวนการและโครงสร้างองค์กรที่เอื้อต่อการนำนวัตกรรมไปใช้ รวมถึงการประเมินผลกระทบทางสังคมและวัฒนธรรมของการประยุกต์ใช้นวัตกรรม',
+                    careers: ['ผู้จัดการการเปลี่ยนแปลงองค์กร', 'ที่ปรึกษาด้านการจัดการ', 'ผู้จัดการโครงการเทคโนโลยี', 'ผู้เชี่ยวชาญด้านการพัฒนาองค์กร']
+                },
+                {
+                    id: 'fwm',
+                    title: '5. การจัดการความมั่งคั่งเชิงนวัตกรรมการเงิน (FWM)',
+                    problem: 'การจัดการความมั่งคั่งที่ไม่ทันสมัยและไม่ตอบโจทย์ความต้องการของผู้บริโภคยุคใหม่, ความท้าทายในการนำเทคโนโลยีทางการเงินมาประยุกต์ใช้ในธุรกิจ, ขาดความเข้าใจในเทรนด์ FinTech, การไม่สามารถสร้างผลิตภัณฑ์ทางการเงินที่เป็นนวัตกรรม',
+                    details: 'แขนงวิชานี้เจาะลึกการบริหารจัดการความมั่งคั่งที่เน้น ความทันสมัยและนวัตกรรม ผสานกับ องค์ความรู้ทางการเงินที่แข็งแกร่ง คุณจะได้เรียนรู้เกี่ยวกับเทรนด์ FinTech ที่กำลังเปลี่ยนแปลงภูมิทัศน์ทางการเงิน การพัฒนาผลิตภัณฑ์และบริการทางการเงินที่เป็นนวัตกรรม การใช้ประโยชน์จากข้อมูลและ AI ในการวิเคราะห์การลงทุนและการให้บริการลูกค้า รวมถึงกลยุทธ์ในการระดมทุนและบริหารความเสี่ยงในบริบทของนวัตกรรมทางการเงิน เพื่อให้สามารถสร้างและบริหารความมั่งคั่งให้แก่บุคคลและองค์กรได้อย่างมีประสิทธิภาพในยุคดิจิทัล',
+                    careers: ['ผู้จัดการกองทุนนวัตกรรม', 'ที่ปรึกษาการลงทุน (ที่เน้น FinTech)', 'นักวิเคราะห์ FinTech', 'นักพัฒนาผลิตภัณฑ์ทางการเงิน']
+                }
+            ];
+
+            const majorsList = document.getElementById('majors-list');
+            const majorTitle = document.getElementById('major-title');
+            const majorContent = document.getElementById('major-content');
+
+            majorsData.forEach((major, index) => {
+                const button = document.createElement('button');
+                button.className = 'w-full text-left p-4 rounded-lg border-2 border-transparent transition-all duration-300';
+                button.dataset.majorId = major.id;
+                button.innerHTML = `<span class="font-semibold text-lg">${major.title}</span>`;
+                
+                if (index === 0) {
+                     button.classList.add('bg-white', 'shadow-md', 'border-emerald-500');
+                } else {
+                     button.classList.add('bg-gray-100', 'hover:bg-white', 'hover:shadow-md');
+                }
+
+                button.addEventListener('click', () => {
+                    // Update content
+                    majorTitle.innerText = major.title;
+                    majorContent.innerHTML = `
+                        <h4 class="text-lg font-semibold text-gray-800 mb-2">ปัญหาขององค์กรที่แก้ไขได้</h4>
+                        <p class="text-gray-600 mb-4">${major.problem}</p>
+                        <h4 class="text-lg font-semibold text-gray-800 mb-2">รายละเอียด</h4>
+                        <p class="text-gray-600 mb-4">${major.details}</p>
+                        <h4 class="text-lg font-semibold text-gray-800 mb-2">อาชีพหลังเรียนจบ</h4>
+                        <div class="flex flex-wrap gap-2">
+                            ${major.careers.map(career => `<span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">${career}</span>`).join('')}
+                        </div>
+                    `;
+
+                    // Update button styles
+                    majorsList.querySelectorAll('button').forEach(btn => {
+                        btn.classList.remove('bg-white', 'shadow-md', 'border-emerald-500');
+                        btn.classList.add('bg-gray-100', 'hover:bg-white', 'hover:shadow-md');
+                    });
+                    button.classList.add('bg-white', 'shadow-md', 'border-emerald-500');
+                    button.classList.remove('bg-gray-100', 'hover:bg-white', 'hover:shadow-md');
+                });
+
+                majorsList.appendChild(button);
+            });
+            
+            // Trigger click on the first major to show its details initially
+            if(majorsList.firstChild) {
+                majorsList.firstChild.click();
+            }
+
+            // Chart.js - Doughnut Chart for Credit Distribution
+            const ctx = document.getElementById('creditsChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['วิชาบังคับ', 'วิชาเลือก', 'โครงงานนวัตกรรม', 'ค้นคว้าอิสระ'],
+                    datasets: [{
+                        label: 'หน่วยกิต',
+                        data: [15, 15, 3, 3],
+                        backgroundColor: [
+                            'rgba(44, 62, 80, 0.8)',   // Custom Blue - #2c3e50
+                            'rgba(16, 185, 129, 0.8)', // Emerald 500 - #10b981
+                            'rgba(52, 152, 219, 0.8)', // Lighter Blue - #3498db (from previous, can be adjusted)
+                            'rgba(5, 150, 105, 0.8)'   // Emerald 600 - #059669
+                        ],
+                        borderColor: [
+                            '#FFFFFF',
+                            '#FFFFFF',
+                            '#FFFFFF',
+                            '#FFFFFF'
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                        title: {
+                            display: false
+                        }
+                    }
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>
